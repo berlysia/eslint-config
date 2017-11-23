@@ -1,0 +1,28 @@
+{
+  "name": "@berlysia/eslint-config",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
+  "author": "berlysia",
+  "license": "MIT",
+  "dependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint-config-prettier": "^2.8.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-import-order-autofix": "^0.8.3",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.5.1",
+    "prettier": "^1.8.2"
+  },
+  "peerDependencies": {
+    "eslint": "^4.11.0"
+  }
+}
