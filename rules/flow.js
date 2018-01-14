@@ -30,8 +30,9 @@ module.exports = {
       "error",
       {
         excludeVariableTypes: {
-          let: true,
-          const: false,
+          var: false,
+          let: false,
+          const: true,
         },
       },
     ],
