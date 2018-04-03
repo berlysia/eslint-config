@@ -73,10 +73,10 @@ module.exports = {
         prop: "parens-new-line",
       },
     ],
-    // This rule is efficient but PropTypes is no longer used
-    // "react/boolean-prop-naming": [ "error", {
-    //   "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+"
-    // }],
+    /* This rule is efficient but PropTypes is no longer used
+       "react/boolean-prop-naming": [ "error", {
+       "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+"
+       }], */
     "react/button-has-type": "error",
     "react/display-name": "error",
     "react/no-access-state-in-setstate": "error",

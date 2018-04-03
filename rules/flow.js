@@ -9,12 +9,12 @@ module.exports = {
   plugins: ["flowtype"],
   settings: {
     flowtype: {
-      onlyFilesWithFlowAnnotation: false,
+      onlyFilesWithFlowAnnotation: true,
     },
   },
   rules: {
     "flowtype/boolean-style": ["error", "boolean"],
-    "flowtype/define-flow-type": "warn",
+    "flowtype/define-flow-type": "error",
     "flowtype/delimiter-dangle": "off",
     "flowtype/generic-spacing": ["error", "never"],
     "flowtype/no-dupe-keys": "error",
@@ -22,9 +22,20 @@ module.exports = {
     "flowtype/no-unused-expressions": "error",
     "flowtype/no-types-missing-file-annotation": "error",
     "flowtype/no-weak-types": "warn",
-    "flowtype/object-type-delimiter": "off",
-    "flowtype/require-parameter-type": "off",
-    "flowtype/require-return-type": "off",
+    "flowtype/object-type-delimiter": ["error", "comma"],
+    "flowtype/require-parameter-type": [
+      "error",
+      { excludeArrowFunctions: "expressionsOnly" },
+    ],
+    "flowtype/require-return-type": [
+      "error",
+      "always",
+      {
+        excludeArrowFunctions: true,
+        annotateUndefined: "always",
+        excludeMatching: ["constructor"],
+      },
+    ],
     "flowtype/require-valid-file-annotation": "off",
     "flowtype/require-variable-type": [
       "error",
