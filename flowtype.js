@@ -1,17 +1,6 @@
 module.exports = {
-  parser: "babel-eslint",
-  parserOptions: {
-    ecmaVersion: 2017,
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+  extends: ["prettier", "prettier/flowtype"],
   plugins: ["flowtype"],
-  settings: {
-    flowtype: {
-      onlyFilesWithFlowAnnotation: true,
-    },
-  },
   rules: {
     "flowtype/boolean-style": ["error", "boolean"],
     "flowtype/define-flow-type": "error",
@@ -23,30 +12,10 @@ module.exports = {
     "flowtype/no-types-missing-file-annotation": "error",
     "flowtype/no-weak-types": "warn",
     "flowtype/object-type-delimiter": ["error", "comma"],
-    "flowtype/require-parameter-type": [
-      "error",
-      { excludeArrowFunctions: "expressionsOnly" },
-    ],
-    "flowtype/require-return-type": [
-      "error",
-      "always",
-      {
-        excludeArrowFunctions: true,
-        annotateUndefined: "always",
-        excludeMatching: ["constructor"],
-      },
-    ],
     "flowtype/require-valid-file-annotation": "off",
-    "flowtype/require-variable-type": [
-      "error",
-      {
-        excludeVariableTypes: {
-          var: false,
-          let: false,
-          const: true,
-        },
-      },
-    ],
+    "flowtype/require-parameter-type": "off",
+    "flowtype/require-return-type": "off",
+    "flowtype/require-variable-type": "off",
     "flowtype/semi": "off",
     "flowtype/space-after-type-colon": ["error", "always"],
     "flowtype/space-before-generic-bracket": ["error", "never"],
@@ -54,5 +23,16 @@ module.exports = {
     "flowtype/type-id-match": "off",
     "flowtype/union-intersection-spacing": ["error", "always"],
     "flowtype/use-flow-type": "warn",
+    "flowtype/array-style-complex-type": "error",
+    "flowtype/array-style-simple-type": "error",
+    "flowtype/require-compound-type-alias": "error",
+    "flowtype/newline-after-flow-annotation": "error",
+    "flowtype/no-existential-type": "error",
+    "flowtype/no-flow-fix-me-comments": "warn",
+    "flowtype/no-mutable-array": "off",
+    "flowtype/require-exact-type": ["error", "always"],
+    "flowtype/require-types-at-top": "off",
+    "flowtype/sort-keys": "off",
+    "flowtype/type-import-style": "off",
   },
 };
