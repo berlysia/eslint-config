@@ -146,7 +146,7 @@ module.exports = {
     "no-shadow-restricted-names": "error",
     "no-undef": "error",
     "no-undef-init": "error",
-    "no-undefined": "error",
+    "no-undefined": "off",
     "no-unused-vars": [
       "error",
       {
@@ -256,7 +256,14 @@ module.exports = {
     "no-tabs": "error",
     "no-ternary": "off",
     "no-trailing-spaces": "error",
-    "no-underscore-dangle": "error",
+    "no-underscore-dangle": [
+      "error",
+      {
+        allowAfterThis: true,
+        allowAfterSuper: true,
+        enforceInMethodNames: false,
+      },
+    ],
     "no-unneeded-ternary": "error",
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": ["error", "below"],
@@ -279,8 +286,6 @@ module.exports = {
         prev: ["const", "let", "var"],
         next: ["const", "let", "var"],
       },
-      { blankLine: "always", prev: "directive", next: "*" },
-      { blankLine: "any", prev: "directive", next: "directive" },
     ],
     "quote-props": ["error", "as-needed"],
     quotes: ["error", "double"],
