@@ -50,6 +50,7 @@ module.exports = {
         },
       },
     ],
+    "@typescript-eslint/ban-ts-ignore": "off",
     camelcase: "off",
     "@typescript-eslint/camelcase": [
       "error",
@@ -61,12 +62,13 @@ module.exports = {
     "@typescript-eslint/generic-type-naming": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/interface-name-prefix": ["error", "never"],
+    "@typescript-eslint/member-delimiter-style": "off",
     "@typescript-eslint/member-naming": "off",
     "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/no-angle-bracket-type-assertion": "error",
     "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/no-empty-interface": "error",
-    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-extraneous-class": "error",
     "@typescript-eslint/no-for-in-array": "off",
     "@typescript-eslint/no-inferrable-types": "error",
@@ -79,6 +81,7 @@ module.exports = {
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-triple-slash-reference": "error",
     "@typescript-eslint/no-type-alias": "off",
+    "@typescript-eslint/no-unnecessary-qualifier": "error",
     "@typescript-eslint/no-unnecessary-type-assertion": "error",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
@@ -96,10 +99,11 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-interface": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/promise-function-async": [
-      "off", // https://github.com/typescript-eslint/typescript-eslint/issues/227
+      "error",
       {
         allowedPromiseNames: [],
         checkArrowFunctions: true,
