@@ -63,7 +63,14 @@ module.exports = {
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/interface-name-prefix": ["error", "never"],
     "@typescript-eslint/member-delimiter-style": "off",
-    "@typescript-eslint/member-naming": "off",
+    "@typescript-eslint/member-naming": [
+      "error",
+      {
+        public: "^[a-zA-Z]",
+        private: "^[a-zA-Z]",
+        protected: "^[a-zA-Z]",
+      },
+    ],
     "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/no-angle-bracket-type-assertion": "error",
     "@typescript-eslint/no-array-constructor": "error",
@@ -88,7 +95,7 @@ module.exports = {
       "error",
       {
         vars: "all",
-        args: "after-used",
+        args: "all",
         ignoreRestSiblings: true,
         argsIgnorePattern: "^_.*$",
         caughtErrors: "all",

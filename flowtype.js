@@ -29,6 +29,7 @@ module.exports = {
     "flowtype/newline-after-flow-annotation": "error",
     "flowtype/no-existential-type": "error",
     "flowtype/no-flow-fix-me-comments": "warn",
+    "flowtype/no-mixed": "off",
     "flowtype/no-mutable-array": "off",
     "flowtype/require-exact-type": ["error", "always"],
     "flowtype/require-types-at-top": "off",

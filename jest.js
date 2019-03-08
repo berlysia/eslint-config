@@ -19,6 +19,7 @@ module.exports = {
     "jest/no-test-prefixes": "error",
     "jest/no-test-return-statement": "error",
     "jest/no-truthy-falsy": "error",
+    "jest/prefer-called-with": "error",
     "jest/prefer-expect-assertions": "off",
     "jest/prefer-inline-snapshots": "off",
     "jest/prefer-spy-on": "warn",
