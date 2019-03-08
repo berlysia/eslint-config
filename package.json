@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
-    "fix": "npm run lint --fix",
+    "lint": "eslint './**/*.{js,ts}'",
+    "fix": "npm run lint -- --fix",
     "format": "prettier '*.{json,md}'",
     "test:prettier": "eslint --print-config . | eslint-config-prettier-check",
     "test:unset": "eslint-find-rules -u './tests/all.js'",
@@ -41,7 +41,7 @@
     "typescript": "^3.3.1"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,ts}": [
       "eslint --fix",
       "git add"
     ],
