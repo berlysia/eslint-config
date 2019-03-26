@@ -4,15 +4,7 @@ module.exports = {
     "global-require": "off",
     "handle-callback-err": "off",
     "max-classes-per-file": ["error", 1],
-    "max-lines-per-function": [
-      "error",
-      {
-        max: 32,
-        skipBlankLines: true,
-        skipComments: true,
-        IIFEs: false,
-      },
-    ],
+    "max-lines-per-function": "off", // 分けたくなるまで分けないので黙らせる
     "no-async-promise-executor": "error",
     "no-buffer-constructor": "error",
     "no-fallthrough": "error",

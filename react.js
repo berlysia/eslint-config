@@ -6,7 +6,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ["react"],
+  plugins: ["react", "react-hooks"],
   rules: {
     "react/boolean-prop-naming": [
       "error",
@@ -26,7 +26,7 @@ module.exports = {
     "react/forbid-prop-types": "off",
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-brace-presence": "off",
-    "react/jsx-filename-extension": ["error", { extensions: [".js"] }],
+    "react/jsx-filename-extension": "off",
     "react/jsx-fragments": ["error", "syntax"],
     "react/jsx-handler-names": "error",
     "react/jsx-key": "error",
@@ -114,5 +114,7 @@ module.exports = {
     "react/sort-prop-types": "off",
     "react/style-prop-object": "error",
     "react/void-dom-elements-no-children": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
   },
 };

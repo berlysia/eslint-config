@@ -3,7 +3,7 @@ module.exports = {
   extends: ["prettier/@typescript-eslint"],
   plugins: ["@typescript-eslint"],
   parserOptions: {
-    loggerFn: false,
+    warnOnUnsupportedTypeScriptVersion: false,
     sourceType: "module",
     jsx: true,
     project: "tsconfig.json",
@@ -113,9 +113,9 @@ module.exports = {
       "error",
       {
         allowedPromiseNames: [],
-        checkArrowFunctions: true,
-        checkFunctionDeclarations: true,
-        checkFunctionExpressions: true,
+        checkArrowFunctions: false,
+        checkFunctionDeclarations: false,
+        checkFunctionExpressions: false,
         checkMethodDeclarations: true,
       },
     ],

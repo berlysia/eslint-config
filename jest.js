@@ -9,6 +9,7 @@ module.exports = {
     "jest/lowercase-name": "off",
     "jest/no-alias-methods": "error",
     "jest/no-disabled-tests": "warn",
+    "jest/no-empty-title": "error",
     "jest/no-focused-tests": "error",
     "jest/no-hooks": "off",
     "jest/no-identical-title": "error",
