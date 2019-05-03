@@ -21,7 +21,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", "array"],
-    "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/await-thenable": "off", // requires type information
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -91,8 +91,8 @@ module.exports = {
     "@typescript-eslint/no-this-alias": "error",
     "@typescript-eslint/no-triple-slash-reference": "error",
     "@typescript-eslint/no-type-alias": "off",
-    "@typescript-eslint/no-unnecessary-qualifier": "error",
-    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/no-unnecessary-qualifier": "off", // requires type information
+    "@typescript-eslint/no-unnecessary-type-assertion": "off", // requires type information
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -111,7 +111,7 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
-    "@typescript-eslint/prefer-includes": "error",
+    "@typescript-eslint/prefer-includes": "off", // requires type information
     "@typescript-eslint/prefer-interface": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/prefer-string-starts-ends-with": "error",
@@ -125,7 +125,7 @@ module.exports = {
         checkMethodDeclarations: true,
       },
     ],
-    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/restrict-plus-operands": "off", // requires type information
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/type-annotation-spacing": "off",
     "@typescript-eslint/unbound-method": "off",
