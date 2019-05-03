@@ -50,5 +50,6 @@ module.exports = {
       },
     ],
     "import/unambiguous": "off",
+    "import/no-unused-modules": "warn",
   },
 };
