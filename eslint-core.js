@@ -164,7 +164,7 @@ module.exports = {
     "computed-property-spacing": ["error", "never"],
     "consistent-this": "off",
     "eol-last": ["error", "always"],
-    "func-call-spacing": ["error", "never"],
+    "func-call-spacing": "off",
     "func-name-matching": "off",
     "func-names": "off",
     "func-style": ["error", "declaration", { allowArrowFunctions: true }],

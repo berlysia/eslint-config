@@ -21,6 +21,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", "array"],
+    "@typescript-eslint/await-thenable": "error",
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -59,6 +60,7 @@ module.exports = {
     "@typescript-eslint/class-name-casing": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/func-call-spacing": "off",
     "@typescript-eslint/generic-type-naming": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/interface-name-prefix": ["error", "never"],
@@ -77,6 +79,7 @@ module.exports = {
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-extraneous-class": "error",
+    "@typescript-eslint/no-extra-parens": "off",
     "@typescript-eslint/no-for-in-array": "off",
     "@typescript-eslint/no-inferrable-types": "error",
     "@typescript-eslint/no-misused-new": "error",
@@ -106,9 +109,12 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
+    "@typescript-eslint/prefer-includes": "error",
     "@typescript-eslint/prefer-interface": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
+    "@typescript-eslint/prefer-string-starts-ends-with": "error",
     "@typescript-eslint/promise-function-async": [
       "error",
       {
@@ -120,6 +126,9 @@ module.exports = {
       },
     ],
     "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/semi": "off",
     "@typescript-eslint/type-annotation-spacing": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/unified-signatures": "off",
   },
 };
