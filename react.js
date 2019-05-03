@@ -87,6 +87,7 @@ module.exports = {
     "react/no-unused-state": "error",
     "react/no-will-update-set-state": "error",
     "react/prefer-es6-class": ["error", "always"],
+    "react/prefer-read-only-props": "error",
     "react/prefer-stateless-function": "off",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "error",
