@@ -35,5 +35,6 @@ module.exports = {
     "flowtype/require-types-at-top": "off",
     "flowtype/sort-keys": "off",
     "flowtype/type-import-style": "off",
+    "flowtype/spread-exact-type": "off",
   },
 };
