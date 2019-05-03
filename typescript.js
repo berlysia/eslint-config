@@ -1,22 +1,12 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["prettier/@typescript-eslint"],
+  extends: ["prettier/@typescript-eslint", "plugin:import/typescript"],
   plugins: ["@typescript-eslint"],
   parserOptions: {
     warnOnUnsupportedTypeScriptVersion: false,
     sourceType: "module",
     jsx: true,
     project: "tsconfig.json",
-  },
-  settings: {
-    "import/resolver": {
-      node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-      },
-    },
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
-    },
   },
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
