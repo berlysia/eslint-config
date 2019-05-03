@@ -115,6 +115,7 @@ module.exports = {
     ],
     "react/sort-prop-types": "off",
     "react/state-in-constructor": "off",
+    "react/static-property-placement": "error",
     "react/style-prop-object": "error",
     "react/void-dom-elements-no-children": "error",
     "react-hooks/rules-of-hooks": "error",
