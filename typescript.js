@@ -43,10 +43,7 @@ module.exports = {
     ],
     "@typescript-eslint/ban-ts-ignore": "off",
     camelcase: "off",
-    "@typescript-eslint/camelcase": [
-      "error",
-      { properties: "always", ignoreDestructuring: false },
-    ],
+    "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/class-name-casing": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",

@@ -156,7 +156,7 @@ module.exports = {
     "array-element-newline": ["error", { multiline: true }],
     "block-spacing": ["error", "always"],
     "brace-style": ["error", "stroustrup", { allowSingleLine: true }],
-    camelcase: ["error", { properties: "always" }],
+    camelcase: "off",
     "capitalized-comments": "off",
     "comma-dangle": ["error", "always-multiline"],
     "comma-spacing": ["error", { before: false, after: true }],
