@@ -99,7 +99,7 @@ module.exports = {
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-includes": "off", // requires type information
-    "@typescript-eslint/prefer-interface": "error",
+    "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/prefer-string-starts-ends-with": "error",
     "@typescript-eslint/promise-function-async": [
