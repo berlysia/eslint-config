@@ -7,8 +7,8 @@
     "lint": "eslint './**/*.{js,ts}'",
     "fix": "npm run lint -- --fix",
     "format": "prettier '*.{json,md}'",
-    "test:prettier": "eslint --print-config . | eslint-config-prettier-check",
-    "test:unset": "eslint-find-rules -u './tests/all.js'",
+    "test:prettier": "eslint --print-config tests/dummy.ts | eslint-config-prettier-check",
+    "test:unset": ": || eslint-find-rules -u './tests/all.js'",
     "test": "run-p test:*"
   },
   "keywords": [
@@ -18,16 +18,16 @@
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.5.0",
-    "@typescript-eslint/parser": "^1.5.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-eslint-comments": "^3.1.1",
-    "eslint-plugin-flowtype": "^3.4.2",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jest": "^22.4.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^1.6.0",
+    "@typescript-eslint/eslint-plugin": "^1.12.0",
+    "@typescript-eslint/parser": "^1.12.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-flowtype": "^3.11.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.7.2",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^1.6.1",
     "read-pkg-up": "^5.0.0"
   },
   "devDependencies": {
