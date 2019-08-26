@@ -2,6 +2,7 @@ module.exports = {
   extends: ["prettier", "prettier/flowtype"],
   plugins: ["flowtype"],
   rules: {
+    "flowtype/arrow-parens": "error",
     "flowtype/boolean-style": ["error", "boolean"],
     "flowtype/define-flow-type": "error",
     "flowtype/delimiter-dangle": "off",
@@ -12,6 +13,8 @@ module.exports = {
     "flowtype/no-types-missing-file-annotation": "error",
     "flowtype/no-weak-types": "warn",
     "flowtype/object-type-delimiter": ["error", "comma"],
+    "flowtype/require-inexact-type": "error",
+    "flowtype/require-readonly-react-props": "error",
     "flowtype/require-valid-file-annotation": "off",
     "flowtype/require-parameter-type": "off",
     "flowtype/require-return-type": "off",
