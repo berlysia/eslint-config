@@ -2,7 +2,7 @@ module.exports = {
   plugins: ["import"],
   rules: {
     "import/no-unresolved": "error",
-    "import/default": "error",
+    "import/default": "off",
     "import/no-absolute-path": "error",
     "import/no-dynamic-require": "error",
     "import/no-self-import": "error",
