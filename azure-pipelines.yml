@@ -1,0 +1,22 @@
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '12.x'
+  displayName: 'Install Node.js'
+
+- script: yarn install --frozen-lockfile --check-files
+  displayName: 'Install Dependencies'
+
+- script: yarn lint
+  displayName: 'Lint'
+
+- script: yarn test
+  displayName: 'Test'
