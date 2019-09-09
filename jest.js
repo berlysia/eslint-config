@@ -38,6 +38,7 @@ module.exports = {
     "jest/prefer-to-contain": "error",
     "jest/prefer-to-have-length": "error",
     "jest/prefer-todo": "warn",
+    "jest/require-top-level-describe": "off", // トップレベルにtestを書かせろ
     "jest/require-tothrow-message": "error",
     "jest/valid-describe": "error",
     "jest/valid-expect": "error",
