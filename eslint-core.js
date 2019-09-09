@@ -101,7 +101,7 @@ module.exports = {
     "no-redeclare": "error",
     "no-restricted-properties": "off",
     "no-return-assign": "error",
-    "no-return-await": "error",
+    "no-return-await": "off",
     "no-script-url": "error",
     "no-self-assign": ["error", { props: false }],
     "no-self-compare": "error",
