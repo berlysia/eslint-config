@@ -155,7 +155,7 @@ module.exports = {
     "array-bracket-spacing": ["error", "never"],
     "array-element-newline": ["error", { multiline: true }],
     "block-spacing": ["error", "always"],
-    "brace-style": ["error", "stroustrup", { allowSingleLine: true }],
+    "brace-style": ["error", "1tbs", { allowSingleLine: true }],
     camelcase: "off",
     "capitalized-comments": "off",
     "comma-dangle": ["error", "always-multiline"],
