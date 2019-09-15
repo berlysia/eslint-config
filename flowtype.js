@@ -13,6 +13,7 @@ module.exports = {
     "flowtype/no-types-missing-file-annotation": "error",
     "flowtype/no-weak-types": "warn",
     "flowtype/object-type-delimiter": ["error", "comma"],
+    "flowtype/require-indexer-name": "error",
     "flowtype/require-inexact-type": "error",
     "flowtype/require-readonly-react-props": "error",
     "flowtype/require-valid-file-annotation": "off",
