@@ -1,7 +1,7 @@
 const { realpathSync } = require("fs");
 const { sync: readPackage } = require("read-pkg-up");
 
-const { pkg } = readPackage({ cwd: realpathSync(process.cwd()) });
+const { package: pkg } = readPackage({ cwd: realpathSync(process.cwd()) });
 const hasIn = (key, name) => {
   for (const x in pkg[key] || {}) {
     if (x === name) return true;
