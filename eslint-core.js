@@ -322,5 +322,8 @@ module.exports = {
     "symbol-description": "error",
     "template-curly-spacing": ["error", "never"],
     "yield-star-spacing": ["error", "after"],
+    "default-param-last": "error",
+    "no-import-assign": "error",
+    "prefer-regex-literals": "error",
   },
 };
