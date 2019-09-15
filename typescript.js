@@ -10,7 +10,7 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/array-type": ["error", "array"],
+    "@typescript-eslint/array-type": ["error", { default: "array" }],
     "@typescript-eslint/await-thenable": "off", // requires type information
     "@typescript-eslint/ban-types": [
       "error",
@@ -42,9 +42,16 @@ module.exports = {
       },
     ],
     "@typescript-eslint/ban-ts-ignore": "off",
+    "brace-style": "off",
+    "@typescript-eslint/brace-style": [
+      "error",
+      "1tbs",
+      { allowSingleLine: true },
+    ],
     camelcase: "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/class-name-casing": "error",
+    "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/consistent-type-definitions": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
@@ -62,7 +69,6 @@ module.exports = {
       },
     ],
     "@typescript-eslint/member-ordering": "off",
-    "@typescript-eslint/no-angle-bracket-type-assertion": "error",
     "@typescript-eslint/no-array-constructor": "error",
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "error",
@@ -78,13 +84,12 @@ module.exports = {
     "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-object-literal-type-assertion": "error",
     "@typescript-eslint/no-parameter-properties": "error",
     "@typescript-eslint/no-require-imports": "error",
     "@typescript-eslint/no-this-alias": "error",
-    "@typescript-eslint/no-triple-slash-reference": "error",
     "@typescript-eslint/no-type-alias": "off",
     "@typescript-eslint/no-unnecessary-qualifier": "off", // requires type information
+    "@typescript-eslint/no-unnecessary-type-arguments": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off", // requires type information
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
@@ -129,6 +134,7 @@ module.exports = {
       "error",
       { path: "never", types: "never", lib: "never" },
     ],
+    "@typescript-eslint/typedef": "off",
     "@typescript-eslint/type-annotation-spacing": "off",
     "@typescript-eslint/unbound-method": "off",
     "@typescript-eslint/unified-signatures": "off",
