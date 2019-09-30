@@ -102,7 +102,6 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
-    "@typescript-eslint/prefer-interface": "off",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     quotes: "error",
     "@typescript-eslint/quotes": "error",
