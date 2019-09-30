@@ -13,6 +13,10 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "off",
     "@typescript-eslint/no-misused-promises": "error",
+    "@typescript-eslint/no-unnecessary-condition": [
+      "error",
+      { ignoreRhs: true },
+    ],
     "@typescript-eslint/no-unnecessary-qualifier": "off", // requires type information
     "@typescript-eslint/no-unnecessary-type-arguments": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off", // requires type information
