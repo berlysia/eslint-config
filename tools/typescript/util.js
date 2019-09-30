@@ -1,12 +1,12 @@
 const plugin = require("@typescript-eslint/eslint-plugin");
 
+const RULE_PREFIX = "@typescript-eslint";
+
 function extract(isWithType) {
   const notDeprecated = ([, dfn]) => !dfn.meta.deprecated;
   const filterFn = isWithType
     ? ([, dfn]) => dfn.meta.docs.requiresTypeChecking === true
     : ([, dfn]) => dfn.meta.docs.requiresTypeChecking !== true;
-
-  const RULE_PREFIX = "@typescript-eslint";
 
   const pairwised = Object.entries(plugin.rules);
   const filtered = pairwised.filter(notDeprecated).filter(filterFn);
@@ -15,8 +15,17 @@ function extract(isWithType) {
   return ruleNames;
 }
 
-module.exports = extract;
-
-if (!module.parent) {
-  console.log(extract(process.argv.includes("--withType")));
+function isTypeScriptRule(ruleName) {
+  return ruleName.startsWith(RULE_PREFIX);
 }
+
+function hasRule(ruleName) {
+  const name = ruleName.split("/")[1];
+  return Object.prototype.hasOwnProperty.call(plugin.rules, name);
+}
+
+module.exports = {
+  extract,
+  hasRule,
+  isTypeScriptRule,
+};
