@@ -10,6 +10,7 @@
     "test:typescript": "node ./tools/typescript/verify",
     "test:prettier": "eslint --print-config tests/dummy.ts | eslint-config-prettier-check",
     "test:unset": "eslint-find-rules -u './tests/all.js'",
+    "test:auto": "node ./auto.js",
     "test": "run-p test:*"
   },
   "keywords": [
