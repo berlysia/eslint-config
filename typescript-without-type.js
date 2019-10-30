@@ -6,7 +6,6 @@ module.exports = {
     warnOnUnsupportedTypeScriptVersion: false,
     sourceType: "module",
     jsx: true,
-    project: "tsconfig.json",
   },
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
