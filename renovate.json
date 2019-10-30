@@ -1,16 +1,3 @@
 {
-  "extends": [
-    "config:base",
-    ":automergeLinters",
-    ":automergeMinor",
-    ":automergeTypes",
-    ":maintainLockFilesMonthly",
-    ":rebaseStalePrs",
-    ":timezone(Asia/Tokyo)",
-    "group:allNonMajor",
-    "group:definitelyTyped",
-    "group:linters",
-    "group:monorepos",
-    "schedule:weekly"
-  ]
+  "extends": ["@berlysia"]
 }
