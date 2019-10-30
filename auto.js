@@ -10,7 +10,6 @@ const hasIn = (key, name) => {
 };
 const keys = ["dependencies", "devDependencies", "peerDependencies"];
 const hasInDeps = name => keys.some(k => hasIn(k, name));
-const flatMap = (arr, fn) => arr.reduce((a, i) => a.concat(fn(i)), []);
 
 module.exports = {
   extends: [
@@ -20,16 +19,14 @@ module.exports = {
   ].filter(Boolean),
   overrides: [
     hasInDeps("jest") && {
-      files: flatMap(["test", "spec"], testName =>
-        flatMap(
-          ["js", "ts", "jsx", "tsx"],
-          extName => `*.${testName}.${extName}`
-        )
-      ),
+      files: [
+        "*.{test,spec}.{js,ts,jsx,tsx}",
+        "**/__tests__/**/*.{js,ts,jsx,tsx}",
+      ],
       extends: "./jest",
     },
     hasInDeps("typescript") && {
-      files: flatMap(["ts", "tsx"], extName => `*.${extName}`),
+      files: ["*.{ts,tsx}"],
       extends: "./typescript-without-type",
     },
   ].filter(Boolean),
