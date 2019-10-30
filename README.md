@@ -28,6 +28,20 @@ in `.eslintrc`
 }
 ```
 
+### opt-in rules for TypeScript
+
+```json
+{
+  "extends": [
+    "@berlysia/eslint-config/auto"
+    "@berlysia/eslint-config/typescript-with-type"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
+```
+
 ## Manual Config
 
 in `.eslintrc`
@@ -35,9 +49,27 @@ in `.eslintrc`
 ```json
 {
   "extends": [
-    "@berlysia", // base
-    "@berlysia/eslint-config/typescript", // TypeScript
-    "@berlysia/eslint-config/jest" // jest
+    "@berlysia" // base
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.{test,spec}.{js,ts,jsx,tsx}",
+        "**/__tests__/**/*.{js,ts,jsx,tsx}"
+      ],
+      "extends": "@berlysia/eslint-config/jest"
+    },
+    {
+      "files": ["*.{ts,tsx}"],
+      "extends": "@berlysia/eslint-config/typescript-without-type"
+    },
+    {
+      "files": ["*.{ts,tsx}"],
+      "extends": "@berlysia/eslint-config/typescript-with-type",
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      }
+    }
   ]
 }
 ```
