@@ -3,11 +3,10 @@ name: Node CI
 on:
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,16 +14,19 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: yarn install --frozen-lockfile --check-files
-      env:
-        CI: true
-    - run: yarn lint
-      env:
-        CI: true
-    - run: yarn test
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --frozen-lockfile --check-files
+        env:
+          CI: true
+      - run: yarn lint
+        env:
+          CI: true
+      - run: yarn test
+        env:
+          CI: true
+      - run: yarn projtest
+        env:
+          CI: true

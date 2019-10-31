@@ -11,9 +11,10 @@
     "test:prettier": "eslint --print-config tests/dummy.ts | eslint-config-prettier-check",
     "test:unset": "eslint-find-rules -u './tests/all.js'",
     "test:auto": "node ./auto.js",
-    "test:tsproj": "cd tests/tsproject && yarn install --no-lockfile && yarn lint",
-    "test:jsproj": "cd tests/jsproject && yarn install --no-lockfile && yarn lint",
-    "test": "run-p test:*"
+    "test": "run-p test:*",
+    "projtest:tsproj": "cd tests/tsproject && yarn install --no-lockfile && yarn lint",
+    "projtest:jsproj": "cd tests/jsproject && yarn install --no-lockfile && yarn lint",
+    "projtest": "run-s projtest:*"
   },
   "keywords": [
     "eslint",
