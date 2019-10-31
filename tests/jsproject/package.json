@@ -1,0 +1,11 @@
+{
+  "name": "sample-project",
+  "private": true,
+  "scripts": {
+    "lint": "eslint 'src/**/*.{js,jsx}' -c ./.eslintrc.js"
+  },
+  "devDependencies": {
+    "eslint": "*",
+    "jest": "*"
+  }
+}

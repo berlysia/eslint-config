@@ -13,10 +13,21 @@ const hasInDeps = name => keys.some(k => hasIn(k, name));
 
 module.exports = {
   extends: [
-    "@berlysia",
-    hasInDeps("jest") && "@berlysia/eslint-config/jest",
-    hasInDeps("typescript") && "@berlysia/eslint-config/typescript",
-    hasInDeps("flow-bin") && "@berlysia/eslint-config/flowtype",
-    hasInDeps("react") && "@berlysia/eslint-config/react",
+    "./",
+    hasInDeps("flow-bin") && "./flowtype",
+    hasInDeps("react") && "./react",
+  ].filter(Boolean),
+  overrides: [
+    hasInDeps("jest") && {
+      files: [
+        "*.{test,spec}.{js,ts,jsx,tsx}",
+        "**/__tests__/**/*.{js,ts,jsx,tsx}",
+      ],
+      extends: "./jest",
+    },
+    hasInDeps("typescript") && {
+      files: ["*.{ts,tsx}"],
+      extends: "./typescript-without-type",
+    },
   ].filter(Boolean),
 };
