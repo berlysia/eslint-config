@@ -46,6 +46,7 @@ module.exports = {
     "react/jsx-no-literals": "off",
     "react/jsx-no-target-blank": "error",
     "react/jsx-no-undef": "error",
+    "react/jsx-no-useless-fragment": "error",
     "react/jsx-pascal-case": "error",
     "react/jsx-props-no-spreading": "off",
     "react/jsx-sort-default-props": "off",
