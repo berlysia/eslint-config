@@ -40,7 +40,7 @@ module.exports = {
     "jest/prefer-todo": "warn",
     "jest/require-top-level-describe": "off", // トップレベルにtestを書かせろ
     "jest/require-tothrow-message": "error",
-    "jest/valid-describe": "error",
+    "jest/valid-describe": "off", // https://github.com/jest-community/eslint-plugin-jest/issues/203
     "jest/valid-expect": "error",
     "jest/valid-expect-in-promise": "error",
   },
