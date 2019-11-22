@@ -11,7 +11,6 @@ module.exports = {
     "jest/no-commented-out-tests": "error",
     "jest/no-disabled-tests": "warn",
     "jest/no-duplicate-hooks": "error",
-    "jest/no-empty-title": "error",
     "jest/no-expect-resolves": "error",
     "jest/no-export": "error",
     "jest/no-focused-tests": "error",
@@ -40,7 +39,7 @@ module.exports = {
     "jest/prefer-todo": "warn",
     "jest/prefer-hooks-on-top": "error",
     "jest/require-top-level-describe": "off", // トップレベルにtestを書かせろ
-    "jest/require-tothrow-message": "error",
+    "jest/require-to-throw-message": "error",
     "jest/valid-describe": "off", // https://github.com/jest-community/eslint-plugin-jest/issues/203
     "jest/valid-expect": "error",
     "jest/valid-expect-in-promise": "error",
