@@ -325,5 +325,10 @@ module.exports = {
     "default-param-last": "error",
     "no-import-assign": "error",
     "prefer-regex-literals": "error",
+    "grouped-accessor-pairs": "error",
+    "no-constructor-return": "error",
+    "no-dupe-else-if": "error",
+    "no-setter-return": "error",
+    "prefer-exponentiation-operator": "error",
   },
 };
