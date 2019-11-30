@@ -19,7 +19,21 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-qualifier": "off",
     "@typescript-eslint/no-unnecessary-type-arguments": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/no-unused-vars-experimental": [
+      "error",
+      {
+        ignoredNamesRegex: "^_",
+        ignoreArgsIfArgsAfterAreUsed: true,
+      },
+    ],
     "@typescript-eslint/prefer-includes": "error",
+    "@typescript-eslint/prefer-nullish-coalescing": [
+      "error",
+      {
+        ignoreConditionalTests: true,
+        ignoreMixedLogicalExpressions: true,
+      },
+    ],
     "@typescript-eslint/prefer-readonly": "error",
     "@typescript-eslint/prefer-regexp-exec": "error",
     "@typescript-eslint/prefer-string-starts-ends-with": "error",
@@ -35,7 +49,16 @@ module.exports = {
     ],
     "@typescript-eslint/require-array-sort-compare": "error",
     "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/return-await": "error",
     "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/restrict-template-expressions": [
+      "error",
+      {
+        allowNumber: true,
+        allowBoolean: false,
+        allowNullable: false,
+      },
+    ],
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/unbound-method": [
       "error",
