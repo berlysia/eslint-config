@@ -5,7 +5,7 @@ async function someFn(): Promise<2> {
 export class Klass {
   value: 1 = 1;
 
-  publicMethod() {
+  publicMethod(): 1 {
     return this.value;
   }
 
@@ -13,7 +13,7 @@ export class Klass {
     return this.value;
   }
 
-  async promiseMethod() {
+  async promiseMethod(): Promise<1 | 2> {
     const sum = 1 + this.value + Math.random();
     return sum > 2.5 ? someFn() : this.value;
   }
