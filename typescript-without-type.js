@@ -76,6 +76,8 @@ module.exports = {
     "@typescript-eslint/no-extraneous-class": "error",
     "@typescript-eslint/no-extra-non-null-assertion": "error",
     "@typescript-eslint/no-extra-parens": "off",
+    "no-extra-semi": "off",
+    "@typescript-eslint/no-extra-semi": "error",
     "@typescript-eslint/no-inferrable-types": "error",
     "@typescript-eslint/no-magic-numbers": "off",
     "@typescript-eslint/no-misused-new": "error",

@@ -12,6 +12,7 @@ module.exports = {
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-misused-promises": "error",
+    "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-unnecessary-condition": [
       "error",
       { ignoreRhs: true },
