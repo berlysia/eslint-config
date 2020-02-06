@@ -1,4 +1,4 @@
-export function sub(a: number, b: number) {
+export function sub(a: number, b: number): number {
   return a - b;
 }
 
