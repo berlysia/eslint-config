@@ -22,7 +22,7 @@ export class Klass {
     return this.value;
   }
 
-  protected protectedMethod() {
+  protected protectedMethod(): 1 {
     return this.privateMethod();
   }
 }

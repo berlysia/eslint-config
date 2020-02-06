@@ -7,7 +7,7 @@ export function restSiblings(obj: { a: number; b: number }): number {
   return rest.b;
 }
 
-export function unusedCaughtError() {
+export function unusedCaughtError(): string {
   try {
     throw new Error();
   } catch (_e) {

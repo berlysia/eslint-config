@@ -24,6 +24,13 @@ module.exports = {
     "react/forbid-elements": "off",
     "react/forbid-foreign-prop-types": "off",
     "react/forbid-prop-types": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        namedComponents: "function-declaration",
+        unnamedComponents: "arrow-function",
+      },
+    ],
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-brace-presence": "off",
     "react/jsx-filename-extension": "off",
@@ -44,6 +51,15 @@ module.exports = {
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-duplicate-props": "error",
     "react/jsx-no-literals": "off",
+    "react/jsx-no-script-url": [
+      "error",
+      [
+        {
+          name: "Link",
+          props: ["to"],
+        },
+      ],
+    ],
     "react/jsx-no-target-blank": "error",
     "react/jsx-no-undef": "error",
     "react/jsx-no-useless-fragment": "error",
@@ -64,6 +80,7 @@ module.exports = {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/no-access-state-in-setstate": "error",
+    "react/no-adjacent-inline-elements": "error",
     "react/no-array-index-key": "warn",
     "react/no-children-prop": "error",
     "react/no-danger": "off", // 使うときはそもそも覚悟してる

@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", { default: "array" }],
+    "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-types": [
       "error",
       {
@@ -49,10 +50,25 @@ module.exports = {
     camelcase: "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/class-name-casing": "error",
+    "comma-spacing": "off",
+    "@typescript-eslint/comma-spacing": [
+      "error",
+      { before: false, after: true },
+    ],
     "@typescript-eslint/consistent-type-assertions": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/default-param-last": "error",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/explicit-module-boundary-types": [
+      "error",
+      {
+        allowTypedFunctionExpressions: true,
+        allowHigherOrderFunctions: true,
+        allowDirectConstAssertionInArrowFunctions: true,
+        allowedNames: [],
+      },
+    ],
     "@typescript-eslint/func-call-spacing": "off",
     "@typescript-eslint/generic-type-naming": "off",
     "@typescript-eslint/indent": "off",
@@ -69,6 +85,8 @@ module.exports = {
     "@typescript-eslint/member-ordering": "off",
     "@typescript-eslint/no-array-constructor": "error",
     "no-empty-function": "off",
+    "no-dupe-class-members": "off",
+    "@typescript-eslint/no-dupe-class-members": "error",
     "@typescript-eslint/no-dynamic-delete": "error",
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-empty-interface": "error",
@@ -82,6 +100,7 @@ module.exports = {
     "@typescript-eslint/no-magic-numbers": "off",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-namespace": "error",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-parameter-properties": "error",
     "@typescript-eslint/no-require-imports": "error",
@@ -113,6 +132,7 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": "error",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/prefer-as-const": "error",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
