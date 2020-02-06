@@ -9,10 +9,38 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: "default",
+        format: ["camelCase"],
+      },
+      {
+        selector: "variable",
+        format: ["camelCase", "UPPER_CASE"],
+      },
+      {
+        selector: "variable",
+        types: ["boolean"],
+        format: ["PascalCase"],
+        prefix: ["is", "should", "has", "can", "did", "will"],
+      },
+      {
+        selector: "parameter",
+        format: ["camelCase", "UPPER_CASE"],
+        leadingUnderscore: "allow",
+      },
+      {
+        selector: "typeLike",
+        format: ["PascalCase"],
+      },
+    ],
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "error",
+    "@typescript-eslint/no-implied-eval": "error",
     "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-throw-literal": "off",
+    "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-unnecessary-condition": [
       "error",
       { ignoreRhs: true },
@@ -61,6 +89,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
     "@typescript-eslint/unbound-method": [
       "error",
       {
