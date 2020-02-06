@@ -14,7 +14,7 @@ module.exports = {
     ],
     "react/button-has-type": "error",
     "react/default-props-match-prop-types": "off", // PropTypesはもう使わない
-    "react/destructuring-assignment": ["error", "never"],
+    "react/destructuring-assignment": "off", // 気にしない
     "react/display-name": "error",
     "react/forbid-component-props": [
       "error",
