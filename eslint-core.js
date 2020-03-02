@@ -281,7 +281,7 @@ module.exports = {
     "padded-blocks": ["error", "never"],
     "padding-line-between-statements": "off",
     "quote-props": ["error", "as-needed"],
-    quotes: ["error", "double"],
+    quotes: "off",
     semi: ["error", "always"],
     "semi-spacing": ["error", { before: false, after: true }],
     "semi-style": ["error", "last"],

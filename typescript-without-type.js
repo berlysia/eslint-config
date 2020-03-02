@@ -137,8 +137,8 @@ module.exports = {
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
-    quotes: "error",
-    "@typescript-eslint/quotes": "error",
+    quotes: "off",
+    "@typescript-eslint/quotes": "off",
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/space-before-function-paren": "off",
     "@typescript-eslint/triple-slash-reference": [
