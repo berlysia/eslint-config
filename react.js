@@ -6,6 +6,11 @@ module.exports = {
       jsx: true,
     },
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
   plugins: ["react", "react-hooks"],
   rules: {
     "react/boolean-prop-naming": [
@@ -16,26 +21,17 @@ module.exports = {
     "react/default-props-match-prop-types": "off", // PropTypesはもう使わない
     "react/destructuring-assignment": "off", // 気にしない
     "react/display-name": "error",
-    "react/forbid-component-props": [
-      "error",
-      { forbid: ["style", "className"] },
-    ],
+    "react/forbid-component-props": "off",
     "react/forbid-dom-props": "off", // 厳しすぎる
     "react/forbid-elements": "off",
     "react/forbid-foreign-prop-types": "off",
     "react/forbid-prop-types": "off",
-    "react/function-component-definition": [
-      "error",
-      {
-        namedComponents: "function-declaration",
-        unnamedComponents: "arrow-function",
-      },
-    ],
+    "react/function-component-definition": "off", // どっちでもいい
     "react/jsx-boolean-value": "error",
     "react/jsx-curly-brace-presence": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-fragments": ["error", "syntax"],
-    "react/jsx-handler-names": "error",
+    "react/jsx-handler-names": "off",
     "react/jsx-key": "error",
     "react/jsx-max-depth": "off",
     "react/jsx-no-bind": [
