@@ -95,6 +95,6 @@ if (invalidInWithoutType.length > 0) {
 }
 
 if (messages.length > 0) {
-  messages.forEach(x => console.error(x, "\n"));
+  messages.forEach((x) => console.error(x, "\n"));
   process.exit(1);
 }
