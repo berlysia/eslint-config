@@ -9,7 +9,7 @@ const hasIn = (key, name) => {
   return false;
 };
 const keys = ["dependencies", "devDependencies", "peerDependencies"];
-const hasInDeps = name => keys.some(k => hasIn(k, name));
+const hasInDeps = (name) => keys.some((k) => hasIn(k, name));
 
 module.exports = {
   extends: [
