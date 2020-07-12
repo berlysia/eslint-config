@@ -23,8 +23,8 @@
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.0.0",
-    "@typescript-eslint/parser": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
     "eslint-plugin-flowtype": "^5.0.0",
