@@ -1,6 +1,11 @@
 module.exports = {
-  extends: ["../../index.js", "../../typescript.js"].map(require.resolve),
-  parserOptions: {
-    project: "./tsconfig.json",
-  },
+  overrides: [
+    {
+      files: ["*.ts"],
+      extends: ["../../index.js", "../../typescript.js"].map(require.resolve),
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+    },
+  ],
 };
