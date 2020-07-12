@@ -9,6 +9,8 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/await-thenable": "error",
+    "dot-notation": "off",
+    "@typescript-eslint/dot-notation": ["error"],
     "@typescript-eslint/naming-convention": [
       "error",
       {
@@ -35,26 +37,21 @@ module.exports = {
         format: ["PascalCase"],
       },
     ],
+    "@typescript-eslint/no-base-to-string": "error",
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-implied-eval": "error",
     "@typescript-eslint/no-misused-promises": "error",
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
-    "@typescript-eslint/no-unnecessary-condition": [
-      "error",
-      { ignoreRhs: true },
-    ],
+    "@typescript-eslint/no-unnecessary-condition": "error",
     "@typescript-eslint/no-unnecessary-qualifier": "off",
     "@typescript-eslint/no-unnecessary-type-arguments": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "error",
-    "@typescript-eslint/no-unused-vars-experimental": [
-      "error",
-      {
-        ignoredNamesRegex: "^_",
-        ignoreArgsIfArgsAfterAreUsed: true,
-      },
-    ],
+    "@typescript-eslint/no-unsafe-assignment": "error",
+    "@typescript-eslint/no-unsafe-call": "error",
+    "@typescript-eslint/no-unsafe-member-access": "error",
+    "@typescript-eslint/no-unsafe-return": "error",
     "@typescript-eslint/prefer-includes": "error",
     "@typescript-eslint/prefer-nullish-coalescing": [
       "error",
@@ -64,8 +61,10 @@ module.exports = {
       },
     ],
     "@typescript-eslint/prefer-readonly": "error",
+    "@typescript-eslint/prefer-readonly-parameter-types": "error",
     "@typescript-eslint/prefer-regexp-exec": "error",
     "@typescript-eslint/prefer-string-starts-ends-with": "error",
+    "@typescript-eslint/prefer-reduce-type-parameter": "error",
     "@typescript-eslint/promise-function-async": [
       "error",
       {
