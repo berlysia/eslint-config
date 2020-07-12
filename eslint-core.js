@@ -337,5 +337,12 @@ module.exports = {
     "no-dupe-else-if": "error",
     "no-setter-return": "error",
     "prefer-exponentiation-operator": "error",
+    "default-case-last": "error",
+    "id-denylist": "off",
+    "no-loss-of-precision": "error",
+    "no-promise-executor-return": "error",
+    "no-restricted-exports": "off",
+    "no-unreachable-loop": "error",
+    "no-useless-backreference": "error",
   },
 };
