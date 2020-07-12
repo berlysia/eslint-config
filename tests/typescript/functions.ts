@@ -2,7 +2,10 @@ export function unusedArgs(a: number, b: number, _c: unknown): number {
   return a + b;
 }
 
-export function restSiblings(obj: { a: number; b: number }): number {
+export function restSiblings(obj: {
+  readonly a: number;
+  readonly b: number;
+}): number {
   const { a, ...rest } = obj;
   return rest.b;
 }
