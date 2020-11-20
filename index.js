@@ -12,8 +12,4 @@ module.exports = {
   extends: ["./eslint-core", "./plugins/eslint-comments", "./plugins/import"]
     .map(require.resolve)
     .concat("prettier"),
-  plugins: ["prettier"],
-  rules: {
-    "prettier/prettier": "error",
-  },
 };

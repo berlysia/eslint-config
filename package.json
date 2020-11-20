@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint './**/*.{js,ts}'",
-    "fix": "npm run lint -- --fix",
+    "lint": "run-p lint:*",
+    "lint:eslint": "eslint './**/*.{js,ts}'",
+    "lint:prettier": "prettier . --check",
+    "fix": "run-s fix:eslint fix:prettier",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:prettier": "yarn lint:prettier --write",
     "format": "prettier '*.{json,md}'",
     "test:typescript": "node ./tools/typescript/verify",
     "test:prettier": "eslint --print-config tests/dummy.ts | eslint-config-prettier-check",
@@ -48,7 +52,8 @@
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "eslint --fix"
+      "eslint --fix",
+      "prettier --write"
     ],
     "*.{json,md}": [
       "prettier --write"
