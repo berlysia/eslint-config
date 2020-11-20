@@ -9,5 +9,6 @@ module.exports = {
     "eslint-comments/no-unused-disable": "error",
     "eslint-comments/no-unused-enable": "error",
     "eslint-comments/no-use": "off",
+    "eslint-comments/require-description": "error",
   },
 };
