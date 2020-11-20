@@ -1,1 +1,3 @@
 **/node_modules/*
+tests/jsproject/**/*
+tests/tsproject/**/*
