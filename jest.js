@@ -22,7 +22,6 @@ module.exports = {
     "jest/no-large-snapshots": ["error", { maxSize: 32 }],
     "jest/no-mocks-import": "error",
     "jest/no-standalone-expect": "error",
-    "jest/no-test-callback": "error",
     "jest/no-test-prefixes": "error",
     "jest/no-test-return-statement": "error",
     "jest/no-truthy-falsy": "error",
@@ -44,5 +43,10 @@ module.exports = {
     "jest/valid-expect": "error",
     "jest/valid-expect-in-promise": "error",
     "jest/valid-title": "error",
+    "jest/no-conditional-expect": "error",
+    "jest/no-deprecated-functions": "error",
+    "jest/no-done-callback": "error",
+    "jest/no-interpolation-in-snapshots": "error",
+    "jest/no-restricted-matchers": "error",
   },
 };
