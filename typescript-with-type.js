@@ -95,5 +95,6 @@ module.exports = {
         ignoreStatic: true,
       },
     ],
+    "@typescript-eslint/no-confusing-void-expression": "error",
   },
 };
