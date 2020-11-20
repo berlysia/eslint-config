@@ -13,7 +13,7 @@ export function restSiblings(obj: {
 export function unusedCaughtError(): string {
   try {
     throw new Error();
-  } catch (_e) {
+  } catch (_e: unknown) {
     return "yay";
   }
 }
