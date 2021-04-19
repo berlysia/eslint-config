@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["prettier", "prettier/react"],
+  extends: ["prettier"],
   env: { browser: true },
   parserOptions: {
     ecmaFeatures: {
@@ -133,6 +133,9 @@ module.exports = {
     "react/style-prop-object": "error",
     "react/void-dom-elements-no-children": "error",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-newline": "off",
+    "react/jsx-no-constructed-context-values": "error",
+    "react/no-unstable-nested-components": "error",
   },
 };

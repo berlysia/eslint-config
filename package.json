@@ -12,7 +12,7 @@
     "fix:prettier": "yarn lint:prettier --write",
     "format": "prettier '*.{json,md}'",
     "test:typescript": "node ./tools/typescript/verify",
-    "test:prettier": "eslint --print-config tests/dummy.ts | eslint-config-prettier-check",
+    "test:prettier": "eslint-config-prettier tests/dummy.ts",
     "test:unset": "eslint-find-rules -u './tests/all.js'",
     "test:auto": "node ./auto.js",
     "test": "run-p test:*",
@@ -27,28 +27,26 @@
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.0.0",
-    "@typescript-eslint/parser": "^4.0.0",
-    "eslint-config-prettier": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-eslint-comments": "^3.1.2",
-    "eslint-plugin-flowtype": "^5.0.0",
     "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-jest": "^24.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.0.0",
     "read-pkg-up": "^7.0.0"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "7.13.0",
+    "eslint": "7.24.0",
     "eslint-find-rules": "3.6.1",
-    "husky": "4.3.0",
+    "husky": "4.3.8",
     "jest": "26.6.3",
-    "lint-staged": "10.5.1",
+    "lint-staged": "10.5.4",
     "npm-run-all": "4.1.5",
-    "prettier": "2.1.2",
-    "typescript": "4.1.2"
+    "prettier": "2.2.1",
+    "typescript": "4.2.4"
   },
   "lint-staged": {
     "*.{js,ts}": [
