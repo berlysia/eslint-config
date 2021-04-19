@@ -1,6 +1,6 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["prettier/@typescript-eslint", "plugin:import/typescript"],
+  extends: ["plugin:import/typescript", "prettier"],
   plugins: ["@typescript-eslint"],
   parserOptions: {
     warnOnUnsupportedTypeScriptVersion: false,
@@ -168,5 +168,7 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-constraint": "error",
     "@typescript-eslint/prefer-enum-initializers": "error",
     "@typescript-eslint/space-infix-ops": "error",
+    "@typescript-eslint/object-curly-spacing": "off",
+    "@typescript-eslint/sort-type-union-intersection-members": "off",
   },
 };

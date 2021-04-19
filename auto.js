@@ -12,11 +12,7 @@ const keys = ["dependencies", "devDependencies", "peerDependencies"];
 const hasInDeps = (name) => keys.some((k) => hasIn(k, name));
 
 module.exports = {
-  extends: [
-    "./",
-    hasInDeps("flow-bin") && "./flowtype",
-    hasInDeps("react") && "./react",
-  ].filter(Boolean),
+  extends: ["./", hasInDeps("react") && "./react"].filter(Boolean),
   overrides: [
     hasInDeps("jest") && {
       files: [
@@ -29,5 +25,13 @@ module.exports = {
       files: ["*.{ts,tsx}"],
       extends: "./typescript-without-type",
     },
+    hasInDeps("jest") &&
+      hasInDeps("typescript") && {
+        files: [
+          "*.{test,spec}.{js,ts,jsx,tsx}",
+          "**/__tests__/**/*.{js,ts,jsx,tsx}",
+        ],
+        extends: "./jest-and-typescript",
+      },
   ].filter(Boolean),
 };

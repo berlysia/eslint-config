@@ -1,6 +1,6 @@
 module.exports = {
   parser: "@typescript-eslint/parser",
-  extends: ["prettier/@typescript-eslint", "plugin:import/typescript"],
+  extends: ["plugin:import/typescript", "prettier"],
   plugins: ["@typescript-eslint"],
   parserOptions: {
     warnOnUnsupportedTypeScriptVersion: false,
@@ -96,5 +96,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/no-confusing-void-expression": "error",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "error",
   },
 };

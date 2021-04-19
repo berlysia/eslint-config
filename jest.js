@@ -48,5 +48,6 @@ module.exports = {
     "jest/no-done-callback": "error",
     "jest/no-interpolation-in-snapshots": "error",
     "jest/no-restricted-matchers": "error",
+    "jest/unbound-method": "off", // configure in `jest-and-typescript`
   },
 };
