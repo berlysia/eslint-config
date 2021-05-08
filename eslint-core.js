@@ -57,7 +57,7 @@ module.exports = {
     "accessor-pairs": "off",
     "array-callback-return": "error",
     "block-scoped-var": "off", // var is banned
-    "class-methods-use-this": "error",
+    "class-methods-use-this": "off",
     complexity: ["error", { max: 10 }],
     "consistent-return": "error",
     curly: ["error", "multi-or-nest"],
@@ -165,7 +165,7 @@ module.exports = {
     "brace-style": ["error", "1tbs", { allowSingleLine: true }],
     camelcase: "off",
     "capitalized-comments": "off",
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": "off",
     "comma-spacing": ["error", { before: false, after: true }],
     "comma-style": ["error", "last"],
     "computed-property-spacing": ["error", "never"],

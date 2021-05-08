@@ -73,11 +73,11 @@ module.exports = {
         reservedFirst: true,
       },
     ],
-    "react/jsx-uses-react": "error",
+    "react/jsx-uses-react": "off",
     "react/jsx-uses-vars": "error",
     "react/no-access-state-in-setstate": "error",
     "react/no-adjacent-inline-elements": "error",
-    "react/no-array-index-key": "warn",
+    "react/no-array-index-key": "off", // index以外を指定できることは少ない
     "react/no-children-prop": "error",
     "react/no-danger": "off", // 使うときはそもそも覚悟してる
     "react/no-danger-with-children": "error",
@@ -104,7 +104,7 @@ module.exports = {
     "react/prefer-read-only-props": "error",
     "react/prefer-stateless-function": "off",
     "react/prop-types": "off",
-    "react/react-in-jsx-scope": "error",
+    "react/react-in-jsx-scope": "off",
     "react/require-default-props": "off", // PropTypesに依存
     "react/require-optimization": "off",
     "react/require-render-return": "error",

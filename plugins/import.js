@@ -15,7 +15,7 @@ module.exports = {
     "import/no-mutable-exports": "error",
     "import/no-commonjs": "off",
     "import/prefer-default-export": "off",
-    "import/no-unassigned-import": "error",
+    "import/no-unassigned-import": "off",
     "import/no-named-default": "error",
     "import/dynamic-import-chunkname": "off",
     "import/exports-last": "off",
