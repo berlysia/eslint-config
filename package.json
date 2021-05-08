@@ -18,7 +18,9 @@
     "test": "run-p test:*",
     "projtest:tsproj": "cd tests/tsproject && yarn install --no-lockfile && yarn lint",
     "projtest:jsproj": "cd tests/jsproject && yarn install --no-lockfile && yarn lint",
-    "projtest": "run-s projtest:*"
+    "projtest": "run-s projtest:*",
+    "pre-commit": "yarn lint-staged",
+    "prepare": "husky install"
   },
   "keywords": [
     "eslint",
@@ -41,7 +43,7 @@
     "babel-eslint": "10.1.0",
     "eslint": "7.25.0",
     "eslint-find-rules": "3.6.1",
-    "husky": "4.3.8",
+    "husky": "6.0.0",
     "jest": "26.6.3",
     "lint-staged": "10.5.4",
     "npm-run-all": "4.1.5",
@@ -56,10 +58,5 @@
     "*.{json,md}": [
       "prettier --write"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
