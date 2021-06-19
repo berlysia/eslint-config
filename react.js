@@ -116,18 +116,7 @@ module.exports = {
         html: false,
       },
     ],
-    "react/sort-comp": [
-      "error",
-      {
-        order: [
-          "static-methods",
-          "lifecycle",
-          "/^on.+$/",
-          "everything-else",
-          "render",
-        ],
-      },
-    ],
+    "react/sort-comp": "off",
     "react/sort-prop-types": "off",
     "react/state-in-constructor": "off",
     "react/static-property-placement": "error",

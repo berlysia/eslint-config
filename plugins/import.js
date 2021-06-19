@@ -1,7 +1,7 @@
 module.exports = {
   plugins: ["import"],
   rules: {
-    "import/no-unresolved": "error",
+    "import/no-unresolved": "off", // よく壊れるしTypeScriptに任せたほうがいい
     "import/default": "off",
     "import/no-absolute-path": "error",
     "import/no-dynamic-require": "error",
