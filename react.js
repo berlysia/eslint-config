@@ -75,6 +75,7 @@ module.exports = {
     ],
     "react/jsx-uses-react": "off",
     "react/jsx-uses-vars": "error",
+    "react/jsx-indent": "off",
     "react/no-access-state-in-setstate": "error",
     "react/no-adjacent-inline-elements": "error",
     "react/no-array-index-key": "off", // index以外を指定できることは少ない
