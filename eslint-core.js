@@ -308,8 +308,8 @@ module.exports = {
     "no-var": "error",
     "object-shorthand": "error",
     "prefer-arrow-callback": ["error", { allowNamedFunctions: true }],
-    "prefer-const": "error",
-    "prefer-destructuring": ["error", { object: true, array: false }],
+    "prefer-const": "off", // 一時的に変えたいことがある
+    "prefer-destructuring": "off", // どっちでもいい
     "prefer-named-capture-group": "off",
     "prefer-numeric-literals": "error",
     "prefer-rest-params": "error",
@@ -332,7 +332,7 @@ module.exports = {
     "default-case-last": "error",
     "id-denylist": "off",
     "no-loss-of-precision": "error",
-    "no-promise-executor-return": "error",
+    "no-promise-executor-return": "off", // わかって書いてるので不要
     "no-restricted-exports": "off",
     "no-unreachable-loop": "error",
     "no-useless-backreference": "error",
