@@ -126,6 +126,6 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error",
     "react/jsx-newline": "off",
     "react/jsx-no-constructed-context-values": "error",
-    "react/no-unstable-nested-components": "error",
+    "react/no-unstable-nested-components": ["error", { allowAsProps: true }],
   },
 };

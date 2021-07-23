@@ -206,7 +206,11 @@ module.exports = {
         allowClassEnd: true,
       },
     ],
-    "lines-between-class-members": ["error", "always"],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { exceptAfterSingleLine: true },
+    ],
     "max-depth": ["error", { max: 4 }],
     "max-len": [
       "error",
