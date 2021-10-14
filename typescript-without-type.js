@@ -124,13 +124,6 @@ module.exports = {
         caughtErrorsIgnorePattern: "^_.*$",
       },
     ],
-    "@typescript-eslint/no-unused-vars-experimental": [
-      "error",
-      {
-        ignoredNamesRegex: "^_",
-        ignoreArgsIfArgsAfterAreUsed: true,
-      },
-    ],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "error",
     "no-useless-constructor": "off",
@@ -174,5 +167,10 @@ module.exports = {
     "@typescript-eslint/space-infix-ops": "error",
     "@typescript-eslint/object-curly-spacing": "off",
     "@typescript-eslint/sort-type-union-intersection-members": "off",
+    "@typescript-eslint/no-non-null-asserted-nullish-coalescing": "error",
+    "no-restricted-imports": "off",
+    "@typescript-eslint/no-restricted-imports": "off",
+    "padding-line-between-statements": "off",
+    "@typescript-eslint/padding-line-between-statements": "off",
   },
 };
