@@ -98,5 +98,7 @@ module.exports = {
     "@typescript-eslint/no-confusing-void-expression": "error",
     "@typescript-eslint/no-unsafe-argument": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
+    "@typescript-eslint/no-meaningless-void-operator": "error",
+    "@typescript-eslint/prefer-return-this-type": "error",
   },
 };
