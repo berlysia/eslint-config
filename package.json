@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "8.4.0",
+    "eslint": "8.4.1",
     "eslint-find-rules": "4.0.0",
     "husky": "7.0.4",
     "jest": "27.4.3",
