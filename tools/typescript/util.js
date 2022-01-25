@@ -21,7 +21,7 @@ function isTypeScriptRule(ruleName) {
 
 function hasRule(ruleName) {
   const name = ruleName.split("/")[1];
-  return Object.prototype.hasOwnProperty.call(plugin.rules, name);
+  return Object.hasOwn(plugin.rules, name);
 }
 
 module.exports = {
