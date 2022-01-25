@@ -127,5 +127,10 @@ module.exports = {
     "react/jsx-newline": "off",
     "react/jsx-no-constructed-context-values": "error",
     "react/no-unstable-nested-components": ["error", { allowAsProps: true }],
+    "react/no-arrow-function-lifecycle": "error",
+    "react/no-invalid-html-attribute": "error",
+    "react/no-namespace": "error",
+    "react/no-unused-class-component-methods": "off",
+    "react/prefer-exact-props": "off",
   },
 };

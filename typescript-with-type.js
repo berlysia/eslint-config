@@ -100,5 +100,6 @@ module.exports = {
     "@typescript-eslint/non-nullable-type-assertion-style": "error",
     "@typescript-eslint/no-meaningless-void-operator": "error",
     "@typescript-eslint/prefer-return-this-type": "error",
+    "@typescript-eslint/consistent-type-exports": "error",
   },
 };

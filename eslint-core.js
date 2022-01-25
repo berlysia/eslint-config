@@ -342,5 +342,7 @@ module.exports = {
     "no-useless-backreference": "error",
     "no-nonoctal-decimal-escape": "error",
     "no-unsafe-optional-chaining": "error",
+    "no-unused-private-class-members": "error",
+    "prefer-object-has-own": "error",
   },
 };
