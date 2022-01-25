@@ -44,5 +44,13 @@ module.exports = {
     "jest/no-interpolation-in-snapshots": "error",
     "jest/no-restricted-matchers": "error",
     "jest/unbound-method": "off", // configure in `jest-and-typescript`
+    "jest/max-nested-describe": "off",
+    "jest/prefer-comparison-matcher": "error",
+    "jest/prefer-equality-matcher": "error",
+    "jest/prefer-expect-resolves": "error",
+    "jest/prefer-lowercase-title": "off", // 日本語で書くので関心なし
+    "jest/prefer-to-be": "error",
+    "jest/require-hook": "error",
+    "jest/valid-describe-callback": "error",
   },
 };

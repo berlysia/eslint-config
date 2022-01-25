@@ -146,17 +146,7 @@ module.exports = {
     "no-undef": "error",
     "no-undef-init": "error",
     "no-undefined": "off",
-    "no-unused-vars": [
-      "error",
-      {
-        vars: "all",
-        args: "all",
-        ignoreRestSiblings: true,
-        argsIgnorePattern: "^_.*$",
-        caughtErrors: "all",
-        caughtErrorsIgnorePattern: "^_.*$",
-      },
-    ],
+    "no-unused-vars": "off",
     "no-use-before-define": "error",
     "array-bracket-newline": ["error", { multiline: true }],
     "array-bracket-spacing": ["error", "never"],
@@ -302,7 +292,7 @@ module.exports = {
     "no-confusing-arrow": ["error", { allowParens: true }],
     "no-const-assign": "error",
     "no-dupe-class-members": "error",
-    "no-duplicate-imports": "error",
+    "no-duplicate-imports": "off", // 誤爆が多いので
     "no-new-symbol": "error",
     "no-restricted-imports": "off",
     "no-this-before-super": "error",
@@ -342,5 +332,7 @@ module.exports = {
     "no-useless-backreference": "error",
     "no-nonoctal-decimal-escape": "error",
     "no-unsafe-optional-chaining": "error",
+    "no-unused-private-class-members": "error",
+    "prefer-object-has-own": "error",
   },
 };
