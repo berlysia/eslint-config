@@ -1,3 +1,7 @@
+.yarn
+!.yarn/releases
+!.yarn/plugins
+
 ### https://raw.github.com/github/gitignore/8edb8a95c4c4b3dce71a378aaaf89275510b9cef/Node.gitignore
 
 # Logs
@@ -69,7 +73,8 @@ typings/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
