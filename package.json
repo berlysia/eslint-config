@@ -16,12 +16,16 @@
     "test:unset": "eslint-find-rules -u './tests/all.js'",
     "test:auto": "node ./auto.js",
     "test": "run-p 'test:*'",
-    "projtest:tsproj": "cd tests/tsproject && yarn install --no-lockfile && yarn lint",
-    "projtest:jsproj": "cd tests/jsproject && yarn install --no-lockfile && yarn lint",
+    "projtest:tsproj": "yarn workspace tsproject lint",
+    "projtest:jsproj": "yarn workspace jsproject lint",
     "projtest": "run-s 'projtest:*'",
     "pre-commit": "yarn lint-staged",
     "prepare": "husky install"
   },
+  "workspaces": [
+    "tests/jsproject",
+    "tests/tsproject"
+  ],
   "keywords": [
     "eslint",
     "eslintconfig"

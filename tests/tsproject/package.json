@@ -1,5 +1,5 @@
 {
-  "name": "sample-project",
+  "name": "tsproject",
   "private": true,
   "scripts": {
     "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}' -c ./.eslintrc.js"
@@ -7,7 +7,7 @@
   "devDependencies": {
     "@types/jest": "*",
     "eslint": "*",
-    "typescript": "*",
-    "jest": "*"
+    "jest": "*",
+    "typescript": "*"
   }
 }

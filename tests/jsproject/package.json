@@ -1,5 +1,5 @@
 {
-  "name": "sample-project",
+  "name": "jsproject",
   "private": true,
   "scripts": {
     "lint": "eslint 'src/**/*.{js,jsx}' -c ./.eslintrc.js"
