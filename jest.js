@@ -52,5 +52,11 @@ module.exports = {
     "jest/prefer-to-be": "error",
     "jest/require-hook": "error",
     "jest/valid-describe-callback": "error",
+    "jest/max-expects": "off",
+    "jest/no-conditional-in-test": "error",
+    "jest/prefer-each": "error",
+    "jest/prefer-hooks-in-order": "error",
+    "jest/prefer-mock-promise-shorthand": "error",
+    "jest/prefer-snapshot-hint": ["error", "multi"],
   },
 };
