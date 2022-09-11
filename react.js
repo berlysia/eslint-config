@@ -132,5 +132,8 @@ module.exports = {
     "react/no-namespace": "error",
     "react/no-unused-class-component-methods": "off",
     "react/prefer-exact-props": "off",
+    "react/hook-use-state": "error",
+    "react/iframe-missing-sandbox": "error",
+    "react/jsx-no-leaked-render": "off", // TS側でbooleanを強制する
   },
 };

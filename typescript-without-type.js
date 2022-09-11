@@ -7,6 +7,13 @@ module.exports = {
     sourceType: "module",
     jsx: true,
   },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
+  },
   rules: {
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", { default: "array" }],
@@ -162,5 +169,13 @@ module.exports = {
     "@typescript-eslint/no-restricted-imports": "off",
     "padding-line-between-statements": "off",
     "@typescript-eslint/padding-line-between-statements": "off",
+    "@typescript-eslint/consistent-generic-constructors": [
+      "error",
+      "constructor",
+    ],
+    "@typescript-eslint/no-duplicate-enum-values": "error",
+    "@typescript-eslint/no-useless-empty-export": "error",
+    "@typescript-eslint/parameter-properties": "off",
+    "@typescript-eslint/space-before-blocks": "off",
   },
 };

@@ -3,7 +3,7 @@ async function someFn(): Promise<2> {
 }
 
 export class Klass {
-  value: 1 = 1;
+  value = 1 as const;
 
   publicMethod(): 1 {
     return this.value;
