@@ -101,5 +101,6 @@ module.exports = {
     "@typescript-eslint/no-meaningless-void-operator": "error",
     "@typescript-eslint/prefer-return-this-type": "error",
     "@typescript-eslint/consistent-type-exports": "error",
+    "@typescript-eslint/no-redundant-type-constituents": "error",
   },
 };
