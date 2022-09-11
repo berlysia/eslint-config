@@ -32,15 +32,15 @@
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
-    "@typescript-eslint/parser": "^5.10.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-eslint-comments": "^3.1.2",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jest": "^27.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "read-pkg-up": "^7.0.0"
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^27.0.4",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "read-pkg-up": "^7.0.1"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
@@ -50,7 +50,7 @@
     "lint-staged": "13.0.3",
     "npm-run-all": "4.1.5",
     "prettier": "2.7.1",
-    "typescript": "4.8.2"
+    "typescript": "4.8.3"
   },
   "lint-staged": {
     "*.{js,ts}": [
