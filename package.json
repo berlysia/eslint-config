@@ -62,7 +62,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@3.2.3",
+  "packageManager": "yarn@3.2.4",
   "peerDependencies": {
     "eslint": "*"
   }
