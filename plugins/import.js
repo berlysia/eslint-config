@@ -1,6 +1,8 @@
+const presentRulesOnly = require("../tools/presentRulesOnly");
+
 module.exports = {
   plugins: ["import"],
-  rules: {
+  rules: presentRulesOnly({
     "import/no-unresolved": "off", // よく壊れるしTypeScriptに任せたほうがいい
     "import/default": "off",
     "import/no-absolute-path": "error",
@@ -53,5 +55,5 @@ module.exports = {
     "import/no-unused-modules": "warn",
     "import/no-import-module-exports": "error",
     "import/no-relative-packages": "error",
-  },
+  }),
 };

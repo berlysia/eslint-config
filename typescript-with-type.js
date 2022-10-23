@@ -1,3 +1,5 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["plugin:import/typescript", "prettier"],
@@ -7,7 +9,7 @@ module.exports = {
     sourceType: "module",
     jsx: true,
   },
-  rules: {
+  rules: presentRulesOnly({
     "@typescript-eslint/await-thenable": "error",
     "dot-notation": "off",
     "@typescript-eslint/dot-notation": ["error"],
@@ -102,5 +104,5 @@ module.exports = {
     "@typescript-eslint/prefer-return-this-type": "error",
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/no-redundant-type-constituents": "error",
-  },
+  }),
 };

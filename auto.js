@@ -1,5 +1,6 @@
 const { realpathSync } = require("fs");
 const { sync: readPackage } = require("read-pkg-up");
+const presentRulesOnly = require("./tools/presentRulesOnly");
 
 const { packageJson: pkg } = readPackage({ cwd: realpathSync(process.cwd()) });
 const hasIn = (key, name) => {
@@ -35,3 +36,5 @@ module.exports = {
       },
   ].filter(Boolean),
 };
+
+presentRulesOnly.showAbsence();

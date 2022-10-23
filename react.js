@@ -1,3 +1,5 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   extends: ["prettier"],
   env: { browser: true },
@@ -12,7 +14,7 @@ module.exports = {
     },
   },
   plugins: ["react", "react-hooks"],
-  rules: {
+  rules: presentRulesOnly({
     "react/boolean-prop-naming": [
       "error",
       { rule: "^(is|has)[A-Z]([A-Za-z0-9]?)+" },
@@ -135,5 +137,5 @@ module.exports = {
     "react/hook-use-state": "error",
     "react/iframe-missing-sandbox": "error",
     "react/jsx-no-leaked-render": "off", // TS側でbooleanを強制する
-  },
+  }),
 };

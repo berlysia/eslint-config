@@ -1,3 +1,5 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   parserOptions: {
     ecmaVersion: 2019,
@@ -13,3 +15,5 @@ module.exports = {
     .map(require.resolve)
     .concat("prettier"),
 };
+
+presentRulesOnly.showAbsence();
