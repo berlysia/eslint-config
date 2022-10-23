@@ -1,9 +1,11 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   plugins: ["jest"],
   env: {
     "jest/globals": true,
   },
-  rules: {
+  rules: presentRulesOnly({
     "jest/consistent-test-it": "error",
     "jest/expect-expect": "off",
     "jest/lowercase-name": "off",
@@ -57,5 +59,5 @@ module.exports = {
     "jest/prefer-hooks-in-order": "error",
     "jest/prefer-mock-promise-shorthand": "error",
     "jest/prefer-snapshot-hint": ["error", "multi"],
-  },
+  }),
 };

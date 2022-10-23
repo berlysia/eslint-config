@@ -1,5 +1,7 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
-  rules: {
+  rules: presentRulesOnly({
     "callback-return": "off",
     "global-require": "off",
     "handle-callback-err": "off",
@@ -336,5 +338,5 @@ module.exports = {
     "prefer-object-has-own": "error",
     "no-constant-binary-expression": "error",
     "logical-assignment-operators": "off",
-  },
+  }),
 };

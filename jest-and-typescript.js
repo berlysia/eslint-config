@@ -1,3 +1,5 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   overrides: [
     {
@@ -5,10 +7,10 @@ module.exports = {
         "*.{test,spec}.{js,ts,jsx,tsx}",
         "**/__tests__/**/*.{js,ts,jsx,tsx}",
       ],
-      rules: {
+      rules: presentRulesOnly({
         "@typescript-eslint/unbound-method": "off",
         "jest/unbound-method": "error",
-      },
+      }),
     },
   ],
 };

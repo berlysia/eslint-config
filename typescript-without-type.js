@@ -1,3 +1,5 @@
+const presentRulesOnly = require("./tools/presentRulesOnly");
+
 module.exports = {
   parser: "@typescript-eslint/parser",
   extends: ["plugin:import/typescript", "prettier"],
@@ -14,7 +16,7 @@ module.exports = {
       },
     },
   },
-  rules: {
+  rules: presentRulesOnly({
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", { default: "array" }],
     "@typescript-eslint/ban-ts-comment": "off",
@@ -177,5 +179,5 @@ module.exports = {
     "@typescript-eslint/no-useless-empty-export": "error",
     "@typescript-eslint/parameter-properties": "off",
     "@typescript-eslint/space-before-blocks": "off",
-  },
+  }),
 };

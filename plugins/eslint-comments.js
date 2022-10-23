@@ -1,6 +1,8 @@
+const presentRulesOnly = require("../tools/presentRulesOnly");
+
 module.exports = {
   plugins: ["eslint-comments"],
-  rules: {
+  rules: presentRulesOnly({
     "eslint-comments/disable-enable-pair": ["error", { allowWholeFile: true }],
     "eslint-comments/no-aggregating-enable": "error",
     "eslint-comments/no-duplicate-disable": "error",
@@ -10,5 +12,5 @@ module.exports = {
     "eslint-comments/no-unused-enable": "error",
     "eslint-comments/no-use": "off",
     "eslint-comments/require-description": "error",
-  },
+  }),
 };
