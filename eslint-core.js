@@ -338,5 +338,7 @@ module.exports = {
     "prefer-object-has-own": "error",
     "no-constant-binary-expression": "error",
     "logical-assignment-operators": "off",
+    "no-empty-static-block": "off",
+    "no-new-native-nonconstructor": "error",
   }),
 };
