@@ -179,5 +179,7 @@ module.exports = {
     "@typescript-eslint/no-useless-empty-export": "error",
     "@typescript-eslint/parameter-properties": "off",
     "@typescript-eslint/space-before-blocks": "off",
+    "@typescript-eslint/no-unsafe-declaration-merging": "error",
+    "@typescript-eslint/sort-type-constituents": "off", // グループ別ならうれしいがキー名はおせっかい
   }),
 };

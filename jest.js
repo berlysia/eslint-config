@@ -59,5 +59,6 @@ module.exports = {
     "jest/prefer-hooks-in-order": "error",
     "jest/prefer-mock-promise-shorthand": "error",
     "jest/prefer-snapshot-hint": ["error", "multi"],
+    "jest/no-restricted-jest-methods": "off", // デフォルトでは指定しない
   }),
 };
