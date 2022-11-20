@@ -38,7 +38,7 @@ module.exports = {
     "jest/valid-describe": "off", // https://github.com/jest-community/eslint-plugin-jest/issues/203
     "jest/valid-expect": "error",
     "jest/valid-expect-in-promise": "error",
-    "jest/valid-title": "error",
+    "jest/valid-title": "off",
     "jest/no-conditional-expect": "error",
     "jest/no-deprecated-functions": "error",
     "jest/no-done-callback": "error",
