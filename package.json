@@ -19,6 +19,7 @@
     "projtest:tsproj": "yarn workspace tsproject lint",
     "projtest:jsproj": "yarn workspace jsproject lint",
     "projtest": "run-s 'projtest:*'",
+    "ci": "run-s lint test projtest",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'"
   },
   "workspaces": [
