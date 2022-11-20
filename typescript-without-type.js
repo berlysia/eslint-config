@@ -124,7 +124,7 @@ module.exports = {
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/no-use-before-define": "off", // 完全に理解しているので不要
     "no-useless-constructor": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     "@typescript-eslint/no-var-requires": "error",
@@ -179,5 +179,7 @@ module.exports = {
     "@typescript-eslint/no-useless-empty-export": "error",
     "@typescript-eslint/parameter-properties": "off",
     "@typescript-eslint/space-before-blocks": "off",
+    "@typescript-eslint/no-unsafe-declaration-merging": "error",
+    "@typescript-eslint/sort-type-constituents": "off", // グループ別ならうれしいがキー名はおせっかい
   }),
 };

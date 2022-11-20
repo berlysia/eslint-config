@@ -248,14 +248,7 @@ module.exports = {
     "no-tabs": "error",
     "no-ternary": "off",
     "no-trailing-spaces": "error",
-    "no-underscore-dangle": [
-      "error",
-      {
-        allowAfterThis: true,
-        allowAfterSuper: true,
-        enforceInMethodNames: false,
-      },
-    ],
+    "no-underscore-dangle": "off",
     "no-unneeded-ternary": "error",
     "no-whitespace-before-property": "error",
     "nonblock-statement-body-position": ["error", "below"],
@@ -338,5 +331,7 @@ module.exports = {
     "prefer-object-has-own": "error",
     "no-constant-binary-expression": "error",
     "logical-assignment-operators": "off",
+    "no-empty-static-block": "off",
+    "no-new-native-nonconstructor": "error",
   }),
 };
