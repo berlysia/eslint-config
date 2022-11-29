@@ -2,7 +2,7 @@ const presentRulesOnly = require("./tools/presentRulesOnly");
 
 module.exports = {
   parserOptions: {
-    ecmaVersion: 2019,
+    ecmaVersion: "latest",
     sourceType: "module",
     ecmaFeatures: {},
   },
