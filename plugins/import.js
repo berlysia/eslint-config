@@ -55,5 +55,7 @@ module.exports = {
     "import/no-unused-modules": "warn",
     "import/no-import-module-exports": "error",
     "import/no-relative-packages": "error",
+    "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+    "import/no-empty-named-blocks": "error",
   }),
 };
