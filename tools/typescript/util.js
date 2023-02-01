@@ -13,8 +13,7 @@ function extract(isWithType) {
     .filter((element) => notDeprecated(element))
     .filter((element) => filterFunction(element));
 
-  const ruleNames = filtered.map(([name]) => `${RULE_PREFIX}/${name}`);
-  return ruleNames;
+  return filtered.map(([name]) => `${RULE_PREFIX}/${name}`);
 }
 
 function isTypeScriptRule(ruleName) {

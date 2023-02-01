@@ -31,7 +31,7 @@ function pluginRuleIsPresent(pluginSlug, ruleName) {
 }
 
 module.exports = function presentRulesOnly(rules) {
-  const filtered = Object.fromEntries(
+  return Object.fromEntries(
     Object.entries(rules)
       .map((kv) => {
         const [ruleName] = kv;
@@ -53,7 +53,6 @@ module.exports = function presentRulesOnly(rules) {
       })
       .filter(Boolean)
   );
-  return filtered;
 };
 
 module.exports.showAbsence = function showAbsence() {

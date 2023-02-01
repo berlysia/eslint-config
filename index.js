@@ -17,6 +17,7 @@ module.exports = {
       "./plugins/eslint-comments",
       "./plugins/import",
       "./plugins/unicorn",
+      "./plugins/sonarjs",
     ].map((x) => require.resolve(x)),
     "prettier",
   ],
