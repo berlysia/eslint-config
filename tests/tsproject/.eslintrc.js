@@ -5,4 +5,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   extends: ["../../auto.js"],
+  rules: {
+    "unicorn/prefer-module": "off",
+  },
 };

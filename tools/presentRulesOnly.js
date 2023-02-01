@@ -37,15 +37,17 @@ module.exports = function presentRulesOnly(rules) {
         const [ruleName] = kv;
         const splitted = ruleName.split("/");
         if (splitted.length === 1) {
-          return coreRuleIsPresent(ruleName) ? kv : null;
+          return coreRuleIsPresent(ruleName) ? kv : undefined;
         }
         if (splitted.length === 2) {
           const [scopeOrName, ruleName] = splitted;
           const isScoped = scopeOrName.startsWith("@");
           if (isScoped) {
-            return scopedPluginRuleIsPresent(scopeOrName, ruleName) ? kv : null;
+            return scopedPluginRuleIsPresent(scopeOrName, ruleName)
+              ? kv
+              : undefined;
           }
-          return pluginRuleIsPresent(scopeOrName, ruleName) ? kv : null;
+          return pluginRuleIsPresent(scopeOrName, ruleName) ? kv : undefined;
         }
         throw new Error(`ruleName: "${ruleName}" is unknown pattern`);
       })
@@ -55,7 +57,7 @@ module.exports = function presentRulesOnly(rules) {
 };
 
 module.exports.showAbsence = function showAbsence() {
-  if (absenceSet.size !== 0) {
+  if (absenceSet.size > 0) {
     console.warn(`Removed rules are found: ${absenceSet}`);
   }
   return absenceSet;

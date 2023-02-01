@@ -1,4 +1,4 @@
-async function someFn(): Promise<2> {
+async function someFunction(): Promise<2> {
   return 2;
 }
 
@@ -15,7 +15,7 @@ export class Klass {
 
   async promiseMethod(): Promise<1 | 2> {
     const sum = 1 + this.value + Math.random();
-    return sum > 2.5 ? someFn() : this.value;
+    return sum > 2.5 ? someFunction() : this.value;
   }
 
   private privateMethod() {
