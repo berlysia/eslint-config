@@ -181,5 +181,7 @@ module.exports = {
     "@typescript-eslint/space-before-blocks": "off",
     "@typescript-eslint/no-unsafe-declaration-merging": "error",
     "@typescript-eslint/sort-type-constituents": "off", // グループ別ならうれしいがキー名はおせっかい
+    "key-spacing": "off",
+    "@typescript-eslint/key-spacing": "off",
   }),
 };

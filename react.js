@@ -137,5 +137,7 @@ module.exports = {
     "react/hook-use-state": "error",
     "react/iframe-missing-sandbox": "error",
     "react/jsx-no-leaked-render": "off", // TS側でbooleanを強制する
+    "react/no-object-type-as-default-prop": "off",
+    "react/sort-default-props": "off",
   }),
 };

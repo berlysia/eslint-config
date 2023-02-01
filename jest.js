@@ -60,5 +60,6 @@ module.exports = {
     "jest/prefer-mock-promise-shorthand": "error",
     "jest/prefer-snapshot-hint": ["error", "multi"],
     "jest/no-restricted-jest-methods": "off", // デフォルトでは指定しない
+    "jest/no-untyped-mock-factory": "off", // configure in `jest-and-typescript`
   }),
 };

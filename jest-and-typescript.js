@@ -10,6 +10,7 @@ module.exports = {
       rules: presentRulesOnly({
         "@typescript-eslint/unbound-method": "off",
         "jest/unbound-method": "error",
+        "jest/no-untyped-mock-factory": "error",
       }),
     },
   ],
