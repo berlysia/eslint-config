@@ -1,10 +1,10 @@
-const { realpathSync } = require("fs");
+const { realpathSync } = require("node:fs");
 const { sync: readPackage } = require("read-pkg-up");
 const presentRulesOnly = require("./tools/presentRulesOnly");
 
-const { packageJson: pkg } = readPackage({ cwd: realpathSync(process.cwd()) });
+const { packageJson } = readPackage({ cwd: realpathSync(process.cwd()) });
 const hasIn = (key, name) => {
-  for (const x in pkg[key] || {}) {
+  for (const x in packageJson[key] || {}) {
     if (x === name) return true;
   }
   return false;

@@ -25,7 +25,7 @@ module.exports = {
       "error",
       {
         types: {
-          Array: null,
+          Array: false,
           Object: {
             message: "Use `object` instead",
             fixWith: "object",

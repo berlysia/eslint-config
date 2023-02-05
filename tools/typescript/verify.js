@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const withType = require("../../typescript-with-type");
 const withoutType = require("../../typescript-without-type");
 const { extract, hasRule, isTypeScriptRule } = require("./util");
@@ -95,6 +97,6 @@ if (invalidInWithoutType.length > 0) {
 }
 
 if (messages.length > 0) {
-  messages.forEach((x) => console.error(x, "\n"));
+  for (const x of messages) console.error(x, "\n");
   process.exit(1);
 }
