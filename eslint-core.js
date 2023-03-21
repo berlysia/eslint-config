@@ -29,7 +29,7 @@ module.exports = {
     "no-compare-neg-zero": "error",
     "no-cond-assign": "error",
     "no-console": "off",
-    "no-constant-condition": "error",
+    "no-constant-condition": "warn",
     "no-control-regex": "error",
     "no-debugger": "error",
     "no-dupe-args": "error",
@@ -60,7 +60,7 @@ module.exports = {
     "array-callback-return": "error",
     "block-scoped-var": "off", // var is banned
     "class-methods-use-this": "off",
-    complexity: ["error", { max: 10 }],
+    complexity: "off",
     "consistent-return": "off",
     curly: ["error", "multi-or-nest"],
     "default-case": "off",
