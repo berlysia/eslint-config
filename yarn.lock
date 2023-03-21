@@ -1255,7 +1255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.2.3":
+"@types/jest@npm:*, @types/jest@npm:^29.2.3":
   version: 29.5.0
   resolution: "@types/jest@npm:29.5.0"
   dependencies:
@@ -6761,7 +6761,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "tsproject@workspace:tests/tsproject"
   dependencies:
-    "@types/jest": ^29.2.3
+    "@types/jest": "*"
     eslint: "*"
     jest: "*"
     typescript: "*"
