@@ -61,5 +61,6 @@ module.exports = {
     "jest/prefer-snapshot-hint": ["error", "multi"],
     "jest/no-restricted-jest-methods": "off", // デフォルトでは指定しない
     "jest/no-untyped-mock-factory": "off", // configure in `jest-and-typescript`
+    "jest/no-confusing-set-timeout": "error",
   }),
 };

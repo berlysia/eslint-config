@@ -114,5 +114,6 @@ module.exports = {
     "unicorn/template-indent": "error",
     "unicorn/text-encoding-identifier-case": "error",
     "unicorn/throw-new-error": "error",
+    "unicorn/prefer-blob-reading-methods": "error",
   }),
 };
