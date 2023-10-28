@@ -4756,6 +4756,9 @@ __metadata:
 "jsproject@workspace:tests/jsproject":
   version: 0.0.0-use.local
   resolution: "jsproject@workspace:tests/jsproject"
+  dependencies:
+    eslint: "npm:8.52.0"
+    jest: "npm:29.7.0"
   languageName: unknown
   linkType: soft
 
@@ -6696,6 +6699,11 @@ __metadata:
 "tsproject@workspace:tests/tsproject":
   version: 0.0.0-use.local
   resolution: "tsproject@workspace:tests/tsproject"
+  dependencies:
+    "@types/jest": "npm:^29.2.3"
+    eslint: "npm:8.52.0"
+    jest: "npm:29.7.0"
+    typescript: "npm:5.2.2"
   languageName: unknown
   linkType: soft
 
