@@ -5,9 +5,9 @@
     "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}' -c ./.eslintrc.js"
   },
   "devDependencies": {
-    "@types/jest": "*",
-    "eslint": "*",
-    "jest": "*",
-    "typescript": "*"
+    "@types/jest": "^29.2.3",
+    "eslint": "8.52.0",
+    "jest": "29.7.0",
+    "typescript": "5.2.2"
   }
 }

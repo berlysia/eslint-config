@@ -133,7 +133,6 @@ module.exports = {
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-literal-enum-member": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
-    "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/prefer-ts-expect-error": "error",
     quotes: "off",
     "@typescript-eslint/quotes": "off",
@@ -183,5 +182,11 @@ module.exports = {
     "@typescript-eslint/sort-type-constituents": "off", // グループ別ならうれしいがキー名はおせっかい
     "key-spacing": "off",
     "@typescript-eslint/key-spacing": "off",
+    "block-spacing": "off",
+    "@typescript-eslint/block-spacing": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/class-methods-use-this": "error",
+    "@typescript-eslint/lines-around-comment": "off",
+    "@typescript-eslint/no-import-type-side-effects": "error",
   }),
 };

@@ -242,7 +242,7 @@ module.exports = {
     "no-multiple-empty-lines": "off",
     "no-negated-condition": "error",
     "no-nested-ternary": "off",
-    "no-new-object": "error",
+    "no-new-object": "off",
     "no-plusplus": "off",
     "no-restricted-syntax": "off",
     "no-tabs": "error",
@@ -333,5 +333,6 @@ module.exports = {
     "logical-assignment-operators": "off",
     "no-empty-static-block": "off",
     "no-new-native-nonconstructor": "error",
+    "no-object-constructor": "error",
   }),
 };

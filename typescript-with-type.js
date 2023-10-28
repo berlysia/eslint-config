@@ -84,9 +84,12 @@ module.exports = {
     "@typescript-eslint/restrict-template-expressions": [
       "error",
       {
+        allowAny: true,
+        allowBoolean: true,
+        allowNever: true,
+        allowNullish: false,
         allowNumber: true,
-        allowBoolean: false,
-        allowNullable: false,
+        allowRegExp: true,
       },
     ],
     "@typescript-eslint/strict-boolean-expressions": "off",
@@ -104,5 +107,10 @@ module.exports = {
     "@typescript-eslint/prefer-return-this-type": "error",
     "@typescript-eslint/consistent-type-exports": "error",
     "@typescript-eslint/no-redundant-type-constituents": "error",
+    "@typescript-eslint/no-duplicate-type-constituents": "error",
+    "@typescript-eslint/no-mixed-enums": "error",
+    "@typescript-eslint/no-unsafe-enum-comparison": "error",
+    "@typescript-eslint/prefer-destructuring": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
   }),
 };
