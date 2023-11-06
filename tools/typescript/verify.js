@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const withType = require("../../typescript-with-type");
-const withoutType = require("../../typescript-without-type");
+const withType = require("../../configs/typescript-with-type");
+const withoutType = require("../../configs/typescript-without-type");
 const { extract, hasRule, isTypeScriptRule } = require("./util");
 
 const withTypeRules = extract(true);

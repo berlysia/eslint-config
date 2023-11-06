@@ -13,11 +13,11 @@ module.exports = {
   },
   extends: [
     ...[
-      "./eslint-core",
-      "./plugins/eslint-comments",
-      "./plugins/import",
-      "./plugins/unicorn",
-      "./plugins/sonarjs",
+      "./configs/eslint-core",
+      "./configs/eslint-comments",
+      "./configs/import",
+      "./configs/unicorn",
+      "./configs/sonarjs",
     ].map((x) => require.resolve(x)),
     "prettier",
   ],

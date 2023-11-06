@@ -1,4 +1,4 @@
-const presentRulesOnly = require("./tools/presentRulesOnly");
+const presentRulesOnly = require("../tools/presentRulesOnly");
 
 module.exports = {
   plugins: ["jest"],
