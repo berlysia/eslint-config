@@ -188,5 +188,7 @@ module.exports = {
     "@typescript-eslint/class-methods-use-this": "error",
     "@typescript-eslint/lines-around-comment": "off",
     "@typescript-eslint/no-import-type-side-effects": "error",
+    "max-params": "off",
+    "@typescript-eslint/max-params": "off",
   }),
 };
