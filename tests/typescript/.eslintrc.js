@@ -2,9 +2,7 @@ module.exports = {
   overrides: [
     {
       files: ["*.ts"],
-      extends: ["../../index.js", "../../typescript.js"].map((x) =>
-        require.resolve(x)
-      ),
+      extends: ["../../dist/index.js", "../../dist/configs/typescript.js"],
       parserOptions: {
         project: "./tsconfig.json",
       },

@@ -1,4 +1,4 @@
-const presentRulesOnly = require("../tools/presentRulesOnly");
+import presentRulesOnly from "../presentRulesOnly";
 
 module.exports = {
   plugins: ["import"],

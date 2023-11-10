@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ["../../auto.js"],
+  extends: ["../../dist/auto.js"],
   rules: {
     "unicorn/prefer-module": "off",
   },

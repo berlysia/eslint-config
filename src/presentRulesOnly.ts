@@ -1,11 +1,14 @@
-function coreRuleIsPresent(ruleName) {
-  const unsupportedAPI = require("eslint/use-at-your-own-risk");
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- tmp */
+function coreRuleIsPresent(ruleName: string): boolean {
+  const unsupportedAPI = require("eslint/use-at-your-own-risk") as {
+    builtinRules: Set<string>;
+  };
   return unsupportedAPI.builtinRules.has(ruleName);
 }
 
-const absenceSet = new Set();
+const absenceSet = new Set<string>();
 
-function scopedPluginRuleIsPresent(scopeName, ruleName) {
+function scopedPluginRuleIsPresent(scopeName: string, ruleName: string) {
   // eslint-disable-next-line import/no-dynamic-require -- forgive me
   const plugin = require(`${scopeName}/eslint-plugin`);
   const pluginRules = plugin.rules;
@@ -16,7 +19,7 @@ function scopedPluginRuleIsPresent(scopeName, ruleName) {
   return Boolean(pluginRules[ruleName]);
 }
 
-function pluginRuleIsPresent(pluginSlug, ruleName) {
+function pluginRuleIsPresent(pluginSlug: string, ruleName: string) {
   const pluginName = pluginSlug.startsWith("eslint-plugin-")
     ? pluginSlug
     : `eslint-plugin-${pluginSlug}`;
@@ -30,7 +33,9 @@ function pluginRuleIsPresent(pluginSlug, ruleName) {
   return Boolean(pluginRules[ruleName]);
 }
 
-module.exports = function presentRulesOnly(rules) {
+export default function presentRulesOnly(
+  rules: Record<string, string | [string, ...unknown[]]>
+) {
   return Object.fromEntries(
     Object.entries(rules)
       .map((kv) => {
@@ -51,13 +56,14 @@ module.exports = function presentRulesOnly(rules) {
         }
         throw new Error(`ruleName: "${ruleName}" is unknown pattern`);
       })
-      .filter(Boolean)
+      // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- needs to filter out undefined
+      .filter((x): x is NonNullable<typeof x> => Boolean(x))
   );
-};
+}
 
-module.exports.showAbsence = function showAbsence() {
+export function showAbsence() {
   if (absenceSet.size > 0) {
     console.warn(`Removed rules are found: ${absenceSet}`);
   }
   return absenceSet;
-};
+}
