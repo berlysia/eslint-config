@@ -73,7 +73,6 @@ export default function configsReact(): FlatConfigItem[] {
         "react/jsx-no-useless-fragment": "error",
         "react/jsx-pascal-case": "error",
         "react/jsx-props-no-spreading": "off",
-        "react/jsx-sort-default-props": "off",
         "react/jsx-sort-props": [
           "error",
           {
@@ -99,7 +98,6 @@ export default function configsReact(): FlatConfigItem[] {
         "react/jsx-max-props-per-line": "off",
         "react/jsx-one-expression-per-line": "off",
         "react/jsx-props-no-multi-spaces": "off",
-        "react/jsx-space-before-closing": "off",
         "react/jsx-tag-spacing": "off",
         "react/jsx-wrap-multilines": "off",
         "react/no-access-state-in-setstate": "error",

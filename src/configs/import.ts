@@ -38,7 +38,7 @@ export default function configsImport(): FlatConfigItem[] {
         "import/no-named-as-default-member": "error",
         "import/newline-after-import": "error",
         "import/first": "error",
-        "import/no-extraneous-dependencies": "error",
+        "import/no-extraneous-dependencies": "off", // おかしくなりやすい
         "import/no-mutable-exports": "error",
         "import/no-commonjs": "off",
         "import/prefer-default-export": "off",
@@ -82,7 +82,6 @@ export default function configsImport(): FlatConfigItem[] {
         "import/no-relative-packages": "error",
         "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
         "import/no-empty-named-blocks": "error",
-        "import/imports-first": "off",
       },
     },
   ];

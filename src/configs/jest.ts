@@ -23,7 +23,6 @@ export default function configsJest(
         "jest/no-export": "error",
         "jest/no-focused-tests": "error",
         "jest/no-hooks": "off",
-        "jest/no-if": "error",
         "jest/no-identical-title": "error",
         "jest/no-jasmine-globals": "error",
         "jest/no-large-snapshots": ["error", { maxSize: 32 }],
