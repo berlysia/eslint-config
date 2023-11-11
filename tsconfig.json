@@ -9,7 +9,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "ignoreDeprecations": "5.0",
+    "importsNotUsedAsValues": "error",
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   },
   "include": ["**/*.ts"],
   "exclude": ["tests/**/*.ts"]

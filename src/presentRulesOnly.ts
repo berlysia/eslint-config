@@ -1,69 +1,77 @@
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-require-imports -- tmp */
+import { Linter } from "eslint";
+import type { ESLint } from "eslint";
+import type { FlatConfigItem } from "./types";
+
+const linter = new Linter();
+const builtinRules = linter.getRules();
+
 function coreRuleIsPresent(ruleName: string): boolean {
-  const unsupportedAPI = require("eslint/use-at-your-own-risk") as {
-    builtinRules: Set<string>;
-  };
-  return unsupportedAPI.builtinRules.has(ruleName);
+  return builtinRules.has(ruleName);
 }
 
 const absenceSet = new Set<string>();
+function processRules(
+  rules: NonNullable<FlatConfigItem["rules"]>,
+  plugins: NonNullable<FlatConfigItem["plugins"]>
+): FlatConfigItem["rules"] {
+  return Object.fromEntries(
+    Object.entries(rules as Record<string, unknown>).flatMap((kv) => {
+      const [ruleNameInConfig] = kv;
+      const splitted = ruleNameInConfig.split("/");
 
-function scopedPluginRuleIsPresent(scopeName: string, ruleName: string) {
-  // eslint-disable-next-line import/no-dynamic-require -- forgive me
-  const plugin = require(`${scopeName}/eslint-plugin`);
-  const pluginRules = plugin.rules;
-  if (!pluginRules) {
-    absenceSet.add(scopeName);
-    return true;
-  }
-  return Boolean(pluginRules[ruleName]);
-}
+      // プラグインを参照していないルールは、コアルールのみを参照しているので、コアルールが存在するかを確認する
+      if (splitted.length === 1) {
+        if (coreRuleIsPresent(ruleNameInConfig)) {
+          return [kv];
+        }
+        absenceSet.add(ruleNameInConfig);
+        return [];
+      }
 
-function pluginRuleIsPresent(pluginSlug: string, ruleName: string) {
-  const pluginName = pluginSlug.startsWith("eslint-plugin-")
-    ? pluginSlug
-    : `eslint-plugin-${pluginSlug}`;
-  // eslint-disable-next-line import/no-dynamic-require -- forgive me
-  const plugin = require(pluginName);
-  const pluginRules = plugin.rules;
-  if (!pluginRules) {
-    absenceSet.add(pluginName);
-    return true;
-  }
-  return Boolean(pluginRules[ruleName]);
+      // プラグインを参照しているルールは、pluginsの定義に対応するプラグインにルールが存在するかを確認する
+      if (splitted.length === 2) {
+        const [pluginName, ruleName] = splitted;
+        const plugin = plugins[pluginName] as ESLint.Plugin;
+        if (!plugin) {
+          throw new Error(`pluginName: "${pluginName}" is not provided`);
+        }
+
+        if (plugin.rules?.[ruleName]) {
+          return [kv];
+        }
+        absenceSet.add(ruleNameInConfig);
+        return [];
+      }
+
+      throw new Error(`ruleName: "${ruleNameInConfig}" is unknown pattern`);
+    })
+  ) as FlatConfigItem["rules"];
 }
 
 export default function presentRulesOnly(
-  rules: Record<string, string | [string, ...unknown[]]>
-) {
-  return Object.fromEntries(
-    Object.entries(rules)
-      .map((kv) => {
-        const [ruleName] = kv;
-        const splitted = ruleName.split("/");
-        if (splitted.length === 1) {
-          return coreRuleIsPresent(ruleName) ? kv : undefined;
-        }
-        if (splitted.length === 2) {
-          const [scopeOrName, ruleName] = splitted;
-          const isScoped = scopeOrName.startsWith("@");
-          if (isScoped) {
-            return scopedPluginRuleIsPresent(scopeOrName, ruleName)
-              ? kv
-              : undefined;
-          }
-          return pluginRuleIsPresent(scopeOrName, ruleName) ? kv : undefined;
-        }
-        throw new Error(`ruleName: "${ruleName}" is unknown pattern`);
-      })
-      // eslint-disable-next-line unicorn/prefer-native-coercion-functions -- needs to filter out undefined
-      .filter((x): x is NonNullable<typeof x> => Boolean(x))
-  );
+  configs: FlatConfigItem[]
+): FlatConfigItem[] {
+  const plugins = configs.reduce<Record<string, unknown>>(
+    (acc, { plugins }) => {
+      if (!plugins) return acc;
+      return { ...acc, ...plugins };
+    },
+    {}
+  ) as Record<string, ESLint.Plugin>;
+
+  return configs.map((config) => {
+    const { rules, ...rest } = config;
+    if (!rules) return config;
+    return {
+      ...rest,
+      rules: processRules(rules, plugins),
+    };
+  });
 }
 
 export function showAbsence() {
   if (absenceSet.size > 0) {
-    console.warn(`Removed rules are found: ${absenceSet}`);
+    console.warn(`Removed rules are found: \n${[...absenceSet].join("\n")}\n`);
   }
   return absenceSet;
 }
