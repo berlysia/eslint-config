@@ -37,9 +37,6 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
     const rulesObjectLiteralExpressions = objectLiteralExpressions.filter(
       (objectLiteralExpression) => {
         const parent = objectLiteralExpression.getParent();
-        if (parent === undefined) {
-          return false;
-        }
 
         return (
           parent.isKind(morph.SyntaxKind.PropertyAssignment) &&
