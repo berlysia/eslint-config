@@ -13,7 +13,8 @@
     "ignoreDeprecations": "5.0",
     "importsNotUsedAsValues": "error",
     "noEmit": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": ["**/*.ts"],
   "exclude": ["tests/**/*.ts"]

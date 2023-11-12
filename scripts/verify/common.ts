@@ -29,6 +29,7 @@ function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
 
   for (const pluginName of targetPluginNames) {
     const plugin = plugins[pluginName];
+    if (!plugin) throw new Error(`plugin ${pluginName} is not found`);
     for (const ruleName of Object.keys(plugin.rules!)) {
       const ruleNameForConfiguration = `${pluginName}/${ruleName}`;
       const rule = plugin.rules![ruleName];
@@ -54,8 +55,12 @@ function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
       continue;
 
     const [pluginName, ruleNameWithoutPrefix] = ruleName.split("/");
-    const plugin = plugins[pluginName];
-    if (!plugin.rules![ruleNameWithoutPrefix]) {
+    if (!pluginName || !ruleNameWithoutPrefix) {
+      unknown.push(ruleName);
+      continue;
+    }
+    const rule = plugins[pluginName]?.rules![ruleNameWithoutPrefix];
+    if (!rule) {
       unknown.push(ruleName);
     }
   }

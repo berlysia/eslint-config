@@ -14,6 +14,7 @@ function processRules(
   rules: NonNullable<FlatConfigItem["rules"]>,
   plugins: NonNullable<FlatConfigItem["plugins"]>
 ): FlatConfigItem["rules"] {
+  const castedPlugins = plugins as Record<string, ESLint.Plugin>;
   return Object.fromEntries(
     Object.entries(rules as Record<string, unknown>).flatMap((kv) => {
       const [ruleNameInConfig] = kv;
@@ -30,8 +31,8 @@ function processRules(
 
       // プラグインを参照しているルールは、pluginsの定義に対応するプラグインにルールが存在するかを確認する
       if (splitted.length === 2) {
-        const [pluginName, ruleName] = splitted;
-        const plugin = plugins[pluginName] as ESLint.Plugin;
+        const [pluginName, ruleName] = splitted as [string, string];
+        const plugin = castedPlugins[pluginName];
         if (!plugin) {
           throw new Error(`pluginName: "${pluginName}" is not provided`);
         }

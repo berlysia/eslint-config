@@ -34,13 +34,11 @@ function isDefinedRule(ruleName: UnprefixedRuleName) {
 }
 
 function isDeprecatedRule(ruleName: UnprefixedRuleName) {
-  return definedRules[ruleName]?.meta?.deprecated === true;
+  return definedRules[ruleName].meta.deprecated === true;
 }
 
 function isTypeAwareRule(pluginRuleName: UnprefixedRuleName) {
-  return Boolean(
-    definedRules[pluginRuleName]?.meta?.docs?.requiresTypeChecking
-  );
+  return Boolean(definedRules[pluginRuleName].meta.docs?.requiresTypeChecking);
 }
 
 export default function verify() {

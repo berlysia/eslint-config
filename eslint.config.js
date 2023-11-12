@@ -2,7 +2,9 @@ import berlysia from "./dist/index.js";
 
 const configs = berlysia(
   {
-    typescript: true,
+    typescript: {
+      tsConfigPath: "./tsconfig.json",
+    },
   },
   {
     files: ["*.ts"],

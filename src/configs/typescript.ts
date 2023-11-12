@@ -36,15 +36,23 @@ export const typeAwareRules: Rules = {
         format: ["camelCase", "UPPER_CASE"],
       },
       {
-        selector: "variable",
+        selector: ["variable", "parameter"],
         types: ["boolean"],
-        format: ["PascalCase"],
-        prefix: ["is", "should", "has", "can", "did", "will"],
+        format: ["camelCase"],
+        custom: {
+          match: true,
+          regex:
+            "^(is|should|has|can|did|will|check|allow|ignore|use)|(Is|Should|Has|Can|Did|Will|Check|Allow|Ignore|Use)[A-Z0-9]",
+        },
       },
       {
         selector: "parameter",
         format: ["camelCase", "UPPER_CASE"],
         leadingUnderscore: "allow",
+      },
+      {
+        selector: ["objectLiteralProperty", "typeProperty"],
+        format: null,
       },
       {
         selector: "typeLike",
@@ -75,7 +83,7 @@ export const typeAwareRules: Rules = {
       },
     ],
     "@typescript-eslint/prefer-readonly": "error",
-    "@typescript-eslint/prefer-readonly-parameter-types": "error",
+    "@typescript-eslint/prefer-readonly-parameter-types": "off", // やりたいが、しんどい
     "@typescript-eslint/prefer-regexp-exec": "error",
     "@typescript-eslint/prefer-string-starts-ends-with": "error",
     "@typescript-eslint/prefer-reduce-type-parameter": "error",
