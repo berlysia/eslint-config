@@ -6,6 +6,7 @@ const configs = berlysia(
       tsConfigPath: "./tsconfig.json",
     },
   },
+  { ignores: ["dist/**/*", "tests/**/*"] },
   {
     files: ["*.ts"],
     rules: {
@@ -13,7 +14,7 @@ const configs = berlysia(
       "unicorn/prefer-module": "off",
       "unicorn/no-empty-file": "off",
     },
-  }
+  },
 );
 
 export default configs;

@@ -1,7 +1,7 @@
 const config = {
   printWidth: 80,
   singleQuote: false,
-  trailingComma: "es5",
+  trailingComma: "all",
 };
 
 export default config;

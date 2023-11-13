@@ -272,7 +272,7 @@ export const nonTypeAwareRules: Rules = {
 };
 
 export default function configsTypeScript(
-  options?: OptionsTypeScript
+  options?: OptionsTypeScript,
 ): FlatConfigItem[] {
   const tsConfigPath = readTsConfigPath(options);
 

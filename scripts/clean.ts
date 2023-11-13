@@ -18,7 +18,7 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
 
   const configsDir = path.resolve(
     path.dirname(url.fileURLToPath(import.meta.url)),
-    "../src/configs"
+    "../src/configs",
   );
   const configFiles = fs.readdirSync(configsDir);
 
@@ -32,7 +32,7 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
     });
 
     const objectLiteralExpressions = sourceFile.getDescendantsOfKind(
-      morph.SyntaxKind.ObjectLiteralExpression
+      morph.SyntaxKind.ObjectLiteralExpression,
     );
     const rulesObjectLiteralExpressions = objectLiteralExpressions.filter(
       (objectLiteralExpression) => {
@@ -42,12 +42,12 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
           parent.isKind(morph.SyntaxKind.PropertyAssignment) &&
           parent.getName() === "rules"
         );
-      }
+      },
     );
 
     for (const rulesObjectLiteralExpression of rulesObjectLiteralExpressions) {
       const rules = rulesObjectLiteralExpression.getChildrenOfKind(
-        morph.SyntaxKind.PropertyAssignment
+        morph.SyntaxKind.PropertyAssignment,
       );
       for (const rule of rules) {
         const nameNode = rule.getNameNode();

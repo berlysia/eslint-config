@@ -34,22 +34,22 @@ function isDefinedRule(ruleName: UnprefixedRuleName) {
 }
 
 function isDeprecatedRule(ruleName: UnprefixedRuleName) {
-  return definedRules[ruleName].meta.deprecated === true;
+  return Boolean(definedRules[ruleName]?.meta.deprecated);
 }
 
 function isTypeAwareRule(pluginRuleName: UnprefixedRuleName) {
-  return Boolean(definedRules[pluginRuleName].meta.docs?.requiresTypeChecking);
+  return Boolean(definedRules[pluginRuleName]?.meta.docs?.requiresTypeChecking);
 }
 
 export default function verify() {
   const withTypeConfiguredRuleNames = Object.keys(
-    withType as Record<PrefixedRuleName, unknown>
+    withType as Record<PrefixedRuleName, unknown>,
   ).filter(isTypeScriptRule) as PrefixedRuleName[];
   const withoutTypeConfiguredRuleNames = Object.keys(
-    withoutType as Record<PrefixedRuleName, unknown>
+    withoutType as Record<PrefixedRuleName, unknown>,
   ).filter(isTypeScriptRule) as PrefixedRuleName[];
   const definedRuleNames = Object.keys(definedRules).map((x) =>
-    addPrefix(x as UnprefixedRuleName)
+    addPrefix(x as UnprefixedRuleName),
   );
 
   const missingInWithType = definedRuleNames.filter((ruleName) => {
@@ -71,30 +71,30 @@ export default function verify() {
   });
 
   const withTypeInWithoutType = withTypeConfiguredRuleNames.filter(
-    (ruleName) => !withoutType.rules[ruleName]
+    (ruleName) => !withoutType.rules[ruleName],
   );
   const withoutTypeInWithType = withoutTypeConfiguredRuleNames.filter(
-    (ruleName) => !withType.rules[ruleName]
+    (ruleName) => !withType.rules[ruleName],
   );
 
   const unknownInWithType = withTypeConfiguredRuleNames.filter(
-    (ruleName) => !isDefinedRule(dropPrefix(ruleName))
+    (ruleName) => !isDefinedRule(dropPrefix(ruleName)),
   );
   const unknownInWithoutType = withoutTypeConfiguredRuleNames.filter(
-    (ruleName) => !isDefinedRule(dropPrefix(ruleName))
+    (ruleName) => !isDefinedRule(dropPrefix(ruleName)),
   );
 
   const deprecatedInWithType = withTypeConfiguredRuleNames.filter(
     (ruleName) => {
       const dropped = dropPrefix(ruleName);
       return isDefinedRule(dropped) && isDeprecatedRule(dropped);
-    }
+    },
   );
   const deprecatedInWithoutType = withoutTypeConfiguredRuleNames.filter(
     (ruleName) => {
       const dropped = dropPrefix(ruleName);
       return isDefinedRule(dropped) && isDeprecatedRule(dropped);
-    }
+    },
   );
 
   return {

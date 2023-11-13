@@ -17,7 +17,7 @@ const result = results.reduce<Result>(
       deprecated: [...acc.deprecated, ...deprecated],
     };
   },
-  { missing: [], unknown: [], deprecated: [] }
+  { missing: [], unknown: [], deprecated: [] },
 );
 
 let flag = {
@@ -45,7 +45,7 @@ const tsResult = typescript();
 if (tsResult.withType.missing.length > 0) {
   flag.hasMissing = true;
   console.error(
-    `Missing rules in withType:\n${tsResult.withType.missing.join("\n")}\n`
+    `Missing rules in withType:\n${tsResult.withType.missing.join("\n")}\n`,
   );
 }
 
@@ -53,15 +53,15 @@ if (tsResult.withType.deprecated.length > 0) {
   flag.hasDeprecated = true;
   console.error(
     `Deprecated rules in withType:\n${tsResult.withType.deprecated.join(
-      "\n"
-    )}\n`
+      "\n",
+    )}\n`,
   );
 }
 
 if (tsResult.withType.unknown.length > 0) {
   flag.hasUnknown = true;
   console.error(
-    `Unknown rules in withType:\n${tsResult.withType.unknown.join("\n")}\n`
+    `Unknown rules in withType:\n${tsResult.withType.unknown.join("\n")}\n`,
   );
 }
 
@@ -69,8 +69,8 @@ if (tsResult.withoutType.missing.length > 0) {
   flag.hasMissing = true;
   console.error(
     `Missing rules in withoutType:\n${tsResult.withoutType.missing.join(
-      "\n"
-    )}\n`
+      "\n",
+    )}\n`,
   );
 }
 
@@ -78,8 +78,8 @@ if (tsResult.withoutType.deprecated.length > 0) {
   flag.hasDeprecated = true;
   console.error(
     `Deprecated rules in withoutType:\n${tsResult.withoutType.deprecated.join(
-      "\n"
-    )}\n`
+      "\n",
+    )}\n`,
   );
 }
 
@@ -87,8 +87,8 @@ if (tsResult.withoutType.unknown.length > 0) {
   flag.hasUnknown = true;
   console.error(
     `Unknown rules in withoutType:\n${tsResult.withoutType.unknown.join(
-      "\n"
-    )}\n`
+      "\n",
+    )}\n`,
   );
 }
 
@@ -101,7 +101,7 @@ if (isFix && !flag.hasMissing && (flag.hasDeprecated || flag.hasUnknown)) {
       ...tsResult.withType.unknown,
       ...tsResult.withoutType.deprecated,
       ...tsResult.withoutType.unknown,
-    ])
+    ]),
   );
   flag.hasDeprecated = false;
   flag.hasUnknown = false;

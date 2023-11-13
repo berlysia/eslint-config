@@ -218,7 +218,17 @@ export default function configsCore(): FlatConfigItem[] {
         "prefer-spread": "error",
         "prefer-template": "error",
         "require-yield": "off",
-        "sort-imports": "off",
+
+        "sort-imports": [
+          "error",
+          {
+            allowSeparatedGroups: false,
+            ignoreCase: false,
+            ignoreDeclarationSort: true,
+            ignoreMemberSort: false,
+            memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+          },
+        ],
         "symbol-description": "error",
         "default-param-last": "error",
         "no-import-assign": "error",

@@ -6,7 +6,7 @@ export default function verifyCore() {
   const configs = configsCore();
   const rules = configs.reduce<NonNullable<FlatConfigItem["rules"]>>(
     (acc, config) => ({ ...acc, ...config.rules }),
-    {}
+    {},
   );
 
   const linter = new Linter();

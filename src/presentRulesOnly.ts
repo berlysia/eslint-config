@@ -12,7 +12,7 @@ function coreRuleIsPresent(ruleName: string): boolean {
 const absenceSet = new Set<string>();
 function processRules(
   rules: NonNullable<FlatConfigItem["rules"]>,
-  plugins: NonNullable<FlatConfigItem["plugins"]>
+  plugins: NonNullable<FlatConfigItem["plugins"]>,
 ): FlatConfigItem["rules"] {
   const castedPlugins = plugins as Record<string, ESLint.Plugin>;
   return Object.fromEntries(
@@ -30,8 +30,9 @@ function processRules(
       }
 
       // プラグインを参照しているルールは、pluginsの定義に対応するプラグインにルールが存在するかを確認する
-      if (splitted.length === 2) {
-        const [pluginName, ruleName] = splitted as [string, string];
+      if (splitted.length >= 2) {
+        const [pluginName, ...ruleNames] = splitted as [string, ...string[]];
+        const ruleName = ruleNames.join("/");
         const plugin = castedPlugins[pluginName];
         if (!plugin) {
           throw new Error(`pluginName: "${pluginName}" is not provided`);
@@ -45,19 +46,19 @@ function processRules(
       }
 
       throw new Error(`ruleName: "${ruleNameInConfig}" is unknown pattern`);
-    })
+    }),
   ) as FlatConfigItem["rules"];
 }
 
 export default function presentRulesOnly(
-  configs: FlatConfigItem[]
+  configs: FlatConfigItem[],
 ): FlatConfigItem[] {
   const plugins = configs.reduce<Record<string, unknown>>(
     (acc, { plugins }) => {
       if (!plugins) return acc;
       return { ...acc, ...plugins };
     },
-    {}
+    {},
   ) as Record<string, ESLint.Plugin>;
 
   return configs.map((config) => {
