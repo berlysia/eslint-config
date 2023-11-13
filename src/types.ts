@@ -1,3 +1,4 @@
+import type { ParserOptions } from "@typescript-eslint/parser";
 import type { FlatESLintConfigItem } from "eslint-define-config";
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem, "plugins"> & {
@@ -5,8 +6,12 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem, "plugins"> & {
   plugins?: Record<string, unknown>;
 };
 
-export type OptionsTypeScript = {
+export type OptionsTypeScriptTsConfigPath = {
   tsConfigPath?: string | string[];
+};
+
+export type OptionsTypeScriptParserOptions = {
+  parserOptions?: Partial<ParserOptions>;
 };
 
 export type OptionsUseTypeScript = {

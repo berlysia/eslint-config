@@ -1,7 +1,11 @@
+import type { ParserOptions } from "eslint-define-config";
 import { GLOB_TS, GLOB_TSX } from "../globs";
 import { parserTs, pluginImport, pluginTs } from "../plugins";
-import type { FlatConfigItem, OptionsTypeScript } from "../types";
-import { readTsConfigPath } from "../utils";
+import type {
+  FlatConfigItem,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptTsConfigPath,
+} from "../types";
 
 type Rules = { rules: NonNullable<FlatConfigItem["rules"]> };
 
@@ -272,9 +276,12 @@ export const nonTypeAwareRules: Rules = {
 };
 
 export default function configsTypeScript(
-  options?: OptionsTypeScript,
+  options?: OptionsTypeScriptTsConfigPath & OptionsTypeScriptParserOptions,
 ): FlatConfigItem[] {
-  const tsConfigPath = readTsConfigPath(options);
+  const tsConfigPath = options?.tsConfigPath
+    ? [options.tsConfigPath].flat()
+    : undefined;
+  const parserOptions = options?.parserOptions;
 
   return [
     {
@@ -292,6 +299,7 @@ export default function configsTypeScript(
           ...(tsConfigPath
             ? { project: tsConfigPath, tsconfigRootDir: process.cwd() }
             : {}),
+          ...(parserOptions as ParserOptions),
         },
       },
 

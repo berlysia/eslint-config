@@ -5,7 +5,8 @@ import presentRulesOnly, { showAbsence } from "./presentRulesOnly";
 import type {
   FlatConfigItem,
   OptionsTestLibrary,
-  OptionsTypeScript,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptTsConfigPath,
 } from "./types";
 import configsComments from "./configs/eslint-comments";
 import configsCore from "./configs/eslint-core";
@@ -24,7 +25,10 @@ import configsPromise from "./configs/promise";
 import configsIgnores from "./configs/ignores";
 
 type Options = {
-  typescript?: boolean | OptionsTypeScript;
+  typescript?:
+    | boolean
+    | OptionsTypeScriptTsConfigPath
+    | OptionsTypeScriptParserOptions;
   react?: boolean;
   gitignore?: boolean | FlatGitignoreOptions;
 } & OptionsTestLibrary;
