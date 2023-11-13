@@ -7,14 +7,6 @@ const configs = berlysia(
     },
   },
   { ignores: ["dist/**/*", "tests/**/*"] },
-  {
-    files: ["*.ts"],
-    rules: {
-      "import/no-import-module-exports": "off",
-      "unicorn/prefer-module": "off",
-      "unicorn/no-empty-file": "off",
-    },
-  },
 );
 
 export default configs;
