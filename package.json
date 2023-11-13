@@ -19,7 +19,7 @@
     "fix:prettier": "prettier . --write",
     "fix:verify-plugins": "tsx ./scripts/verify/index.ts --fix",
     "format": "prettier '*.{json,md}'",
-    "test:prettier": "eslint-config-prettier tests/dummy.ts",
+    "test:prettier": "eslint-config-prettier src/index.ts",
     "test": "run-s clean stub && run-s 'test:*'",
     "projtest:tsproj": "yarn workspace tsproject lint",
     "projtest:jsproj": "yarn workspace jsproject lint",
