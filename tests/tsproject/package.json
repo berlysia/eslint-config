@@ -2,7 +2,7 @@
   "name": "tsproject",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}' -c ./.eslintrc.js"
+    "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}' -c ./eslint.config.js"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",

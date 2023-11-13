@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginNode } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsNode(): FlatConfigItem[] {
+export default function configsNode(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:node",
@@ -48,6 +50,8 @@ export default function configsNode(): FlatConfigItem[] {
         "node/prefer-promises/fs": "error",
         "node/process-exit-as-throw": "error",
         "node/shebang": "error",
+
+        ...options.overrides,
       },
     },
   ];

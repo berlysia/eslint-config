@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginComments } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsComments(): FlatConfigItem[] {
+export default function configsComments(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:eslint-comments",
@@ -23,6 +25,8 @@ export default function configsComments(): FlatConfigItem[] {
         "eslint-comments/no-unused-enable": "error",
         "eslint-comments/no-use": "off",
         "eslint-comments/require-description": "error",
+
+        ...options.overrides,
       },
     },
   ];

@@ -1,8 +1,10 @@
 import globals from "globals";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 import { GLOB_SRC } from "../globs";
 
-export default function configsCore(): FlatConfigItem[] {
+export default function configsCore(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:core",
@@ -219,16 +221,7 @@ export default function configsCore(): FlatConfigItem[] {
         "prefer-template": "error",
         "require-yield": "off",
 
-        "sort-imports": [
-          "error",
-          {
-            allowSeparatedGroups: false,
-            ignoreCase: false,
-            ignoreDeclarationSort: true,
-            ignoreMemberSort: false,
-            memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-          },
-        ],
+        "sort-imports": "off",
         "symbol-description": "error",
         "default-param-last": "error",
         "no-import-assign": "error",
@@ -254,6 +247,8 @@ export default function configsCore(): FlatConfigItem[] {
         "no-empty-static-block": "off",
         "no-new-native-nonconstructor": "error",
         "no-object-constructor": "error",
+
+        ...options.overrides,
       },
     },
   ];

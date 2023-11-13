@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginPromise } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsPromise(): FlatConfigItem[] {
+export default function configsPromise(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:promise",
@@ -26,6 +28,8 @@ export default function configsPromise(): FlatConfigItem[] {
         "promise/prefer-await-to-callbacks": "error",
         "promise/prefer-await-to-then": "error",
         "promise/valid-params": "off", // in favor of TypeScript
+
+        ...options.overrides,
       },
     },
   ];

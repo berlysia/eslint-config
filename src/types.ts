@@ -1,5 +1,6 @@
 import type { ParserOptions } from "@typescript-eslint/parser";
-import type { FlatESLintConfigItem } from "eslint-define-config";
+import type { Linter } from "@typescript-eslint/utils/ts-eslint";
+import type { FlatESLintConfigItem, Rules } from "eslint-define-config";
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem, "plugins"> & {
   name?: string;
@@ -24,4 +25,8 @@ export type OptionsTestLibrary = {
 
 export type OptionsIsInEditor = {
   isInEditor?: boolean;
+};
+
+export type OptionsOverride = {
+  overrides?: Record<string, Linter.RuleEntry>;
 };

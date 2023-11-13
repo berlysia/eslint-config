@@ -3,6 +3,7 @@ import { GLOB_TS, GLOB_TSX } from "../globs";
 import { parserTs, pluginImport, pluginTs } from "../plugins";
 import type {
   FlatConfigItem,
+  OptionsOverride,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptTsConfigPath,
 } from "../types";
@@ -276,12 +277,14 @@ export const nonTypeAwareRules: Rules = {
 };
 
 export default function configsTypeScript(
-  options?: OptionsTypeScriptTsConfigPath & OptionsTypeScriptParserOptions,
+  options: OptionsTypeScriptTsConfigPath &
+    OptionsTypeScriptParserOptions &
+    OptionsOverride,
 ): FlatConfigItem[] {
-  const tsConfigPath = options?.tsConfigPath
+  const tsConfigPath = options.tsConfigPath
     ? [options.tsConfigPath].flat()
     : undefined;
-  const parserOptions = options?.parserOptions;
+  const { parserOptions, overrides } = options;
 
   return [
     {
@@ -313,6 +316,8 @@ export default function configsTypeScript(
       rules: {
         ...nonTypeAwareRules.rules,
         ...(tsConfigPath ? typeAwareRules.rules : {}),
+
+        ...overrides,
       },
     },
   ];

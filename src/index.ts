@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { isPackageExists } from "local-pkg";
 import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
+import type { Linter } from "eslint";
 import presentRulesOnly, { showAbsence } from "./presentRulesOnly";
 import type {
   FlatConfigItem,
@@ -24,6 +25,8 @@ import configsMarkdown from "./configs/markdown";
 import configsPromise from "./configs/promise";
 import configsIgnores from "./configs/ignores";
 
+type Rules = Record<string, Linter.RuleEntry>;
+
 type Options = {
   typescript?:
     | boolean
@@ -31,6 +34,21 @@ type Options = {
     | OptionsTypeScriptParserOptions;
   react?: boolean;
   gitignore?: boolean | FlatGitignoreOptions;
+  overrides?: {
+    core?: Rules;
+    typescript?: Rules;
+    unicorn?: Rules;
+    sonarjs?: Rules;
+    test?: Rules;
+    import?: Rules;
+    comments?: Rules;
+    react?: Rules;
+    node?: Rules;
+    jsdoc?: Rules;
+    jsonc?: Rules;
+    markdown?: Rules;
+    promise?: Rules;
+  };
 } & OptionsTestLibrary;
 
 export default function berlysia(
@@ -62,20 +80,26 @@ export default function berlysia(
 
   configs.push(
     presentRulesOnly(configsIgnores()),
-    presentRulesOnly(configsCore()),
-    presentRulesOnly(configsComments()),
-    presentRulesOnly(configsImport()),
-    presentRulesOnly(configsUnicorn()),
-    presentRulesOnly(configsSonarjs()),
-    presentRulesOnly(configsNode()),
-    presentRulesOnly(configsJsdoc()),
-    presentRulesOnly(configsJsonc()),
-    presentRulesOnly(configsMarkdown()),
-    presentRulesOnly(configsPromise()),
+    presentRulesOnly(configsCore({ overrides: options.overrides?.core })),
+    presentRulesOnly(
+      configsComments({ overrides: options.overrides?.comments }),
+    ),
+    presentRulesOnly(configsImport({ overrides: options.overrides?.import })),
+    presentRulesOnly(configsUnicorn({ overrides: options.overrides?.unicorn })),
+    presentRulesOnly(configsSonarjs({ overrides: options.overrides?.sonarjs })),
+    presentRulesOnly(configsNode({ overrides: options.overrides?.node })),
+    presentRulesOnly(configsJsdoc({ overrides: options.overrides?.jsdoc })),
+    presentRulesOnly(configsJsonc({ overrides: options.overrides?.jsonc })),
+    presentRulesOnly(
+      configsMarkdown({ overrides: options.overrides?.markdown }),
+    ),
+    presentRulesOnly(configsPromise({ overrides: options.overrides?.promise })),
   );
 
   if (useReact) {
-    configs.push(presentRulesOnly(configsReact()));
+    configs.push(
+      presentRulesOnly(configsReact({ overrides: options.overrides?.react })),
+    );
   }
 
   if (useTypeScript) {
@@ -83,6 +107,7 @@ export default function berlysia(
       presentRulesOnly(
         configsTypeScript({
           ...(typeof useTypeScript === "boolean" ? {} : useTypeScript),
+          overrides: options.overrides?.typescript,
         }),
       ),
     );
@@ -92,9 +117,10 @@ export default function berlysia(
     configs.push(
       presentRulesOnly(
         configsTest({
-          useTypeScript: Boolean(useTypeScript),
+          ...(typeof useTypeScript === "boolean" ? {} : useTypeScript),
           testLibrary,
           isInEditor,
+          overrides: options.overrides?.test,
         }),
       ),
     );

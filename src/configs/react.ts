@@ -1,8 +1,10 @@
 import { GLOB_JSX, GLOB_TSX } from "../globs";
 import { pluginJsxA11y, pluginReact, pluginReactHooks } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsReact(): FlatConfigItem[] {
+export default function configsReact(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:react",
@@ -205,6 +207,8 @@ export default function configsReact(): FlatConfigItem[] {
         "jsx-a11y/role-supports-aria-props": "error",
         "jsx-a11y/scope": "error",
         "jsx-a11y/tabindex-no-positive": "error",
+
+        ...options.overrides,
       },
     },
   ];

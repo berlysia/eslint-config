@@ -1,8 +1,10 @@
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs";
 import { parserJsonc, pluginJsonc } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsJsonc(): FlatConfigItem[] {
+export default function configsJsonc(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:jsonc:setup",
@@ -62,6 +64,8 @@ export default function configsJsonc(): FlatConfigItem[] {
         "jsonc/quote-props": "off",
         "jsonc/quotes": "off",
         "jsonc/space-unary-ops": "off",
+
+        ...options.overrides,
       },
     },
   ];

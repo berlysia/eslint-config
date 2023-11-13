@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginSonarJs } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsSonarjs(): FlatConfigItem[] {
+export default function configsSonarjs(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:sonarjs",
@@ -43,6 +45,8 @@ export default function configsSonarjs(): FlatConfigItem[] {
         "sonarjs/prefer-object-literal": "error",
         "sonarjs/prefer-single-boolean-return": "error",
         "sonarjs/prefer-while": "error",
+
+        ...options.overrides,
       },
     },
   ];

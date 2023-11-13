@@ -3,7 +3,7 @@ import type { FlatConfigItem } from "../../src/types";
 import configsCore from "../../src/configs/eslint-core";
 
 export default function verifyCore() {
-  const configs = configsCore();
+  const configs = configsCore({});
   const rules = configs.reduce<NonNullable<FlatConfigItem["rules"]>>(
     (acc, config) => ({ ...acc, ...config.rules }),
     {},

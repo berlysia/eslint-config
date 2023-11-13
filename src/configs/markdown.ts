@@ -1,8 +1,10 @@
 import { GLOB_MARKDOWN, GLOB_SRC } from "../globs";
 import { pluginMarkdown, pluginNode, pluginTs } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsMarkdown(): FlatConfigItem[] {
+export default function configsMarkdown(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:markdown:setup",
@@ -47,6 +49,8 @@ export default function configsMarkdown(): FlatConfigItem[] {
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-var-requires": "off",
+
+        ...options.overrides,
       },
     },
   ];

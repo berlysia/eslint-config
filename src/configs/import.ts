@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginImport } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsImport(): FlatConfigItem[] {
+export default function configsImport(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:import",
@@ -82,6 +84,8 @@ export default function configsImport(): FlatConfigItem[] {
         "import/no-relative-packages": "error",
         "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
         "import/no-empty-named-blocks": "error",
+
+        ...options.overrides,
       },
     },
   ];

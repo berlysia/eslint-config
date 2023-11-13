@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginUnicorn } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsUnicorn(): FlatConfigItem[] {
+export default function configsUnicorn(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:unicorn",
@@ -13,7 +15,7 @@ export default function configsUnicorn(): FlatConfigItem[] {
       rules: {
         "unicorn/better-regex": "error",
         "unicorn/catch-error-name": "error",
-        "unicorn/consistent-destructuring": "error",
+        "unicorn/consistent-destructuring": "off",
         "unicorn/consistent-function-scoping": "error",
         "unicorn/custom-error-definition": "error",
         "unicorn/empty-brace-spaces": "error",
@@ -122,6 +124,8 @@ export default function configsUnicorn(): FlatConfigItem[] {
         "unicorn/text-encoding-identifier-case": "error",
         "unicorn/throw-new-error": "error",
         "unicorn/prefer-blob-reading-methods": "error",
+
+        ...options.overrides,
       },
     },
   ];

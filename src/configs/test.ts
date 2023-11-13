@@ -1,6 +1,9 @@
+import type { ParserOptions } from "eslint-define-config";
 import { GLOB_TESTS } from "../globs";
 import {
+  parserTs,
   pluginJest,
+  pluginJestDom,
   pluginNoOnlyTests,
   pluginTestingLibrary,
   pluginTs,
@@ -9,17 +12,44 @@ import {
 import type {
   FlatConfigItem,
   OptionsIsInEditor,
+  OptionsOverride,
   OptionsTestLibrary,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptTsConfigPath,
   OptionsUseTypeScript,
 } from "../types";
+
+const vitestToJest = [
+  "prefer-to-be-falsy",
+  "prefer-to-be-object",
+  "prefer-to-be-truthy",
+] as const;
+
+const jestToVitest = ["valid-expect-in-promise"] as const;
 
 function getTestPlugin(options: OptionsTestLibrary) {
   switch (options.testLibrary) {
     case "jest": {
-      return pluginJest;
+      return {
+        ...pluginJest,
+        rules: {
+          ...pluginJest.rules,
+          ...Object.fromEntries(
+            vitestToJest.map((key) => [key, pluginVitest.rules[key]]),
+          ),
+        },
+      };
     }
     case "vitest": {
-      return pluginVitest;
+      return {
+        ...pluginVitest,
+        rules: {
+          ...pluginVitest.rules,
+          ...Object.fromEntries(
+            jestToVitest.map((key) => [key, pluginJest.rules![key]]),
+          ),
+        },
+      };
     }
     default: {
       throw new Error(`invalid testLibrary: ${options.testLibrary}`);
@@ -28,7 +58,11 @@ function getTestPlugin(options: OptionsTestLibrary) {
 }
 
 export default function configsTest(
-  options: OptionsUseTypeScript & OptionsTestLibrary & OptionsIsInEditor,
+  options: OptionsTypeScriptParserOptions &
+    OptionsTypeScriptTsConfigPath &
+    OptionsTestLibrary &
+    OptionsIsInEditor &
+    OptionsOverride,
 ): FlatConfigItem[] {
   const pluginTest = getTestPlugin(options);
   const configs: FlatConfigItem[] = [
@@ -40,6 +74,7 @@ export default function configsTest(
           rules: {
             ...pluginTest.rules,
             ...pluginNoOnlyTests.rules,
+            ...pluginJestDom.rules,
           },
         },
         "testing-library": pluginTestingLibrary,
@@ -94,30 +129,47 @@ export default function configsTest(
         "test/prefer-mock-promise-shorthand": "error",
         "test/prefer-snapshot-hint": ["error", "multi"],
 
+        // vitestからjestに移植
+        "test/prefer-to-be-falsy": "error",
+        "test/prefer-to-be-object": "error",
+        "test/prefer-to-be-truthy": "error",
+
+        // jestからvitestに移植
+        "test/valid-expect-in-promise": "error",
+
         ...(options.testLibrary === "vitest"
           ? {
               "test/no-conditional-tests": "error",
               "test/no-restricted-vi-methods": "off",
               "test/consistent-test-filename": "error",
-              "test/prefer-to-be-falsy": "error",
-              "test/prefer-to-be-object": "error",
-              "test/prefer-to-be-truthy": "error",
             }
           : {}),
 
         ...(options.testLibrary === "jest"
           ? {
-              "test/no-export": "off",
-              "test/no-jasmine-globals": "error",
               "test/no-deprecated-functions": "error",
-              "test/prefer-expect-assertions": "off",
-              "test/valid-expect-in-promise": "error",
-              "test/no-restricted-jest-methods": "off",
-              "test/no-confusing-set-timeout": "off",
+              "test/no-jasmine-globals": "error",
               "test/unbound-method": "off", // configure in `jest-and-typescript`
               "test/no-untyped-mock-factory": "off", // configure in `jest-and-typescript`
+              "test/no-export": "off",
+              "test/prefer-expect-assertions": "off",
+              "test/no-restricted-jest-methods": "off",
+              "test/no-confusing-set-timeout": "off",
             }
           : {}),
+
+        // jest-dom
+        "test/prefer-checked": "error",
+        "test/prefer-empty": "error",
+        "test/prefer-enabled-disabled": "error",
+        "test/prefer-focus": "error",
+        "test/prefer-in-document": "error",
+        "test/prefer-required": "error",
+        "test/prefer-to-have-attribute": "error",
+        "test/prefer-to-have-class": "error",
+        "test/prefer-to-have-style": "error",
+        "test/prefer-to-have-text-content": "error",
+        "test/prefer-to-have-value": "error",
 
         "testing-library/await-async-events": "error",
         "testing-library/await-async-queries": "error",
@@ -148,16 +200,33 @@ export default function configsTest(
         "testing-library/prefer-screen-queries": "error",
         "testing-library/prefer-user-event": "error",
         "testing-library/render-result-naming-convention": "error",
+
+        ...options.overrides,
       },
     },
   ];
 
-  if (options.useTypeScript && options.testLibrary === "jest") {
+  const tsConfigPath = options.tsConfigPath
+    ? [options.tsConfigPath].flat()
+    : undefined;
+  const { parserOptions, testLibrary } = options;
+  if ((tsConfigPath || parserOptions) && testLibrary === "jest") {
     configs.push({
       name: "berlysia:test-and-typescript",
       files: GLOB_TESTS,
       plugins: {
         "@typescript-eslint": pluginTs,
+      },
+      languageOptions: {
+        parser: parserTs,
+        parserOptions: {
+          warnOnUnsupportedTypeScriptVersion: false,
+          sourceType: "module",
+          ...(tsConfigPath
+            ? { project: tsConfigPath, tsconfigRootDir: process.cwd() }
+            : {}),
+          ...(parserOptions as ParserOptions),
+        },
       },
       rules: {
         "@typescript-eslint/unbound-method": "off",

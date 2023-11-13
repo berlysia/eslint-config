@@ -88,18 +88,18 @@ function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
 
 export default function verify() {
   const verifyTarget: Parameters<typeof verifier>[] = [
-    [configsComments(), ["eslint-comments"]],
-    [configsImport(), ["import"]],
-    [configsJsdoc(), ["jsdoc"]],
-    [configsJsonc(), ["jsonc"]],
-    [configsMarkdown(), ["markdown"]],
-    [configsNode(), ["node"]],
-    [configsPromise(), ["promise"]],
-    [configsReact(), ["react", "react-hooks"]],
-    [configsSonarjs(), ["sonarjs"]],
-    [configsTest({ useTypeScript: true, testLibrary: "jest" }), ["test"]],
-    [configsTest({ useTypeScript: true, testLibrary: "vitest" }), ["test"]],
-    [configsUnicorn(), ["unicorn"]],
+    [configsComments({}), ["eslint-comments"]],
+    [configsImport({}), ["import"]],
+    [configsJsdoc({}), ["jsdoc"]],
+    [configsJsonc({}), ["jsonc"]],
+    [configsMarkdown({}), ["markdown"]],
+    [configsNode({}), ["node"]],
+    [configsPromise({}), ["promise"]],
+    [configsReact({}), ["react", "react-hooks"]],
+    [configsSonarjs({}), ["sonarjs"]],
+    [configsTest({ tsConfigPath: "x", testLibrary: "jest" }), ["test"]],
+    [configsTest({ tsConfigPath: "x", testLibrary: "vitest" }), ["test"]],
+    [configsUnicorn({}), ["unicorn"]],
   ];
 
   return verifyTarget.map((args) => verifier(...args));

@@ -18,6 +18,10 @@ import pluginJestRaw from "eslint-plugin-jest";
 export const pluginJest = pluginJestRaw as Plugin;
 
 // @ts-expect-error -- no type definition
+import pluginJestDomRaw from "eslint-plugin-jest-dom";
+export const pluginJestDom = pluginJestDomRaw as Plugin;
+
+// @ts-expect-error -- no type definition
 import pluginReactRaw from "eslint-plugin-react";
 export const pluginReact = pluginReactRaw as Plugin;
 

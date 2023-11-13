@@ -1,8 +1,10 @@
 import { GLOB_SRC } from "../globs";
 import { pluginJsdoc } from "../plugins";
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem, OptionsOverride } from "../types";
 
-export default function configsJsdoc(): FlatConfigItem[] {
+export default function configsJsdoc(
+  options: OptionsOverride,
+): FlatConfigItem[] {
   return [
     {
       name: "berlysia:jsdoc",
@@ -63,6 +65,8 @@ export default function configsJsdoc(): FlatConfigItem[] {
         "jsdoc/sort-tags": "off",
         "jsdoc/tag-lines": "off",
         "jsdoc/valid-types": "off",
+
+        ...options.overrides,
       },
     },
   ];
