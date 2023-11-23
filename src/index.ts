@@ -61,8 +61,8 @@ export default function berlysia(
     testLibrary = isPackageExists("vitest")
       ? "vitest"
       : isPackageExists("jest")
-      ? "jest"
-      : false,
+        ? "jest"
+        : false,
     gitignore: useGitIgnore = true,
   } = options;
 
