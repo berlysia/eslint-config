@@ -18,6 +18,11 @@ export const GLOB_TESTS = [
   `**/?(*.)+(spec|test|perf).${GLOB_SRC_EXT}`,
 ];
 
+export const GLOB_STORIES = [
+  `**/*.stories.${GLOB_SRC_EXT}`,
+  "**/*.stories.mdx",
+];
+
 export const GLOB_IGNORE = [
   "**/node_modules",
   "**/dist",

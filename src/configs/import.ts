@@ -36,8 +36,8 @@ export default function configsImport(
         "import/no-dynamic-require": "error",
         "import/no-self-import": "error",
         "import/export": "error",
-        "import/no-named-as-default": "error",
-        "import/no-named-as-default-member": "error",
+        "import/no-named-as-default": "off", // うれしいが、誤爆しやすい
+        "import/no-named-as-default-member": "off", // うれしいが、誤爆しやすい
         "import/newline-after-import": "error",
         "import/first": "error",
         "import/no-extraneous-dependencies": "off", // おかしくなりやすい

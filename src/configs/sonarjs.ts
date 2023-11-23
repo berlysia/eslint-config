@@ -1,4 +1,4 @@
-import { GLOB_SRC } from "../globs";
+import { GLOB_SRC, GLOB_STORIES } from "../globs";
 import { pluginSonarJs } from "../plugins";
 import type { FlatConfigItem, OptionsOverride } from "../types";
 
@@ -47,6 +47,12 @@ export default function configsSonarjs(
         "sonarjs/prefer-while": "error",
 
         ...options.overrides,
+      },
+    },
+    {
+      files: GLOB_STORIES,
+      rules: {
+        "sonarjs/no-duplicate-string": "off",
       },
     },
   ];
