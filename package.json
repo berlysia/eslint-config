@@ -3,7 +3,8 @@
   "version": "5.0.0-beta.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "scripts": {
     "build": "tsup 'src/**' --format esm,cjs --clean --dts",
     "stub": "tsup 'src/**' --format esm",
