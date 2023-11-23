@@ -37,6 +37,9 @@
     "eslint",
     "eslintconfig"
   ],
+  "files": [
+    "dist/**/*"
+  ],
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
