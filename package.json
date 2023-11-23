@@ -29,7 +29,9 @@
     "projtest": "run-s build 'projtest:*'",
     "ci": "run-s build nostub:lint nostub:test 'projtest:*'",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "release": "bumpp && yarn npm publish"
+    "release": "yarn run build && bumpp",
+    "publish": "yarn npm publish --access public",
+    "publish:beta": "yarn npm publish --access public --tag beta"
   },
   "workspaces": [
     "tests/jsproject",
