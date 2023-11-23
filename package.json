@@ -29,7 +29,7 @@
     "projtest": "run-s build 'projtest:*'",
     "ci": "run-s build nostub:lint nostub:test 'projtest:*'",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "release": "bumpp && yarn run publish"
+    "release": "bumpp && yarn npm publish"
   },
   "workspaces": [
     "tests/jsproject",
