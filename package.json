@@ -1,26 +1,37 @@
 {
   "name": "@berlysia/eslint-config",
-  "version": "4.1.0",
+  "version": "5.0.0-beta.2",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
   "scripts": {
-    "lint": "run-p 'lint:*'",
+    "build": "tsup 'src/**' --format esm,cjs --clean --dts",
+    "stub": "tsup 'src/**' --format esm",
+    "dev": "tsup 'src/**' --format esm,cjs --watch & eslint-flat-config-viewer",
+    "clean": "node -e 'fs.rmSync(\"dist\", {recursive:true, force:true})'",
+    "lint": "run-s clean stub lint:eslint lint:prettier lint:verify-plugins",
+    "nostub:lint": "run-s lint:eslint lint:prettier lint:verify-plugins",
     "lint:eslint": "eslint './**/*.{js,ts}'",
     "lint:prettier": "prettier . --check",
-    "fix": "run-s fix:eslint fix:prettier",
+    "lint:verify-plugins": "tsx ./scripts/verify/index.ts",
+    "lint:type": "tsc",
+    "fix": "run-s clean stub fix:eslint fix:prettier fix:verify-plugins",
     "fix:eslint": "yarn lint:eslint --fix",
-    "fix:prettier": "yarn lint:prettier --write",
+    "fix:prettier": "prettier . --write",
+    "fix:verify-plugins": "tsx ./scripts/verify/index.ts --fix",
     "format": "prettier '*.{json,md}'",
-    "test:typescript": "node ./tools/typescript/verify",
-    "test:prettier": "eslint-config-prettier tests/dummy.ts",
-    "test:unset": "eslint-find-rules -u './tests/all.js'",
-    "test:auto": "node ./auto.js",
-    "test": "run-p 'test:*'",
+    "test:prettier": "eslint-config-prettier src/index.ts",
+    "test": "run-s clean stub 'test:*'",
+    "nostub:test": "run-s 'test:*'",
     "projtest:tsproj": "yarn workspace tsproject lint",
     "projtest:jsproj": "yarn workspace jsproject lint",
-    "projtest": "run-s 'projtest:*'",
-    "ci": "run-s lint test projtest",
-    "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'"
+    "projtest": "run-s build 'projtest:*'",
+    "ci": "run-s build nostub:lint nostub:test 'projtest:*'",
+    "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
+    "release": "yarn run build && bumpp",
+    "publish": "yarn npm publish --access public",
+    "publish:beta": "yarn npm publish --access public --tag beta"
   },
   "workspaces": [
     "tests/jsproject",
@@ -30,31 +41,87 @@
     "eslint",
     "eslintconfig"
   ],
+  "files": [
+    "dist/**/*"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./configs/*": {
+      "import": {
+        "types": "./dist/configs/*.d.ts",
+        "default": "./dist/configs/*.js"
+      },
+      "require": {
+        "types": "./dist/configs/*.d.cts",
+        "default": "./dist/configs/*.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts"
+      },
+      "require": {
+        "types": "./dist/*.d.cts"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@typescript-eslint/utils": "^6.10.0",
+    "eslint-config-flat-gitignore": "^0.1.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.5.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-i": "^2.29.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^27.0.4",
+    "eslint-plugin-jest-dom": "^5.1.0",
+    "eslint-plugin-jsdoc": "^46.9.0",
+    "eslint-plugin-jsonc": "^2.10.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-markdown": "^3.0.1",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-sonarjs": "^0.23.0",
+    "eslint-plugin-testing-library": "^6.1.2",
     "eslint-plugin-unicorn": "^49.0.0",
-    "read-pkg-up": "^7.0.1"
+    "eslint-plugin-vitest": "^0.3.9",
+    "globals": "^13.23.0",
+    "jsonc-eslint-parser": "^2.4.0",
+    "local-pkg": "^0.5.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.23.3",
+    "@types/eslint": "^8.44.6",
     "@types/jest": "^29.2.3",
+    "bumpp": "^9.2.0",
     "eslint": "8.54.0",
+    "eslint-define-config": "^1.24.1",
     "eslint-find-rules": "4.1.0",
+    "eslint-flat-config-viewer": "^0.1.0",
     "jest": "29.7.0",
     "lint-staged": "15.0.2",
     "npm-run-all": "4.1.5",
     "prettier": "3.1.0",
+    "ts-morph": "^20.0.0",
+    "tsup": "^7.2.0",
+    "tsx": "^4.1.1",
     "typescript": "5.2.2"
   },
   "lint-staged": {

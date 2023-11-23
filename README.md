@@ -20,56 +20,20 @@ $ npm install --save-dev eslint @berlysia/eslint-config
 
 ## Config
 
-in `.eslintrc`
+in `eslint.config.js`
 
-```json
-{
-  "extends": ["@berlysia/eslint-config/auto"]
-}
+```js
+import berlysia from "@berlysia/eslint-config";
+
+export default berlysia();
 ```
 
 ### opt-in rules for TypeScript
 
-```json
-{
-  "extends": [
-    "@berlysia/eslint-config/auto"
-    "@berlysia/eslint-config/typescript-with-type"
-  ],
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  }
-}
-```
+```js
+import berlysia from "@berlysia/eslint-config";
 
-## Manual Config
-
-in `.eslintrc`
-
-```json
-{
-  "extends": [
-    "@berlysia" // base
-  ],
-  "overrides": [
-    {
-      "files": [
-        "*.{test,spec}.{js,ts,jsx,tsx}",
-        "**/__tests__/**/*.{js,ts,jsx,tsx}"
-      ],
-      "extends": "@berlysia/eslint-config/jest"
-    },
-    {
-      "files": ["*.{ts,tsx}"],
-      "extends": "@berlysia/eslint-config/typescript-without-type"
-    },
-    {
-      "files": ["*.{ts,tsx}"],
-      "extends": "@berlysia/eslint-config/typescript-with-type",
-      "parserOptions": {
-        "project": "./tsconfig.json"
-      }
-    }
-  ]
-}
+export default berlysia({
+  tsConfigPath: "./tsconfig.json",
+});
 ```

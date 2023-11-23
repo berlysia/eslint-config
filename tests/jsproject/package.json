@@ -2,7 +2,7 @@
   "name": "jsproject",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{js,jsx}' -c ./.eslintrc.js"
+    "lint": "eslint 'src/**/*.{js,jsx}' -c ./eslint.config.js"
   },
   "devDependencies": {
     "eslint": "8.52.0",
