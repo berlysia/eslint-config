@@ -41,6 +41,37 @@
   "files": [
     "dist/**/*"
   ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./configs/*": {
+      "import": {
+        "types": "./dist/configs/*.d.ts",
+        "default": "./dist/configs/*.js"
+      },
+      "require": {
+        "types": "./dist/configs/*.d.cts",
+        "default": "./dist/configs/*.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts"
+      },
+      "require": {
+        "types": "./dist/*.d.cts"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
