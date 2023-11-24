@@ -142,6 +142,7 @@ export const typeAwareRules: Rules = {
 
 export const nonTypeAwareRules: Rules = {
   rules: {
+    "no-undef": "off",
     ...stylisticCoreRules.rules,
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", { default: "array" }],
