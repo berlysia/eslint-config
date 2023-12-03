@@ -111,7 +111,7 @@
     "@types/eslint": "^8.44.6",
     "@types/jest": "^29.2.3",
     "bumpp": "^9.2.0",
-    "eslint": "8.54.0",
+    "eslint": "8.55.0",
     "eslint-define-config": "^1.24.1",
     "eslint-find-rules": "4.1.0",
     "eslint-flat-config-viewer": "^0.1.0",
