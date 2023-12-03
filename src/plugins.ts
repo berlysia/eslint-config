@@ -1,67 +1,94 @@
-/* eslint-disable import/first, import/newline-after-import, import/no-namespace -- we need cast */
+/* eslint-disable import/first, import/newline-after-import, import/no-namespace, unicorn/prefer-export-from -- we need cast */
 import type { ESLint, Linter } from "eslint";
 
 type Plugin = ESLint.Plugin;
+
+function assertPlugin(
+  plugin: Plugin | null | undefined,
+  name: string,
+): asserts plugin is Plugin {
+  if (plugin == null) {
+    throw new TypeError(
+      `plugin${name ? ` "${name}"` : ""} is null or undefined`,
+    );
+  }
+}
 
 export { default as pluginTs } from "@typescript-eslint/eslint-plugin";
 
 // @ts-expect-error -- no type definition
 import pluginCommentsRaw from "eslint-plugin-eslint-comments";
-export const pluginComments = pluginCommentsRaw as Plugin;
+assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
+export const pluginComments = pluginCommentsRaw;
 
 // @ts-expect-error -- no type definition
 import * as pluginImportRaw from "eslint-plugin-i";
-export const pluginImport = pluginImportRaw as Plugin;
+assertPlugin(pluginImportRaw, "eslint-plugin-i");
+export const pluginImport = pluginImportRaw;
 
 // @ts-expect-error -- no type definition
 import pluginJestRaw from "eslint-plugin-jest";
-export const pluginJest = pluginJestRaw as Plugin;
+assertPlugin(pluginJestRaw, "eslint-plugin-jest");
+export const pluginJest = pluginJestRaw;
 
 // @ts-expect-error -- no type definition
-import pluginJestDomRaw from "eslint-plugin-jest-dom";
-export const pluginJestDom = pluginJestDomRaw as Plugin;
+import * as pluginJestDomRaw from "eslint-plugin-jest-dom";
+assertPlugin(pluginJestDomRaw, "eslint-plugin-jest-dom");
+export const pluginJestDom = pluginJestDomRaw;
 
 // @ts-expect-error -- no type definition
 import pluginReactRaw from "eslint-plugin-react";
-export const pluginReact = pluginReactRaw as Plugin;
+assertPlugin(pluginReactRaw, "eslint-plugin-react");
+export const pluginReact = pluginReactRaw;
 
 // @ts-expect-error -- no type definition
 import pluginReactHooksRaw from "eslint-plugin-react-hooks";
-export const pluginReactHooks = pluginReactHooksRaw as Plugin;
+assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
+export const pluginReactHooks = pluginReactHooksRaw;
 
-export * as pluginSonarJs from "eslint-plugin-sonarjs";
+import * as pluginSonarJsRaw from "eslint-plugin-sonarjs";
+assertPlugin(pluginSonarJsRaw, "eslint-plugin-sonarjs");
+export const pluginSonarJs = pluginSonarJsRaw;
 
 // @ts-expect-error -- no type definition
 import pluginNodeRaw from "eslint-plugin-n";
-export const pluginNode = pluginNodeRaw as Plugin;
+assertPlugin(pluginNodeRaw, "eslint-plugin-n");
+export const pluginNode = pluginNodeRaw;
 
 // @ts-expect-error -- no type definition
 import pluginPromiseRaw from "eslint-plugin-promise";
-export const pluginPromise = pluginPromiseRaw as Plugin;
+assertPlugin(pluginPromiseRaw, "eslint-plugin-promise");
+export const pluginPromise = pluginPromiseRaw;
 
 // @ts-expect-error -- no type definition
 import pluginUnicornRaw from "eslint-plugin-unicorn";
-export const pluginUnicorn = pluginUnicornRaw as Plugin;
+assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
+export const pluginUnicorn = pluginUnicornRaw;
 
 // @ts-expect-error -- no type definition
 import pluginMarkdownRaw from "eslint-plugin-markdown";
-export const pluginMarkdown = pluginMarkdownRaw as Plugin;
+assertPlugin(pluginMarkdownRaw, "eslint-plugin-markdown");
+export const pluginMarkdown = pluginMarkdownRaw;
 
 // @ts-expect-error -- no type definition
 import pluginJsdocRaw from "eslint-plugin-jsdoc";
-export const pluginJsdoc = pluginJsdocRaw as Plugin;
+assertPlugin(pluginJsdocRaw, "eslint-plugin-jsdoc");
+export const pluginJsdoc = pluginJsdocRaw;
 
 // @ts-expect-error -- no type definition
 import pluginNoOnlyTestsRaw from "eslint-plugin-no-only-tests";
-export const pluginNoOnlyTests = pluginNoOnlyTestsRaw as Plugin;
+assertPlugin(pluginNoOnlyTestsRaw, "eslint-plugin-no-only-tests");
+export const pluginNoOnlyTests = pluginNoOnlyTestsRaw;
 
 // @ts-expect-error -- no type definition
 import pluginTestingLibraryRaw from "eslint-plugin-testing-library";
-export const pluginTestingLibrary = pluginTestingLibraryRaw as Plugin;
+assertPlugin(pluginTestingLibraryRaw, "eslint-plugin-testing-library");
+export const pluginTestingLibrary = pluginTestingLibraryRaw;
 
 // @ts-expect-error -- no type definition
 import pluginJsxA11yRaw from "eslint-plugin-jsx-a11y";
-export const pluginJsxA11y = pluginJsxA11yRaw as Plugin;
+assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
+export const pluginJsxA11y = pluginJsxA11yRaw;
 
 export { default as pluginJsonc } from "eslint-plugin-jsonc";
 export { default as pluginVitest } from "eslint-plugin-vitest";

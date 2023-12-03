@@ -79,7 +79,7 @@ export default function configsCore(
         curly: ["error", "multi-line"],
         "default-case": "off",
         "dot-notation": "error",
-        eqeqeq: "error",
+        eqeqeq: ["error", "always", { null: "ignore" }],
         "guard-for-in": "error",
         "no-alert": "error",
         "no-caller": "error",
@@ -88,7 +88,7 @@ export default function configsCore(
         "no-else-return": "error",
         "no-empty-function": "off",
         "no-empty-pattern": "error",
-        "no-eq-null": "error",
+        "no-eq-null": "off", // we need x == null
         "no-eval": "error",
         "no-extend-native": "error",
         "no-extra-bind": "error",

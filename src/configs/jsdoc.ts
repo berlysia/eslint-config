@@ -26,7 +26,7 @@ export default function configsJsdoc(
         "jsdoc/empty-tags": "warn",
         "jsdoc/implements-on-classes": "warn",
         "jsdoc/imports-as-dependencies": "off",
-        "jsdoc/match-name": "warn",
+        "jsdoc/match-name": "off",
         "jsdoc/no-blank-blocks": "warn",
         "jsdoc/text-escaping": "off",
         "jsdoc/informative-docs": "off",
