@@ -545,7 +545,7 @@ __metadata:
     eslint: "npm:8.55.0"
     eslint-config-flat-gitignore: "npm:^0.1.1"
     eslint-config-prettier: "npm:^9.0.0"
-    eslint-define-config: "npm:^1.24.1"
+    eslint-define-config: "npm:^2.0.0"
     eslint-find-rules: "npm:4.1.0"
     eslint-flat-config-viewer: "npm:^0.1.0"
     eslint-import-resolver-typescript: "npm:^3.5.1"
@@ -3505,10 +3505,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-define-config@npm:^1.24.1":
-  version: 1.24.1
-  resolution: "eslint-define-config@npm:1.24.1"
-  checksum: e726d3953da5873cd5e2d1e15bfdadb2064e1a29b908414ce2230a132edc07da8c17a4ffd5cc9323a2597dc4d7e930194e6e35eef02482a7d94770aeeeb07911
+"eslint-define-config@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "eslint-define-config@npm:2.0.0"
+  checksum: 5cb5a7a91dd0dacb7dcd084586206e49deef8e06020f40e3858a94c9a6f996d83943e5d8b01f089741591479e2d715a1d204c1f13f3d87b894567c7c51c58c2f
   languageName: node
   linkType: hard
 
