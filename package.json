@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "scripts": {
-    "build": "tsup 'src/**' --format esm,cjs --clean --dts",
+    "build": "tsup 'src/**' --format esm,cjs --clean --sourcemap",
     "stub": "tsup 'src/**' --format esm",
     "dev": "tsup 'src/**' --format esm,cjs --watch & eslint-flat-config-viewer",
     "clean": "node -e 'fs.rmSync(\"dist\", {recursive:true, force:true})'",
