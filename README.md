@@ -2,6 +2,8 @@
 
 > ESLint config for myself
 
+Organization approach is based on https://github.com/antfu/eslint-config ❤
+
 ## Features
 
 - React
