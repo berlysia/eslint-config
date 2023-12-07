@@ -72,9 +72,11 @@ export default function berlysia(
 
   if (useGitIgnore) {
     if (typeof useGitIgnore !== "boolean") {
-      configs.push([configFlatGitIgnore(useGitIgnore)]);
+      configs.push([
+        { name: "berlysia:gitignore", ...configFlatGitIgnore(useGitIgnore) },
+      ]);
     } else if (existsSync(".gitignore")) {
-      configs.push([configFlatGitIgnore()]);
+      configs.push([{ name: "berlysia:gitignore", ...configFlatGitIgnore() }]);
     }
   }
 
