@@ -23,6 +23,7 @@ const vitestToJest = [
   "prefer-to-be-falsy",
   "prefer-to-be-object",
   "prefer-to-be-truthy",
+  "no-import-node-test",
 ] as const;
 
 const jestToVitest = ["valid-expect-in-promise"] as const;
@@ -133,6 +134,7 @@ export default function configsTest(
         "test/prefer-to-be-falsy": "error",
         "test/prefer-to-be-object": "error",
         "test/prefer-to-be-truthy": "error",
+        "test/no-import-node-test": "error",
 
         // jestからvitestに移植
         "test/valid-expect-in-promise": "error",
@@ -142,6 +144,8 @@ export default function configsTest(
               "test/no-conditional-tests": "error",
               "test/no-restricted-vi-methods": "off",
               "test/consistent-test-filename": "error",
+              "test/require-local-test-context-for-concurrent-snapshots":
+                "error",
             }
           : {}),
 
