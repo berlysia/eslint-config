@@ -134,7 +134,7 @@ export default function configsCore(
         "no-useless-escape": "error",
         "no-useless-return": "error",
         "no-void": "error",
-        "no-warning-comments": "warn",
+        "no-warning-comments": "off",
         "no-with": "error",
         "prefer-promise-reject-errors": [
           "error",

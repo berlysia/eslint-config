@@ -1,9 +1,13 @@
-import { GLOB_SRC, GLOB_STORIES } from "../globs";
+import { GLOB_SRC, GLOB_STORIES, GLOB_TESTS } from "../globs";
 import { pluginSonarJs } from "../plugins";
-import type { FlatConfigItem, OptionsOverride } from "../types";
+import type {
+  FlatConfigItem,
+  OptionsIsInEditor,
+  OptionsOverride,
+} from "../types";
 
 export default function configsSonarjs(
-  options: OptionsOverride,
+  options: OptionsOverride & OptionsIsInEditor,
 ): FlatConfigItem[] {
   return [
     {
@@ -41,7 +45,9 @@ export default function configsSonarjs(
         "sonarjs/no-use-of-empty-return-value": "error",
         "sonarjs/no-useless-catch": "error",
         "sonarjs/non-existent-operator": "error",
-        "sonarjs/prefer-immediate-return": "error",
+        "sonarjs/prefer-immediate-return": options.isInEditor
+          ? "warn"
+          : "error",
         "sonarjs/prefer-object-literal": "error",
         "sonarjs/prefer-single-boolean-return": "error",
         "sonarjs/prefer-while": "error",
@@ -50,7 +56,7 @@ export default function configsSonarjs(
       },
     },
     {
-      files: GLOB_STORIES,
+      files: [...GLOB_STORIES, ...GLOB_TESTS],
       rules: {
         "sonarjs/no-duplicate-string": "off",
       },

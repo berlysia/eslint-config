@@ -66,6 +66,9 @@ export default function berlysia(
     gitignore: useGitIgnore = true,
   } = options;
 
+  const optionTypeScript =
+    typeof useTypeScript === "boolean" ? {} : useTypeScript;
+
   const isInEditor = Boolean(process.env.VSCODE_PID && !process.env.CI);
 
   const configs: FlatConfigItem[][] = [];
@@ -88,7 +91,9 @@ export default function berlysia(
     ),
     presentRulesOnly(configsImport({ overrides: options.overrides?.import })),
     presentRulesOnly(configsUnicorn({ overrides: options.overrides?.unicorn })),
-    presentRulesOnly(configsSonarjs({ overrides: options.overrides?.sonarjs })),
+    presentRulesOnly(
+      configsSonarjs({ overrides: options.overrides?.sonarjs, isInEditor }),
+    ),
     presentRulesOnly(configsNode({ overrides: options.overrides?.node })),
     presentRulesOnly(configsJsdoc({ overrides: options.overrides?.jsdoc })),
     presentRulesOnly(configsJsonc({ overrides: options.overrides?.jsonc })),
@@ -108,7 +113,7 @@ export default function berlysia(
     configs.push(
       presentRulesOnly(
         configsTypeScript({
-          ...(typeof useTypeScript === "boolean" ? {} : useTypeScript),
+          ...optionTypeScript,
           overrides: options.overrides?.typescript,
         }),
       ),
@@ -119,7 +124,7 @@ export default function berlysia(
     configs.push(
       presentRulesOnly(
         configsTest({
-          ...(typeof useTypeScript === "boolean" ? {} : useTypeScript),
+          ...optionTypeScript,
           testLibrary,
           isInEditor,
           overrides: options.overrides?.test,
