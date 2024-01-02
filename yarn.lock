@@ -479,7 +479,7 @@ __metadata:
     eslint-plugin-import: "npm:^2.26.0"
     eslint-plugin-jest: "npm:^27.0.4"
     eslint-plugin-jest-dom: "npm:^5.1.0"
-    eslint-plugin-jsdoc: "npm:^46.9.0"
+    eslint-plugin-jsdoc: "npm:^48.0.0"
     eslint-plugin-jsonc: "npm:^2.10.0"
     eslint-plugin-jsx-a11y: "npm:^6.8.0"
     eslint-plugin-markdown: "npm:^3.0.1"
@@ -490,7 +490,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-sonarjs: "npm:^0.23.0"
     eslint-plugin-testing-library: "npm:^6.1.2"
-    eslint-plugin-unicorn: "npm:^49.0.0"
+    eslint-plugin-unicorn: "npm:^50.0.0"
     eslint-plugin-vitest: "npm:^0.3.9"
     globals: "npm:^13.23.0"
     jest: "npm:29.7.0"
@@ -2372,7 +2372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"browserslist@npm:^4.21.9":
+"browserslist@npm:^4.21.9, browserslist@npm:^4.22.2":
   version: 4.22.2
   resolution: "browserslist@npm:4.22.2"
   dependencies:
@@ -2628,10 +2628,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-info@npm:^3.2.0, ci-info@npm:^3.8.0":
+"ci-info@npm:^3.2.0":
   version: 3.9.0
   resolution: "ci-info@npm:3.9.0"
   checksum: 75bc67902b4d1c7b435497adeb91598f6d52a3389398e44294f6601b20cfef32cf2176f7be0eb961d9e085bb333a8a5cae121cb22f81cf238ae7f58eb80e9397
+  languageName: node
+  linkType: hard
+
+"ci-info@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "ci-info@npm:4.0.0"
+  checksum: c983bb7ff1b06648f4a47432201abbd58291147d8ab5043dbb5c03e1a0e3fb2347f40d29b66a3044f28ffeb5dade01ac35aa6bd4e7464a44d9a49a3d7532415a
   languageName: node
   linkType: hard
 
@@ -2816,6 +2823,15 @@ __metadata:
   version: 2.0.0
   resolution: "convert-source-map@npm:2.0.0"
   checksum: c987be3ec061348cdb3c2bfb924bec86dea1eacad10550a85ca23edb0fe3556c3a61c7399114f3331ccb3499d7fd0285ab24566e5745929412983494c3926e15
+  languageName: node
+  linkType: hard
+
+"core-js-compat@npm:^3.34.0":
+  version: 3.35.0
+  resolution: "core-js-compat@npm:3.35.0"
+  dependencies:
+    browserslist: "npm:^4.22.2"
+  checksum: aa21ad2f0c946be7a8ecef92233bc003a38fa27e43a925fcd9b79e32ae49b879e0f5c23459ffc310df38ee547389b8e5e43a6a8be0b2369b9b9ebf3d04ae69b9
   languageName: node
   linkType: hard
 
@@ -3607,9 +3623,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^46.9.0":
-  version: 46.9.1
-  resolution: "eslint-plugin-jsdoc@npm:46.9.1"
+"eslint-plugin-jsdoc@npm:^48.0.0":
+  version: 48.0.1
+  resolution: "eslint-plugin-jsdoc@npm:48.0.1"
   dependencies:
     "@es-joy/jsdoccomment": "npm:~0.41.0"
     are-docs-informative: "npm:^0.0.2"
@@ -3621,8 +3637,8 @@ __metadata:
     semver: "npm:^7.5.4"
     spdx-expression-parse: "npm:^4.0.0"
   peerDependencies:
-    eslint: ^7.0.0 || ^8.0.0
-  checksum: 0b176d690738b3e5dad9bceccb8640b95070e8981ce0dce48227969d6c9fe972554aeccfc013bf231cf1eb51dacc3b0987c597b553f4b0e52f637f4587b509be
+    eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
+  checksum: 6a078d5dc7c07b6478302d7f3c63bc403e4a7b6e6c886f437ea976965ee258769a367d035a59d724f31d991227a839b0c108c15e6b18dc6eeca24f4d92ee8f24
   languageName: node
   linkType: hard
 
@@ -3770,14 +3786,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:^49.0.0":
-  version: 49.0.0
-  resolution: "eslint-plugin-unicorn@npm:49.0.0"
+"eslint-plugin-unicorn@npm:^50.0.0":
+  version: 50.0.1
+  resolution: "eslint-plugin-unicorn@npm:50.0.1"
   dependencies:
     "@babel/helper-validator-identifier": "npm:^7.22.20"
     "@eslint-community/eslint-utils": "npm:^4.4.0"
-    ci-info: "npm:^3.8.0"
+    "@eslint/eslintrc": "npm:^2.1.4"
+    ci-info: "npm:^4.0.0"
     clean-regexp: "npm:^1.0.0"
+    core-js-compat: "npm:^3.34.0"
     esquery: "npm:^1.5.0"
     indent-string: "npm:^4.0.0"
     is-builtin-module: "npm:^3.2.1"
@@ -3789,8 +3807,8 @@ __metadata:
     semver: "npm:^7.5.4"
     strip-indent: "npm:^3.0.0"
   peerDependencies:
-    eslint: ">=8.52.0"
-  checksum: 7f73f41356cdf720675998c558ab13872d76302dde3a49661df0b5219fd328627e3d7e418aaa3e94cf8764d1ef8b606f7ea01f019eccc0bf0522def8e6769caa
+    eslint: ">=8.56.0"
+  checksum: dd5e45f624a94172965858d7a15434df0ea98e14a300d90cfe7f0cbbd893883e1488036f77cb49162e2b61802c1d5386facfcaf5fd995357a7065013bfb8fe7f
   languageName: node
   linkType: hard
 
