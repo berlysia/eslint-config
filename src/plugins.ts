@@ -70,9 +70,7 @@ import pluginMarkdownRaw from "eslint-plugin-markdown";
 assertPlugin(pluginMarkdownRaw, "eslint-plugin-markdown");
 export const pluginMarkdown = pluginMarkdownRaw;
 
-// @ts-expect-error -- no type definition
 import pluginJsdocRaw from "eslint-plugin-jsdoc";
-assertPlugin(pluginJsdocRaw, "eslint-plugin-jsdoc");
 export const pluginJsdoc = pluginJsdocRaw;
 
 // @ts-expect-error -- no type definition

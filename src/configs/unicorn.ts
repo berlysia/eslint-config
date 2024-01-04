@@ -124,6 +124,7 @@ export default function configsUnicorn(
         "unicorn/text-encoding-identifier-case": "error",
         "unicorn/throw-new-error": "error",
         "unicorn/prefer-blob-reading-methods": "error",
+        "unicorn/no-unnecessary-polyfills": "error",
 
         ...options.overrides,
       },
