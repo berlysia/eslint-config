@@ -138,6 +138,7 @@ export const typeAwareRules: Rules = {
     "@typescript-eslint/prefer-destructuring": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/no-unsafe-unary-minus": "error",
+    "@typescript-eslint/no-useless-template-literals": "error",
   },
 };
 
