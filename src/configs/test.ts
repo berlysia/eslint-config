@@ -112,7 +112,6 @@ export default function configsTest(
         "test/valid-expect": "error",
         "test/valid-title": "off",
         "test/no-conditional-expect": "error",
-        "test/no-done-callback": "error",
         "test/no-interpolation-in-snapshots": "error",
         "test/no-restricted-matchers": "error",
         "test/max-nested-describe": "off",
@@ -147,7 +146,6 @@ export default function configsTest(
               "test/no-restricted-vi-methods": "off",
               "test/require-local-test-context-for-concurrent-snapshots":
                 "error",
-              "test/prefer-called-exactly-once-with": "error",
             }
           : {}),
 
@@ -160,6 +158,7 @@ export default function configsTest(
               "test/no-export": "off",
               "test/no-restricted-jest-methods": "off",
               "test/no-confusing-set-timeout": "off",
+              "test/no-done-callback": "error",
             }
           : {}),
 
