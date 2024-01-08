@@ -98,6 +98,7 @@ export default function verify() {
   );
 
   return {
+    name: "typescript",
     withType: {
       missing: missingInWithType,
       misdefined: withTypeInWithoutType,

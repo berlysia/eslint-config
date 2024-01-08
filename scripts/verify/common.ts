@@ -12,7 +12,11 @@ import configsJsonc from "../../src/configs/jsonc";
 import configsPromise from "../../src/configs/promise";
 import configsMarkdown from "../../src/configs/markdown";
 
-function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
+function verifier(
+  verificationName: string,
+  configs: FlatConfigItem[],
+  targetPluginNames: string[],
+) {
   const rules = configs.reduce<NonNullable<FlatConfigItem["rules"]>>(
     (acc, config) => ({
       ...acc,
@@ -80,6 +84,7 @@ function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
   }
 
   return {
+    name: verificationName,
     deprecated,
     missing,
     unknown,
@@ -88,18 +93,22 @@ function verifier(configs: FlatConfigItem[], targetPluginNames: string[]) {
 
 export default function verify() {
   const verifyTarget: Parameters<typeof verifier>[] = [
-    [configsComments({}), ["eslint-comments"]],
-    [configsImport({}), ["import"]],
-    [configsJsdoc({}), ["jsdoc"]],
-    [configsJsonc({}), ["jsonc"]],
-    [configsMarkdown({}), ["markdown"]],
-    [configsNode({}), ["node"]],
-    [configsPromise({}), ["promise"]],
-    [configsReact({}), ["react", "react-hooks"]],
-    [configsSonarjs({}), ["sonarjs"]],
-    [configsTest({ tsConfigPath: "x", testLibrary: "jest" }), ["test"]],
-    [configsTest({ tsConfigPath: "x", testLibrary: "vitest" }), ["test"]],
-    [configsUnicorn({}), ["unicorn"]],
+    ["comments", configsComments({}), ["eslint-comments"]],
+    ["import", configsImport({}), ["import"]],
+    ["jsdoc", configsJsdoc({}), ["jsdoc"]],
+    ["jsonc", configsJsonc({}), ["jsonc"]],
+    ["markdown", configsMarkdown({}), ["markdown"]],
+    ["node", configsNode({}), ["node"]],
+    ["promise", configsPromise({}), ["promise"]],
+    ["react", configsReact({}), ["react", "react-hooks"]],
+    ["sonarjs", configsSonarjs({}), ["sonarjs"]],
+    ["jest", configsTest({ tsConfigPath: "x", testLibrary: "jest" }), ["test"]],
+    [
+      "vitest",
+      configsTest({ tsConfigPath: "x", testLibrary: "vitest" }),
+      ["test"],
+    ],
+    ["unicorn", configsUnicorn({}), ["unicorn"]],
   ];
 
   return verifyTarget.map((args) => verifier(...args));
