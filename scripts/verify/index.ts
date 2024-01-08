@@ -6,107 +6,124 @@ import common from "./common";
 const args = process.argv.slice(2);
 const isFix = args.includes("--fix");
 
-type Result = ReturnType<typeof common>[number];
-const results = [...common(), core()];
-
-const result = results.reduce<Result>(
-  (acc, { missing, unknown, deprecated }) => {
-    return {
-      missing: [...acc.missing, ...missing],
-      unknown: [...acc.unknown, ...unknown],
-      deprecated: [...acc.deprecated, ...deprecated],
-    };
-  },
-  { missing: [], unknown: [], deprecated: [] },
-);
-
-let flag = {
+const flags = {
   hasMissing: false,
-  hasUnknown: false,
   hasDeprecated: false,
+  hasUnknown: false,
 };
 
-if (result.missing.length > 0) {
-  flag.hasMissing = true;
-  console.error(`Missing rules:\n${result.missing.join("\n")}\n`);
+const deprecatedOrUnknowns = new Set<string>();
+
+const results = [...common(), core()];
+
+for (const result of results) {
+  let isInvalid = false;
+  const messages: string[] = [];
+  if (result.missing.length > 0) {
+    isInvalid = true;
+    flags.hasMissing = true;
+    messages.push(`Missing rules:\n${result.missing.join("\n")}\n`);
+  }
+
+  if (result.deprecated.length > 0) {
+    isInvalid = true;
+    flags.hasDeprecated = true;
+    for (const rule of result.deprecated) deprecatedOrUnknowns.add(rule);
+    messages.push(`Deprecated rules:\n${result.deprecated.join("\n")}\n`);
+  }
+
+  if (result.unknown.length > 0) {
+    isInvalid = true;
+    flags.hasUnknown = true;
+    for (const rule of result.unknown) deprecatedOrUnknowns.add(rule);
+    messages.push(`Unknown rules:\n${result.unknown.join("\n")}\n`);
+  }
+
+  if (isInvalid) {
+    console.error(
+      `verificaction for "${result.name}" failed\n${messages.join("\n")}`,
+    );
+  }
 }
 
-if (result.deprecated.length > 0) {
-  flag.hasDeprecated = true;
-  console.error(`Deprecated rules:\n${result.deprecated.join("\n")}\n`);
+{
+  let isInvalid = false;
+  const result = typescript();
+  const messages: string[] = [];
+  if (result.withType.missing.length > 0) {
+    isInvalid = true;
+    messages.push(
+      `Missing rules in withType:\n${result.withType.missing.join("\n")}\n`,
+    );
+  }
+
+  if (result.withType.deprecated.length > 0) {
+    isInvalid = true;
+    flags.hasDeprecated = true;
+    for (const rule of result.withType.deprecated)
+      deprecatedOrUnknowns.add(rule);
+    messages.push(
+      `Deprecated rules in withType:\n${result.withType.deprecated.join(
+        "\n",
+      )}\n`,
+    );
+  }
+
+  if (result.withType.unknown.length > 0) {
+    isInvalid = true;
+    flags.hasUnknown = true;
+    for (const rule of result.withType.unknown) deprecatedOrUnknowns.add(rule);
+    messages.push(
+      `Unknown rules in withType:\n${result.withType.unknown.join("\n")}\n`,
+    );
+  }
+
+  if (result.withoutType.missing.length > 0) {
+    isInvalid = true;
+    messages.push(
+      `Missing rules in withoutType:\n${result.withoutType.missing.join(
+        "\n",
+      )}\n`,
+    );
+  }
+
+  if (result.withoutType.deprecated.length > 0) {
+    isInvalid = true;
+    flags.hasDeprecated = true;
+    for (const rule of result.withoutType.deprecated)
+      deprecatedOrUnknowns.add(rule);
+    messages.push(
+      `Deprecated rules in withoutType:\n${result.withoutType.deprecated.join(
+        "\n",
+      )}\n`,
+    );
+  }
+
+  if (result.withoutType.unknown.length > 0) {
+    isInvalid = true;
+    flags.hasUnknown = true;
+    for (const rule of result.withoutType.unknown)
+      deprecatedOrUnknowns.add(rule);
+    messages.push(
+      `Unknown rules in withoutType:\n${result.withoutType.unknown.join(
+        "\n",
+      )}\n`,
+    );
+  }
+
+  if (isInvalid) {
+    console.error(
+      `verificaction for "${result.name}" failed\n${messages.join("\n")}`,
+    );
+  }
 }
 
-if (result.unknown.length > 0) {
-  flag.hasUnknown = true;
-  console.error(`Unknown rules:\n${result.unknown.join("\n")}\n`);
+if (isFix && !flags.hasMissing && (flags.hasDeprecated || flags.hasUnknown)) {
+  clean(deprecatedOrUnknowns);
+  flags.hasDeprecated = false;
+  flags.hasUnknown = false;
 }
 
-const tsResult = typescript();
-if (tsResult.withType.missing.length > 0) {
-  flag.hasMissing = true;
-  console.error(
-    `Missing rules in withType:\n${tsResult.withType.missing.join("\n")}\n`,
-  );
-}
-
-if (tsResult.withType.deprecated.length > 0) {
-  flag.hasDeprecated = true;
-  console.error(
-    `Deprecated rules in withType:\n${tsResult.withType.deprecated.join(
-      "\n",
-    )}\n`,
-  );
-}
-
-if (tsResult.withType.unknown.length > 0) {
-  flag.hasUnknown = true;
-  console.error(
-    `Unknown rules in withType:\n${tsResult.withType.unknown.join("\n")}\n`,
-  );
-}
-
-if (tsResult.withoutType.missing.length > 0) {
-  flag.hasMissing = true;
-  console.error(
-    `Missing rules in withoutType:\n${tsResult.withoutType.missing.join(
-      "\n",
-    )}\n`,
-  );
-}
-
-if (tsResult.withoutType.deprecated.length > 0) {
-  flag.hasDeprecated = true;
-  console.error(
-    `Deprecated rules in withoutType:\n${tsResult.withoutType.deprecated.join(
-      "\n",
-    )}\n`,
-  );
-}
-
-if (tsResult.withoutType.unknown.length > 0) {
-  flag.hasUnknown = true;
-  console.error(
-    `Unknown rules in withoutType:\n${tsResult.withoutType.unknown.join(
-      "\n",
-    )}\n`,
-  );
-}
-
-if (isFix && !flag.hasMissing && (flag.hasDeprecated || flag.hasUnknown)) {
-  clean(
-    new Set([
-      ...result.deprecated,
-      ...result.unknown,
-      ...tsResult.withType.deprecated,
-      ...tsResult.withType.unknown,
-      ...tsResult.withoutType.deprecated,
-      ...tsResult.withoutType.unknown,
-    ]),
-  );
-  flag.hasDeprecated = false;
-  flag.hasUnknown = false;
-}
-
-if (flag.hasMissing || flag.hasUnknown || flag.hasDeprecated) {
+if (flags.hasMissing || flags.hasUnknown || flags.hasDeprecated) {
   throw new Error("Some rules are missing, unknown or deprecated.");
 }

@@ -39,6 +39,7 @@ export default function verifyCore() {
   }
 
   return {
+    name: "eslint-core",
     missing,
     unknown,
     deprecated,
