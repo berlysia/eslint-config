@@ -1,6 +1,6 @@
 {
   "name": "@berlysia/eslint-config",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "description": "",
   "type": "module",
   "main": "dist/index.js",
