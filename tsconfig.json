@@ -14,8 +14,8 @@
     "importsNotUsedAsValues": "error",
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
   },
   "include": ["**/*.ts"],
-  "exclude": ["tests/**/*.ts"]
+  "exclude": ["tests/**/*.ts"],
 }
