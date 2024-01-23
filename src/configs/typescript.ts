@@ -63,6 +63,10 @@ export const typeAwareRules: Rules = {
         selector: "typeLike",
         format: ["PascalCase"],
       },
+      {
+        selector: "function",
+        format: ["camelCase", "PascalCase" /* Components */],
+      },
     ],
     "@typescript-eslint/no-base-to-string": "error",
     "@typescript-eslint/no-floating-promises": "error",
@@ -155,7 +159,7 @@ export const nonTypeAwareRules: Rules = {
     "no-undef": "off",
     ...stylisticCoreRules.rules,
     "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/array-type": ["error", { default: "array" }],
+    "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/ban-tslint-comment": "error",
     "@typescript-eslint/ban-types": [
