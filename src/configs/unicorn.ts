@@ -83,7 +83,7 @@ export default function configsUnicorn(
         "unicorn/prefer-dom-node-remove": "error",
         "unicorn/prefer-dom-node-text-content": "error",
         "unicorn/prefer-event-target": "error",
-        "unicorn/prefer-export-from": "error",
+        "unicorn/prefer-export-from": ["error", { ignoreUsedVariables: true }],
         "unicorn/prefer-includes": "error",
         "unicorn/prefer-json-parse-buffer": "error",
         "unicorn/prefer-keyboard-event-key": "error",
