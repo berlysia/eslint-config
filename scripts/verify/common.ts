@@ -92,7 +92,7 @@ function verifier(
 }
 
 export default function verify() {
-  const verifyTarget: Parameters<typeof verifier>[] = [
+  const verifyTarget: Array<Parameters<typeof verifier>> = [
     ["comments", configsComments({}), ["eslint-comments"]],
     ["import", configsImport({}), ["import"]],
     ["jsdoc", configsJsdoc({}), ["jsdoc"]],

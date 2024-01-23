@@ -1,5 +1,5 @@
 import type { ParserOptions } from "eslint-define-config";
-import { GLOB_TS, GLOB_TSX } from "../globs";
+import { GLOB_DTS, GLOB_TS, GLOB_TSX } from "../globs";
 import { parserTs, pluginImport, pluginTs } from "../plugins";
 import type {
   FlatConfigItem,
@@ -305,6 +305,7 @@ export default function configsTypeScript(
     {
       name: "berlysia:typescript",
       files: [GLOB_TS, GLOB_TSX],
+      ignores: [GLOB_DTS],
       plugins: {
         "@typescript-eslint": pluginTs,
         import: pluginImport,
