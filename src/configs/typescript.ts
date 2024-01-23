@@ -139,6 +139,14 @@ export const typeAwareRules: Rules = {
     "@typescript-eslint/prefer-optional-chain": "error",
     "@typescript-eslint/no-unsafe-unary-minus": "error",
     "@typescript-eslint/no-useless-template-literals": "error",
+    "@typescript-eslint/no-array-delete": "error",
+    "prefer-promise-reject-errors": "off",
+    "@typescript-eslint/prefer-promise-reject-errors": [
+      "error",
+      {
+        allowEmptyReject: true,
+      },
+    ],
   },
 };
 
