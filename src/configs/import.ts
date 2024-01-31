@@ -54,7 +54,7 @@ export default function configsImport(
         "import/named": "error",
         "import/namespace": "error",
         "import/no-amd": "error",
-        "import/no-anonymous-default-export": "error",
+        "import/no-anonymous-default-export": "off",
         "import/no-cycle": "off",
         "import/no-default-export": "off",
         "import/no-deprecated": "error",

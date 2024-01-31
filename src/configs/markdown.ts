@@ -50,6 +50,8 @@ export default function configsMarkdown(
         "@typescript-eslint/no-unused-vars": "off",
         "@typescript-eslint/no-var-requires": "off",
 
+        "unicorn/prefer-module": "off",
+
         ...options.overrides,
       },
     },
