@@ -42,7 +42,8 @@
     "eslintconfig"
   ],
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "src/**/*"
   ],
   "exports": {
     ".": {
