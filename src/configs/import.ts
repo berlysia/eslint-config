@@ -61,7 +61,7 @@ export default function configsImport(
         "import/no-duplicates": "error",
         "import/no-internal-modules": "off",
         "import/no-named-export": "off",
-        "import/no-namespace": "error",
+        "import/no-namespace": "off",
         "import/no-nodejs-modules": "off",
         "import/no-relative-parent-imports": "off",
         "import/no-restricted-paths": "off",
