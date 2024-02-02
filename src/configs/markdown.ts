@@ -1,5 +1,10 @@
 import { GLOB_MARKDOWN, GLOB_SRC } from "../globs";
-import { pluginMarkdown, pluginNode, pluginTs } from "../plugins";
+import {
+  pluginMarkdown,
+  pluginNode,
+  pluginTs,
+  pluginUnicorn,
+} from "../plugins";
 import type { FlatConfigItem, OptionsOverride } from "../types";
 
 export default function configsMarkdown(
@@ -15,6 +20,7 @@ export default function configsMarkdown(
         },
         node: pluginNode,
         "@typescript-eslint": pluginTs,
+        unicorn: pluginUnicorn,
       },
     },
     {
