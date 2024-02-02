@@ -29,7 +29,7 @@
     "projtest": "yarn run build && yarn run projtest:jsproj && yarn run projtest:tsproj",
     "ci": "yarn run build && yarn run nostub:lint && yarn run nostub:test && yarn run projtest:jsproj && yarn run projtest:tsproj",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "release": "yarn run build && bumpp",
+    "release": "yarn run ci && bumpp",
     "publish": "yarn npm publish --access public",
     "publish:beta": "yarn npm publish --access public --tag beta"
   },
