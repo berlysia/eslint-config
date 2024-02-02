@@ -1,7 +1,6 @@
 import path from "node:path";
 import fs from "node:fs";
 import url from "node:url";
-// eslint-disable-next-line import/no-namespace -- in devDependencies
 import * as morph from "ts-morph";
 
 export function clean(removeTargetRules: Set<string>): void {

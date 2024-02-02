@@ -1,4 +1,4 @@
-/* eslint-disable import/first, import/newline-after-import, import/no-namespace, unicorn/prefer-export-from -- we need cast */
+/* eslint-disable import/first, import/newline-after-import, unicorn/prefer-export-from -- we need cast */
 import type { ESLint, Linter } from "eslint";
 
 type Plugin = ESLint.Plugin;
