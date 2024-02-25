@@ -103,7 +103,7 @@
     "eslint-plugin-testing-library": "^6.1.2",
     "eslint-plugin-unicorn": "^51.0.0",
     "eslint-plugin-vitest": "^0.3.9",
-    "globals": "^13.23.0",
+    "globals": "^14.0.0",
     "jsonc-eslint-parser": "^2.4.0",
     "local-pkg": "^0.5.0"
   },
