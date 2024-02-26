@@ -41,7 +41,7 @@ for (const result of results) {
 
   if (isInvalid) {
     console.error(
-      `verificaction for "${result.name}" failed\n${messages.join("\n")}`,
+      `verification for "${result.name}" failed\n${messages.join("\n")}`,
     );
   }
 }
@@ -113,7 +113,7 @@ for (const result of results) {
 
   if (isInvalid) {
     console.error(
-      `verificaction for "${result.name}" failed\n${messages.join("\n")}`,
+      `verification for "${result.name}" failed\n${messages.join("\n")}`,
     );
   }
 }

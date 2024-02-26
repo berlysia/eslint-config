@@ -151,6 +151,11 @@ export const typeAwareRules: Rules = {
         allowEmptyReject: true,
       },
     ],
+    "@typescript-eslint/prefer-find": "error",
+    "@typescript-eslint/consistent-return": [
+      "error",
+      { treatUndefinedAsUnspecified: true },
+    ],
   },
 };
 
