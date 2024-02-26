@@ -1,4 +1,3 @@
 {
-  "extends": ["@berlysia"],
-  "ignoreDeps": ["read-pkg-up"]
+  "extends": ["@berlysia"]
 }
