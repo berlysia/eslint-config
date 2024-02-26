@@ -151,6 +151,7 @@ export const typeAwareRules: Rules = {
         allowEmptyReject: true,
       },
     ],
+    "@typescript-eslint/prefer-find": "error",
   },
 };
 
