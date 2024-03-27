@@ -41,6 +41,13 @@ function isTypeAwareRule(pluginRuleName: UnprefixedRuleName) {
   return Boolean(definedRules[pluginRuleName]?.meta.docs?.requiresTypeChecking);
 }
 
+function pairwiseRuleNameAndDocsUrl(ruleName: PrefixedRuleName) {
+  return {
+    name: ruleName,
+    docs: definedRules[dropPrefix(ruleName)]?.meta.docs?.url,
+  };
+}
+
 export default function verify() {
   const withTypeConfiguredRuleNames = Object.keys(
     withType as Record<PrefixedRuleName, unknown>,
@@ -100,16 +107,16 @@ export default function verify() {
   return {
     name: "typescript",
     withType: {
-      missing: missingInWithType,
-      misdefined: withTypeInWithoutType,
+      missing: missingInWithType.map(pairwiseRuleNameAndDocsUrl),
+      misdefined: withTypeInWithoutType.map(pairwiseRuleNameAndDocsUrl),
       unknown: unknownInWithType,
-      deprecated: deprecatedInWithType,
+      deprecated: deprecatedInWithType.map(pairwiseRuleNameAndDocsUrl),
     },
     withoutType: {
-      missing: missingInWithoutType,
-      misdefined: withoutTypeInWithType,
+      missing: missingInWithoutType.map(pairwiseRuleNameAndDocsUrl),
+      misdefined: withoutTypeInWithType.map(pairwiseRuleNameAndDocsUrl),
       unknown: unknownInWithoutType,
-      deprecated: deprecatedInWithoutType,
+      deprecated: deprecatedInWithoutType.map(pairwiseRuleNameAndDocsUrl),
     },
   };
 }

@@ -20,12 +20,13 @@ export default function verifyCore() {
     const rule = definedRules.get(definedRuleName);
     const ruleIsConfigured = Boolean(rules[definedRuleName]);
     const ruleIsDeprecated = Boolean(rule?.meta?.deprecated);
+    const ruleDocsUrl = rule?.meta?.docs?.url;
 
     if (!ruleIsConfigured && !ruleIsDeprecated) {
-      missing.push(definedRuleName);
+      missing.push({ name: definedRuleName, docs: ruleDocsUrl });
     }
     if (ruleIsConfigured && ruleIsDeprecated) {
-      deprecated.push(definedRuleName);
+      deprecated.push({ name: definedRuleName, docs: ruleDocsUrl });
     }
   }
 

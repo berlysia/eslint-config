@@ -1,7 +1,13 @@
+import terminalLink from "terminal-link";
 import { clean } from "../clean";
 import typescript from "./typescript";
 import core from "./core";
 import common from "./common";
+
+function linkify({ name, docs }: { name: string; docs?: string }) {
+  if (!docs) return name;
+  return terminalLink(name, docs);
+}
 
 const args = process.argv.slice(2);
 const isFix = args.includes("--fix");
@@ -12,7 +18,9 @@ const flags = {
   hasUnknown: false,
 };
 
-const deprecatedOrUnknowns = new Set<string>();
+const deprecatedOrUnknowns = new Set<
+  string | { name: string; docs?: string }
+>();
 
 const results = [...common(), core()];
 
@@ -22,14 +30,18 @@ for (const result of results) {
   if (result.missing.length > 0) {
     isInvalid = true;
     flags.hasMissing = true;
-    messages.push(`Missing rules:\n${result.missing.join("\n")}\n`);
+    messages.push(
+      `Missing rules:\n${result.missing.map(linkify).join("\n")}\n`,
+    );
   }
 
   if (result.deprecated.length > 0) {
     isInvalid = true;
     flags.hasDeprecated = true;
     for (const rule of result.deprecated) deprecatedOrUnknowns.add(rule);
-    messages.push(`Deprecated rules:\n${result.deprecated.join("\n")}\n`);
+    messages.push(
+      `Deprecated rules:\n${result.deprecated.map(linkify).join("\n")}\n`,
+    );
   }
 
   if (result.unknown.length > 0) {
@@ -53,7 +65,7 @@ for (const result of results) {
   if (result.withType.missing.length > 0) {
     isInvalid = true;
     messages.push(
-      `Missing rules in withType:\n${result.withType.missing.join("\n")}\n`,
+      `Missing rules in withType:\n${result.withType.missing.map(linkify).join("\n")}\n`,
     );
   }
 
@@ -63,9 +75,9 @@ for (const result of results) {
     for (const rule of result.withType.deprecated)
       deprecatedOrUnknowns.add(rule);
     messages.push(
-      `Deprecated rules in withType:\n${result.withType.deprecated.join(
-        "\n",
-      )}\n`,
+      `Deprecated rules in withType:\n${result.withType.deprecated
+        .map(linkify)
+        .join("\n")}\n`,
     );
   }
 
@@ -81,9 +93,9 @@ for (const result of results) {
   if (result.withoutType.missing.length > 0) {
     isInvalid = true;
     messages.push(
-      `Missing rules in withoutType:\n${result.withoutType.missing.join(
-        "\n",
-      )}\n`,
+      `Missing rules in withoutType:\n${result.withoutType.missing
+        .map(linkify)
+        .join("\n")}\n`,
     );
   }
 
@@ -93,9 +105,9 @@ for (const result of results) {
     for (const rule of result.withoutType.deprecated)
       deprecatedOrUnknowns.add(rule);
     messages.push(
-      `Deprecated rules in withoutType:\n${result.withoutType.deprecated.join(
-        "\n",
-      )}\n`,
+      `Deprecated rules in withoutType:\n${result.withoutType.deprecated
+        .map(linkify)
+        .join("\n")}\n`,
     );
   }
 
@@ -119,7 +131,13 @@ for (const result of results) {
 }
 
 if (isFix && !flags.hasMissing && (flags.hasDeprecated || flags.hasUnknown)) {
-  clean(deprecatedOrUnknowns);
+  clean(
+    new Set(
+      [...deprecatedOrUnknowns].map((rule) =>
+        typeof rule === "string" ? rule : rule.name,
+      ),
+    ),
+  );
   flags.hasDeprecated = false;
   flags.hasUnknown = false;
 }
