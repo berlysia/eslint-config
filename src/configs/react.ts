@@ -169,6 +169,7 @@ export default function configsReact(
         "react/jsx-no-leaked-render": "off", // TS側でbooleanを強制する
         "react/no-object-type-as-default-prop": "off",
         "react/sort-default-props": "off",
+        "react/checked-requires-onchange-or-readonly": "error",
 
         "jsx-a11y/alt-text": "error",
         "jsx-a11y/anchor-ambiguous-text": "off",
