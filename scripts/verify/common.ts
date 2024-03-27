@@ -53,12 +53,14 @@ function verifier(
       const ruleIsDeprecated = Boolean(
         typeof rule === "object" && rule.meta?.deprecated,
       );
+      const ruleDocsUrl =
+        typeof rule === "object" ? rule.meta?.docs?.url : undefined;
 
       if (!ruleIsConfigured && !ruleIsDeprecated) {
-        missing.push(ruleNameForConfiguration);
+        missing.push({ name: ruleNameForConfiguration, docs: ruleDocsUrl });
       }
       if (ruleIsConfigured && ruleIsDeprecated) {
-        deprecated.push(ruleNameForConfiguration);
+        deprecated.push({ name: ruleNameForConfiguration, docs: ruleDocsUrl });
       }
     }
   }
