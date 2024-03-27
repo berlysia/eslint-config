@@ -156,6 +156,7 @@ export const typeAwareRules: Rules = {
       "error",
       { treatUndefinedAsUnspecified: true },
     ],
+    "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
   },
 };
 
