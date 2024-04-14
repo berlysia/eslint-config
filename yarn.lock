@@ -1282,12 +1282,12 @@ __metadata:
   linkType: hard
 
 "@types/eslint@npm:^8.56.3":
-  version: 8.56.7
-  resolution: "@types/eslint@npm:8.56.7"
+  version: 8.56.9
+  resolution: "@types/eslint@npm:8.56.9"
   dependencies:
     "@types/estree": "npm:*"
     "@types/json-schema": "npm:*"
-  checksum: 10/4c90f30a19bc5a01b27afc4f7e3efa28d191b7c9505fd4f6373d1dcdf8e93b939628d92ae730c3ef77bf2a094622296bb307cbecbad7cb6b43ef31dd722f6944
+  checksum: 10/fde20e8f3e5384f0ac78897b04cbaf1c78f4ba6cbdae9aeba876c00b665b498670cfcdf84a39eb4e44a6e27d6de80e24b5833d51a09d5d7e410229feb8b9c401
   languageName: node
   linkType: hard
 
@@ -3623,8 +3623,8 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-jsonc@npm:^2.13.0":
-  version: 2.15.0
-  resolution: "eslint-plugin-jsonc@npm:2.15.0"
+  version: 2.15.1
+  resolution: "eslint-plugin-jsonc@npm:2.15.1"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     eslint-compat-utils: "npm:^0.5.0"
@@ -3635,7 +3635,7 @@ __metadata:
     synckit: "npm:^0.6.0"
   peerDependencies:
     eslint: ">=6.0.0"
-  checksum: 10/f3dc4dad7b0f99228137acd1d8fee351921123cd9e3c0faafc3d567a76298d6ddec7819061f85b663070a30c5dda1e4feacbd2230ec6b6243e79d9dcf405c023
+  checksum: 10/0c7e69d660baa7b5440543448119b90362b43745ceac068187f5da96c76d9c19153e253d76179053028b61d48420bfca40f88bee3e3f21b41c0ddee4721abf3f
   languageName: node
   linkType: hard
 
@@ -3760,13 +3760,13 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-testing-library@npm:^6.2.0":
-  version: 6.2.0
-  resolution: "eslint-plugin-testing-library@npm:6.2.0"
+  version: 6.2.1
+  resolution: "eslint-plugin-testing-library@npm:6.2.1"
   dependencies:
     "@typescript-eslint/utils": "npm:^5.58.0"
   peerDependencies:
     eslint: ^7.5.0 || ^8.0.0
-  checksum: 10/c523e668066fc1f68765e72c65565cb006489e7e8460efa1a4dbaf75f31d197a858a49fc7c9a43e26ffb37c0c611359ec585ab29976ff2b0276cd85cebb2890a
+  checksum: 10/12b6b5fe4b66513f576ca1c59d8ad8ade6e6f06c3be76a7fb2d0bf49b6f5a71f12de7c32a51641714afc2618120cb5770ce699fd4525f0a063ce74f4251cdcf9
   languageName: node
   linkType: hard
 
