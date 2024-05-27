@@ -3533,8 +3533,8 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-jsonc@npm:^2.13.0":
-  version: 2.15.1
-  resolution: "eslint-plugin-jsonc@npm:2.15.1"
+  version: 2.16.0
+  resolution: "eslint-plugin-jsonc@npm:2.16.0"
   dependencies:
     "@eslint-community/eslint-utils": "npm:^4.2.0"
     eslint-compat-utils: "npm:^0.5.0"
@@ -3545,7 +3545,7 @@ __metadata:
     synckit: "npm:^0.6.0"
   peerDependencies:
     eslint: ">=6.0.0"
-  checksum: 10/0c7e69d660baa7b5440543448119b90362b43745ceac068187f5da96c76d9c19153e253d76179053028b61d48420bfca40f88bee3e3f21b41c0ddee4721abf3f
+  checksum: 10/bec880a4d6f0cd8ba37ae3a6528477d3161b41ca7b885ed43c34bed95d09b30fd1d277bfa9e487164f5a8aad265f3b075a4b479c20811fe0dd18c25b6835cf56
   languageName: node
   linkType: hard
 
@@ -3615,11 +3615,11 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-promise@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "eslint-plugin-promise@npm:6.1.1"
+  version: 6.2.0
+  resolution: "eslint-plugin-promise@npm:6.2.0"
   peerDependencies:
-    eslint: ^7.0.0 || ^8.0.0
-  checksum: 10/216c4348f796c5e90984224532d42a8f8d0455b8cbb1955bcb328b3aa10a52e9718f6fb044b6fe19825eda3a2d62a32b1042d9cbb10731353cf61b7a6cab2d71
+    eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
+  checksum: 10/9d3598a1c754d1cfa92b292e441fa8583c5f420058db6bd0de750e2c2b76fa08683deed86e9c51668a7e54e6991d3d428fbcfbe9363a6c93a94c0d74a29f5d5e
   languageName: node
   linkType: hard
 
