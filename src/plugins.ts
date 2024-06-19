@@ -21,9 +21,9 @@ import pluginCommentsRaw from "eslint-plugin-eslint-comments";
 assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
 export const pluginComments = pluginCommentsRaw;
 
-// @ts-expect-error -- no type definition
-import * as pluginImportRaw from "eslint-plugin-i";
-assertPlugin(pluginImportRaw, "eslint-plugin-i");
+import * as pluginImportRaw from "eslint-plugin-import-x";
+// @ts-expect-error -- うまく合わない
+assertPlugin(pluginImportRaw, "eslint-plugin-import-x");
 export const pluginImport = pluginImportRaw;
 
 // @ts-expect-error -- no type definition
@@ -47,10 +47,10 @@ assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
 export const pluginReactHooks = pluginReactHooksRaw;
 
 import * as pluginSonarJsRaw from "eslint-plugin-sonarjs";
+// @ts-expect-error -- 合ってない
 assertPlugin(pluginSonarJsRaw, "eslint-plugin-sonarjs");
 export const pluginSonarJs = pluginSonarJsRaw;
 
-// @ts-expect-error -- no type definition
 import pluginNodeRaw from "eslint-plugin-n";
 assertPlugin(pluginNodeRaw, "eslint-plugin-n");
 export const pluginNode = pluginNodeRaw;

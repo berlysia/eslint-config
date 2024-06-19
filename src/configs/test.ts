@@ -159,6 +159,8 @@ export default function configsTest(
               "test/no-restricted-jest-methods": "off",
               "test/no-confusing-set-timeout": "off",
               "test/no-done-callback": "error",
+              "test/prefer-importing-jest-globals": "error",
+              "test/prefer-jest-mocked": "error",
             }
           : {}),
 

@@ -1,4 +1,4 @@
-import { Linter } from "eslint";
+import eslintUnsafe from "eslint/use-at-your-own-risk";
 import type { FlatConfigItem } from "../../src/types";
 import configsCore from "../../src/configs/eslint-core";
 
@@ -9,8 +9,8 @@ export default function verifyCore() {
     {},
   );
 
-  const linter = new Linter();
-  const definedRules = linter.getRules();
+  // TODO: https://github.com/eslint/eslint/issues/18322#issuecomment-2057589871
+  const definedRules = eslintUnsafe.builtinRules;
 
   const missing = [];
   const unknown = [];

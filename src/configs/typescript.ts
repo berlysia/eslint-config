@@ -157,6 +157,8 @@ export const typeAwareRules: Rules = {
       { treatUndefinedAsUnspecified: true },
     ],
     "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
+    "@typescript-eslint/no-unnecessary-template-expression": "error",
+    "@typescript-eslint/only-throw-error": "error",
   },
 };
 
@@ -329,7 +331,7 @@ export default function configsTypeScript(
       },
 
       settings: {
-        "import/resolver": {
+        "import-x/resolver": {
           typescript: {
             alwaysTryTypes: true,
           },

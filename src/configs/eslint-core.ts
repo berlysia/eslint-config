@@ -166,13 +166,11 @@ export default function configsCore(
         "func-style": ["error", "declaration", { allowArrowFunctions: true }],
         "id-length": "off",
         "id-match": "off",
-        "line-comment-position": "off",
         "max-depth": ["error", { max: 4 }],
         "max-lines": "off",
         "max-nested-callbacks": "off",
         "max-params": "off",
         "max-statements": "off",
-        "multiline-comment-style": "off",
         "new-cap": "off",
         "no-array-constructor": "error",
         "no-bitwise": [
@@ -203,7 +201,6 @@ export default function configsCore(
         "no-const-assign": "error",
         "no-dupe-class-members": "error",
         "no-duplicate-imports": "off", // 誤爆が多いので
-        "no-new-symbol": "error",
         "no-restricted-imports": "off",
         "no-this-before-super": "error",
         "no-useless-computed-key": "error",
@@ -247,6 +244,7 @@ export default function configsCore(
         "no-empty-static-block": "off",
         "no-new-native-nonconstructor": "error",
         "no-object-constructor": "error",
+        "no-useless-assignment": "error",
 
         ...options.overrides,
       },
