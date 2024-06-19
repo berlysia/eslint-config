@@ -443,7 +443,7 @@ __metadata:
   resolution: "@berlysia/eslint-config@workspace:."
   dependencies:
     "@babel/eslint-parser": "npm:^7.23.10"
-    "@types/eslint": "npm:^8.56.3"
+    "@types/eslint": "npm:^8.56.10"
     "@types/jest": "npm:^29.5.12"
     "@typescript-eslint/eslint-plugin": "npm:^7.1.0"
     "@typescript-eslint/parser": "npm:^7.1.0"
@@ -1515,7 +1515,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^8.56.3, @types/eslint@npm:^8.56.5":
+"@types/eslint@npm:^8.56.10, @types/eslint@npm:^8.56.5":
   version: 8.56.10
   resolution: "@types/eslint@npm:8.56.10"
   dependencies:
