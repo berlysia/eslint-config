@@ -1,9 +1,8 @@
-import { Linter } from "eslint";
+import eslintUnsafe from "eslint/use-at-your-own-risk";
 import type { ESLint } from "eslint";
 import type { FlatConfigItem } from "./types";
 
-const linter = new Linter();
-const builtinRules = linter.getRules();
+const builtinRules = eslintUnsafe.builtinRules;
 
 function coreRuleIsPresent(ruleName: string): boolean {
   return builtinRules.has(ruleName);
