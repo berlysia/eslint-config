@@ -28,10 +28,7 @@ export default function configsReact(
         },
       },
       rules: {
-        "react/boolean-prop-naming": [
-          "error",
-          { rule: "^(is|has)[A-Z]([A-Za-z0-9]?)+" },
-        ],
+        "react/boolean-prop-naming": "off", // 気にしない
         "react/button-has-type": "error",
         "react/default-props-match-prop-types": "off", // PropTypesはもう使わない
         "react/destructuring-assignment": "off", // 気にしない
