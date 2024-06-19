@@ -13,7 +13,7 @@ export default function configsImport(
         import: pluginImport,
       },
       settings: {
-        "import/parsers": {
+        "import-x/parsers": {
           espree: [".js", ".cjs", ".mjs", ".jsx", ".cjsx", ".mjsx"],
           "@typescript-eslint/parser": [
             ".ts",
@@ -24,7 +24,7 @@ export default function configsImport(
             ".mtsx",
           ],
         },
-        "import/resolver": {
+        "import-x/resolver": {
           typescript: true,
           node: true,
         },

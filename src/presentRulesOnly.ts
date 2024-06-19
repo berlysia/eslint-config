@@ -2,10 +2,8 @@ import eslintUnsafe from "eslint/use-at-your-own-risk";
 import type { ESLint } from "eslint";
 import type { FlatConfigItem } from "./types";
 
-const builtinRules = eslintUnsafe.builtinRules;
-
 function coreRuleIsPresent(ruleName: string): boolean {
-  return builtinRules.has(ruleName);
+  return eslintUnsafe.builtinRules.has(ruleName);
 }
 
 function parseRuleId(ruleId: string) {

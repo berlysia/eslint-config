@@ -329,7 +329,7 @@ export default function configsTypeScript(
       },
 
       settings: {
-        "import/resolver": {
+        "import-x/resolver": {
           typescript: {
             alwaysTryTypes: true,
           },
