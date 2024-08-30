@@ -13,7 +13,6 @@ import configsComments from "./configs/eslint-comments";
 import configsCore from "./configs/eslint-core";
 import configsImport from "./configs/import";
 import configsUnicorn from "./configs/unicorn";
-import configsSonarjs from "./configs/sonarjs";
 import configsTypeScript from "./configs/typescript";
 import configsTest from "./configs/test";
 import configsReact from "./configs/react";
@@ -38,7 +37,6 @@ type Options = {
     core?: Rules;
     typescript?: Rules;
     unicorn?: Rules;
-    sonarjs?: Rules;
     test?: Rules;
     import?: Rules;
     comments?: Rules;
@@ -93,9 +91,6 @@ export default function berlysia(
     ),
     presentRulesOnly(configsImport({ overrides: options.overrides?.import })),
     presentRulesOnly(configsUnicorn({ overrides: options.overrides?.unicorn })),
-    presentRulesOnly(
-      configsSonarjs({ overrides: options.overrides?.sonarjs, isInEditor }),
-    ),
     presentRulesOnly(configsNode({ overrides: options.overrides?.node })),
     presentRulesOnly(configsJsdoc({ overrides: options.overrides?.jsdoc })),
     presentRulesOnly(configsJsonc({ overrides: options.overrides?.jsonc })),

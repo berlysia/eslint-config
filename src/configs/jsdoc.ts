@@ -65,6 +65,10 @@ export default function configsJsdoc(
         "jsdoc/sort-tags": "off",
         "jsdoc/tag-lines": "off",
         "jsdoc/valid-types": "off",
+        "jsdoc/check-template-names": "error",
+        "jsdoc/convert-to-jsdoc-comments": "off",
+        "jsdoc/lines-before-block": "off",
+        "jsdoc/require-template": "error",
 
         ...options.overrides,
       },

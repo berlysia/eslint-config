@@ -167,6 +167,7 @@ export default function configsReact(
         "react/no-object-type-as-default-prop": "off",
         "react/sort-default-props": "off",
         "react/checked-requires-onchange-or-readonly": "error",
+        "react/jsx-props-no-spread-multi": "off",
 
         "jsx-a11y/alt-text": "error",
         "jsx-a11y/anchor-ambiguous-text": "off",
