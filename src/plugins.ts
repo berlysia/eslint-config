@@ -22,9 +22,8 @@ assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
 export const pluginComments = pluginCommentsRaw;
 
 import * as pluginImportRaw from "eslint-plugin-import-x";
-// @ts-expect-error -- うまく合わない
-assertPlugin(pluginImportRaw, "eslint-plugin-import-x");
-export const pluginImport = pluginImportRaw;
+assertPlugin(pluginImportRaw as unknown as Plugin, "eslint-plugin-import-x");
+export const pluginImport: Plugin = pluginImportRaw as unknown as Plugin;
 
 // @ts-expect-error -- no type definition
 import pluginJestRaw from "eslint-plugin-jest";
@@ -46,11 +45,6 @@ import pluginReactHooksRaw from "eslint-plugin-react-hooks";
 assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
 export const pluginReactHooks = pluginReactHooksRaw;
 
-import * as pluginSonarJsRaw from "eslint-plugin-sonarjs";
-// @ts-expect-error -- 合ってない
-assertPlugin(pluginSonarJsRaw, "eslint-plugin-sonarjs");
-export const pluginSonarJs = pluginSonarJsRaw;
-
 import pluginNodeRaw from "eslint-plugin-n";
 assertPlugin(pluginNodeRaw, "eslint-plugin-n");
 export const pluginNode = pluginNodeRaw;
@@ -60,7 +54,6 @@ import pluginPromiseRaw from "eslint-plugin-promise";
 assertPlugin(pluginPromiseRaw, "eslint-plugin-promise");
 export const pluginPromise = pluginPromiseRaw;
 
-// @ts-expect-error -- no type definition
 import pluginUnicornRaw from "eslint-plugin-unicorn";
 assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
 export const pluginUnicorn = pluginUnicornRaw;

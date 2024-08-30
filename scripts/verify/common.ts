@@ -4,7 +4,6 @@ import configsComments from "../../src/configs/eslint-comments";
 import configsImport from "../../src/configs/import";
 import configsTest from "../../src/configs/test";
 import configsReact from "../../src/configs/react";
-import configsSonarjs from "../../src/configs/sonarjs";
 import configsUnicorn from "../../src/configs/unicorn";
 import configsNode from "../../src/configs/node";
 import configsJsdoc from "../../src/configs/jsdoc";
@@ -103,7 +102,6 @@ export default function verify() {
     ["node", configsNode({}), ["node"]],
     ["promise", configsPromise({}), ["promise"]],
     ["react", configsReact({}), ["react", "react-hooks"]],
-    ["sonarjs", configsSonarjs({}), ["sonarjs"]],
     ["jest", configsTest({ tsConfigPath: "x", testLibrary: "jest" }), ["test"]],
     [
       "vitest",

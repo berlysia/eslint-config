@@ -134,6 +134,7 @@ export default function configsUnicorn(
         "unicorn/no-single-promise-in-promise-methods": "error",
         "unicorn/prefer-string-raw": "error",
         "unicorn/prefer-structured-clone": "error",
+        "unicorn/no-length-as-slice-end": "error",
 
         ...options.overrides,
       },

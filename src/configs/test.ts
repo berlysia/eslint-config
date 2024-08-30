@@ -161,6 +161,16 @@ export default function configsTest(
               "test/no-done-callback": "error",
               "test/prefer-importing-jest-globals": "error",
               "test/prefer-jest-mocked": "error",
+
+              // stylistic
+              "test/padding-around-after-all-blocks": "off",
+              "test/padding-around-after-each-blocks": "off",
+              "test/padding-around-all": "off",
+              "test/padding-around-before-all-blocks": "off",
+              "test/padding-around-before-each-blocks": "off",
+              "test/padding-around-describe-blocks": "off",
+              "test/padding-around-expect-groups": "off",
+              "test/padding-around-test-blocks": "off",
             }
           : {}),
 
