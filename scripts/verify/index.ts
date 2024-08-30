@@ -31,7 +31,7 @@ for (const result of results) {
     isInvalid = true;
     flags.hasMissing = true;
     messages.push(
-      `Missing rules:\n${result.missing.map(linkify).join("\n")}\n`,
+      `Rules to be configured:\n${result.missing.map(linkify).join("\n")}\n`,
     );
   }
 
@@ -65,7 +65,7 @@ for (const result of results) {
   if (result.withType.missing.length > 0) {
     isInvalid = true;
     messages.push(
-      `Missing rules in withType:\n${result.withType.missing.map(linkify).join("\n")}\n`,
+      `Rules to be configured in withType:\n${result.withType.missing.map(linkify).join("\n")}\n`,
     );
   }
 
@@ -93,7 +93,7 @@ for (const result of results) {
   if (result.withoutType.missing.length > 0) {
     isInvalid = true;
     messages.push(
-      `Missing rules in withoutType:\n${result.withoutType.missing
+      `Rules to be configured in withoutType:\n${result.withoutType.missing
         .map(linkify)
         .join("\n")}\n`,
     );
