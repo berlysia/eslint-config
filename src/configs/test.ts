@@ -232,7 +232,6 @@ export default function configsTest(
       name: "berlysia:test-and-typescript",
       files: GLOB_TESTS,
       plugins: {
-        // @ts-expect-error -- TS plugins plugin type is more specialized
         "@typescript-eslint": pluginTs,
       },
       languageOptions: {

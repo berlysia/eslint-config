@@ -15,7 +15,10 @@ function assertPlugin(
   }
 }
 
-export { default as pluginTs } from "@typescript-eslint/eslint-plugin";
+import pluginTsRaw from "@typescript-eslint/eslint-plugin";
+// @ts-expect-error -- something wrong
+assertPlugin(pluginTsRaw, "@typescript-eslint/eslint-plugin");
+export const pluginTs = pluginTsRaw;
 
 // @ts-expect-error -- no type definition
 import pluginCommentsRaw from "eslint-plugin-eslint-comments";
@@ -79,7 +82,11 @@ import pluginJsxA11yRaw from "eslint-plugin-jsx-a11y";
 assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
 export const pluginJsxA11y = pluginJsxA11yRaw;
 
-export { default as pluginJsonc } from "eslint-plugin-jsonc";
+import pluginJsoncRaw from "eslint-plugin-jsonc";
+// @ts-expect-error -- something wrong
+assertPlugin(pluginJsoncRaw, "eslint-plugin-jsonc");
+export const pluginJsonc = pluginJsoncRaw;
+
 export { default as pluginVitest } from "@vitest/eslint-plugin";
 
 export * as parserTs from "@typescript-eslint/parser";

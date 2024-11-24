@@ -280,7 +280,6 @@ export default function configsTypeScript(
       files: [GLOB_TS, GLOB_TSX],
       ignores: [GLOB_DTS],
       plugins: {
-        // @ts-expect-error -- TS plugins plugin type is more specialized
         "@typescript-eslint": pluginTs,
         import: pluginImport,
       },
