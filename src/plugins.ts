@@ -71,7 +71,6 @@ import pluginNoOnlyTestsRaw from "eslint-plugin-no-only-tests";
 assertPlugin(pluginNoOnlyTestsRaw, "eslint-plugin-no-only-tests");
 export const pluginNoOnlyTests = pluginNoOnlyTestsRaw;
 
-// @ts-expect-error -- no type definition
 import pluginTestingLibraryRaw from "eslint-plugin-testing-library";
 assertPlugin(pluginTestingLibraryRaw, "eslint-plugin-testing-library");
 export const pluginTestingLibrary = pluginTestingLibraryRaw;
@@ -82,7 +81,7 @@ assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
 export const pluginJsxA11y = pluginJsxA11yRaw;
 
 export { default as pluginJsonc } from "eslint-plugin-jsonc";
-export { default as pluginVitest } from "eslint-plugin-vitest";
+export { default as pluginVitest } from "@vitest/eslint-plugin";
 
 export * as parserTs from "@typescript-eslint/parser";
 

@@ -82,6 +82,7 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "@typescript-eslint/utils": "^8.0.0",
+    "@vitest/eslint-plugin": "^1.0.1",
     "eslint-config-flat-gitignore": "0.1.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -100,7 +101,6 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-testing-library": "^7.0.0",
     "eslint-plugin-unicorn": "^56.0.0",
-    "eslint-plugin-vitest": "^0.5.0",
     "globals": "^15.0.0",
     "jsonc-eslint-parser": "^2.4.0",
     "local-pkg": "^0.5.0"
