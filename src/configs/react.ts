@@ -168,6 +168,7 @@ export default function configsReact(
         "react/sort-default-props": "off",
         "react/checked-requires-onchange-or-readonly": "error",
         "react/jsx-props-no-spread-multi": "off",
+        "react/forward-ref-uses-ref": "error",
 
         "jsx-a11y/alt-text": "error",
         "jsx-a11y/anchor-ambiguous-text": "off",

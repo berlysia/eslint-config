@@ -1,4 +1,4 @@
 {
-  "extends": ["@berlysia"],
+  "extends": ["@berlysia", ":pinDevDependencies"],
   "ignoreDeps": ["eslint-config-flat-gitignore"]
 }

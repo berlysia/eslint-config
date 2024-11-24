@@ -9,7 +9,7 @@ export default function verifyCore() {
     {},
   );
 
-  // TODO: https://github.com/eslint/eslint/issues/18322#issuecomment-2057589871
+  // eslint-disable-next-line @typescript-eslint/no-deprecated -- https://github.com/eslint/eslint/issues/18322#issuecomment-2057589871
   const definedRules = eslintUnsafe.builtinRules;
 
   const missing = [];

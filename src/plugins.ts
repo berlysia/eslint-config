@@ -1,4 +1,5 @@
-/* eslint-disable import/first, import/newline-after-import, unicorn/prefer-export-from -- we need cast */
+/* eslint-disable import/first, import/newline-after-import -- 対応関係を示すために */
+
 import type { ESLint, Linter } from "eslint";
 
 type Plugin = ESLint.Plugin;
@@ -14,7 +15,10 @@ function assertPlugin(
   }
 }
 
-export { default as pluginTs } from "@typescript-eslint/eslint-plugin";
+import pluginTsRaw from "@typescript-eslint/eslint-plugin";
+// @ts-expect-error -- something wrong
+assertPlugin(pluginTsRaw, "@typescript-eslint/eslint-plugin");
+export const pluginTs = pluginTsRaw;
 
 // @ts-expect-error -- no type definition
 import pluginCommentsRaw from "eslint-plugin-eslint-comments";
@@ -22,21 +26,20 @@ assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
 export const pluginComments = pluginCommentsRaw;
 
 import * as pluginImportRaw from "eslint-plugin-import-x";
-assertPlugin(pluginImportRaw as unknown as Plugin, "eslint-plugin-import-x");
-export const pluginImport: Plugin = pluginImportRaw as unknown as Plugin;
+// @ts-expect-error -- something wrong
+assertPlugin(pluginImportRaw, "eslint-plugin-import-x");
+export const pluginImport: Plugin = pluginImportRaw;
 
-// @ts-expect-error -- no type definition
 import pluginJestRaw from "eslint-plugin-jest";
 assertPlugin(pluginJestRaw, "eslint-plugin-jest");
 export const pluginJest = pluginJestRaw;
 
-// @ts-expect-error -- no type definition
 import * as pluginJestDomRaw from "eslint-plugin-jest-dom";
 assertPlugin(pluginJestDomRaw, "eslint-plugin-jest-dom");
 export const pluginJestDom = pluginJestDomRaw;
 
-// @ts-expect-error -- no type definition
 import pluginReactRaw from "eslint-plugin-react";
+// @ts-expect-error -- something wrong
 assertPlugin(pluginReactRaw, "eslint-plugin-react");
 export const pluginReact = pluginReactRaw;
 
@@ -63,15 +66,13 @@ import pluginMarkdownRaw from "eslint-plugin-markdown";
 assertPlugin(pluginMarkdownRaw, "eslint-plugin-markdown");
 export const pluginMarkdown = pluginMarkdownRaw;
 
-import pluginJsdocRaw from "eslint-plugin-jsdoc";
-export const pluginJsdoc = pluginJsdocRaw;
+export { default as pluginJsdoc } from "eslint-plugin-jsdoc";
 
 // @ts-expect-error -- no type definition
 import pluginNoOnlyTestsRaw from "eslint-plugin-no-only-tests";
 assertPlugin(pluginNoOnlyTestsRaw, "eslint-plugin-no-only-tests");
 export const pluginNoOnlyTests = pluginNoOnlyTestsRaw;
 
-// @ts-expect-error -- no type definition
 import pluginTestingLibraryRaw from "eslint-plugin-testing-library";
 assertPlugin(pluginTestingLibraryRaw, "eslint-plugin-testing-library");
 export const pluginTestingLibrary = pluginTestingLibraryRaw;
@@ -81,18 +82,18 @@ import pluginJsxA11yRaw from "eslint-plugin-jsx-a11y";
 assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
 export const pluginJsxA11y = pluginJsxA11yRaw;
 
-export { default as pluginJsonc } from "eslint-plugin-jsonc";
-export { default as pluginVitest } from "eslint-plugin-vitest";
+import pluginJsoncRaw from "eslint-plugin-jsonc";
+// @ts-expect-error -- something wrong
+assertPlugin(pluginJsoncRaw, "eslint-plugin-jsonc");
+export const pluginJsonc = pluginJsoncRaw;
+
+export { default as pluginVitest } from "@vitest/eslint-plugin";
 
 export * as parserTs from "@typescript-eslint/parser";
 
 export * as parserJsonc from "jsonc-eslint-parser";
 
 // @ts-expect-error -- no type definition
-import configPrettierRaw from "eslint-config-prettier";
+export { default as configPrettier } from "eslint-config-prettier";
 
 export { default as configFlatGitIgnore } from "eslint-config-flat-gitignore";
-
-export const configPrettier = configPrettierRaw as {
-  rules: Linter.RulesRecord;
-};

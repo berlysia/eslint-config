@@ -29,7 +29,7 @@ function verifier(
       ...config.plugins,
     }),
     {},
-  ) as Record<string, ESLint.Plugin>;
+  );
 
   const missing = [];
   const unknown = [];

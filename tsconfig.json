@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "ignoreDeprecations": "5.0",
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "noUncheckedIndexedAccess": true
