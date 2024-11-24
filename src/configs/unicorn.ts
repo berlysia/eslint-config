@@ -135,6 +135,9 @@ export default function configsUnicorn(
         "unicorn/prefer-string-raw": "error",
         "unicorn/prefer-structured-clone": "error",
         "unicorn/no-length-as-slice-end": "error",
+        "unicorn/consistent-existence-index-check": "error",
+        "unicorn/prefer-global-this": "off",
+        "unicorn/prefer-math-min-max": "error",
 
         ...options.overrides,
       },

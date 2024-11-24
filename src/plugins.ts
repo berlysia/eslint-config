@@ -1,4 +1,5 @@
-/* eslint-disable import/first, import/newline-after-import, unicorn/prefer-export-from -- we need cast */
+/* eslint-disable import/first, import/newline-after-import -- 対応関係を示すために */
+
 import type { ESLint, Linter } from "eslint";
 
 type Plugin = ESLint.Plugin;
@@ -22,21 +23,20 @@ assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
 export const pluginComments = pluginCommentsRaw;
 
 import * as pluginImportRaw from "eslint-plugin-import-x";
-assertPlugin(pluginImportRaw as unknown as Plugin, "eslint-plugin-import-x");
-export const pluginImport: Plugin = pluginImportRaw as unknown as Plugin;
+// @ts-expect-error -- something wrong
+assertPlugin(pluginImportRaw, "eslint-plugin-import-x");
+export const pluginImport: Plugin = pluginImportRaw;
 
-// @ts-expect-error -- no type definition
 import pluginJestRaw from "eslint-plugin-jest";
 assertPlugin(pluginJestRaw, "eslint-plugin-jest");
 export const pluginJest = pluginJestRaw;
 
-// @ts-expect-error -- no type definition
 import * as pluginJestDomRaw from "eslint-plugin-jest-dom";
 assertPlugin(pluginJestDomRaw, "eslint-plugin-jest-dom");
 export const pluginJestDom = pluginJestDomRaw;
 
-// @ts-expect-error -- no type definition
 import pluginReactRaw from "eslint-plugin-react";
+// @ts-expect-error -- something wrong
 assertPlugin(pluginReactRaw, "eslint-plugin-react");
 export const pluginReact = pluginReactRaw;
 
@@ -63,8 +63,7 @@ import pluginMarkdownRaw from "eslint-plugin-markdown";
 assertPlugin(pluginMarkdownRaw, "eslint-plugin-markdown");
 export const pluginMarkdown = pluginMarkdownRaw;
 
-import pluginJsdocRaw from "eslint-plugin-jsdoc";
-export const pluginJsdoc = pluginJsdocRaw;
+export { default as pluginJsdoc } from "eslint-plugin-jsdoc";
 
 // @ts-expect-error -- no type definition
 import pluginNoOnlyTestsRaw from "eslint-plugin-no-only-tests";
@@ -88,10 +87,6 @@ export * as parserTs from "@typescript-eslint/parser";
 export * as parserJsonc from "jsonc-eslint-parser";
 
 // @ts-expect-error -- no type definition
-import configPrettierRaw from "eslint-config-prettier";
+export { default as configPrettier } from "eslint-config-prettier";
 
 export { default as configFlatGitIgnore } from "eslint-config-flat-gitignore";
-
-export const configPrettier = configPrettierRaw as {
-  rules: Linter.RulesRecord;
-};

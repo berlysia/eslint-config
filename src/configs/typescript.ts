@@ -143,6 +143,10 @@ export const typeAwareRules: Rules = {
     "@typescript-eslint/no-unnecessary-template-expression": "error",
     "@typescript-eslint/only-throw-error": "error",
     "@typescript-eslint/no-unnecessary-type-parameters": "error",
+
+    "@typescript-eslint/no-deprecated": "error",
+    "@typescript-eslint/no-unsafe-type-assertion": "error",
+    "@typescript-eslint/related-getter-setter-pairs": "error",
   },
 };
 
@@ -151,7 +155,16 @@ export const nonTypeAwareRules: Rules = {
     "no-undef": "off",
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/array-type": ["error", { default: "array-simple" }],
-    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        minimumDescriptionLength: 3,
+        "ts-check": false,
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": true,
+        "ts-nocheck": true,
+      },
+    ],
     "@typescript-eslint/ban-tslint-comment": "error",
     "@typescript-eslint/class-literal-property-style": ["error", "fields"],
     "@typescript-eslint/consistent-type-assertions": "error",
@@ -177,7 +190,10 @@ export const nonTypeAwareRules: Rules = {
     "@typescript-eslint/no-extra-non-null-assertion": "error",
     "@typescript-eslint/no-inferrable-types": "error",
     "no-invalid-this": "off",
-    "@typescript-eslint/no-invalid-this": "error",
+    "@typescript-eslint/no-invalid-this": [
+      "error",
+      { capIsConstructor: false },
+    ],
     "@typescript-eslint/no-invalid-void-type": "error",
     "no-loss-of-precision": "error",
     "@typescript-eslint/no-loss-of-precision": "error",
@@ -264,6 +280,7 @@ export default function configsTypeScript(
       files: [GLOB_TS, GLOB_TSX],
       ignores: [GLOB_DTS],
       plugins: {
+        // @ts-expect-error -- TS plugins plugin type is more specialized
         "@typescript-eslint": pluginTs,
         import: pluginImport,
       },
@@ -275,6 +292,7 @@ export default function configsTypeScript(
           ...(tsConfigPath
             ? { project: tsConfigPath, tsconfigRootDir: process.cwd() }
             : {}),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- TS plugins parserOptions type is more specialized
           ...(parserOptions as ParserOptions),
         },
       },

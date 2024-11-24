@@ -7,26 +7,50 @@ import {
 
 // branded type
 type PrefixedRuleName = string & { __brand: "PrefixedRuleName" };
+function assertPrefixedRuleName(
+  name: string,
+): asserts name is PrefixedRuleName {
+  const splitted = name.split("/");
+  if (!name.startsWith("@") && splitted.length < 2) {
+    throw new Error(`Invalid rule name: ${name}`);
+  }
+}
+function isPrefixedRuleName(name: string): name is PrefixedRuleName {
+  assertPrefixedRuleName(name);
+  return true;
+}
 type UnprefixedRuleName = string & { __brand: "UnprefixedRuleName" };
+function assertUnprefixedRuleName(
+  name: string,
+): asserts name is UnprefixedRuleName {
+  if (name.includes("/") && name.startsWith("@")) {
+    throw new Error(`Invalid rule name: ${name}`);
+  }
+}
+function isUnprefixedRuleName(name: string): name is UnprefixedRuleName {
+  assertUnprefixedRuleName(name);
+  return true;
+}
 
-const definedRules = plugin.rules as unknown as Record<
-  UnprefixedRuleName,
-  RuleModule<string, unknown[]>
->;
+const definedRules = plugin.rules;
 
 function isTypeScriptRule(ruleName: string) {
   return ruleName.startsWith(`@typescript-eslint/`);
 }
 
 function addPrefix(ruleName: UnprefixedRuleName): PrefixedRuleName {
-  return `@typescript-eslint/${ruleName}` as PrefixedRuleName;
+  const result = `@typescript-eslint/${ruleName}`;
+  assertPrefixedRuleName(result);
+  return result;
 }
 
 function dropPrefix(ruleName: PrefixedRuleName): UnprefixedRuleName {
   if (!isTypeScriptRule(ruleName)) {
     throw new Error(`Not a typescript rule: ${ruleName}`);
   }
-  return ruleName.split("/")[1] as UnprefixedRuleName;
+  const [, result] = ruleName.split("/");
+  assertUnprefixedRuleName(result!);
+  return result;
 }
 
 function isDefinedRule(ruleName: UnprefixedRuleName) {
@@ -38,26 +62,26 @@ function isDeprecatedRule(ruleName: UnprefixedRuleName) {
 }
 
 function isTypeAwareRule(pluginRuleName: UnprefixedRuleName) {
-  return Boolean(definedRules[pluginRuleName]?.meta.docs?.requiresTypeChecking);
+  return Boolean(definedRules[pluginRuleName]?.meta.docs.requiresTypeChecking);
 }
 
 function pairwiseRuleNameAndDocsUrl(ruleName: PrefixedRuleName) {
   return {
     name: ruleName,
-    docs: definedRules[dropPrefix(ruleName)]?.meta.docs?.url,
+    docs: definedRules[dropPrefix(ruleName)]?.meta.docs.url,
   };
 }
 
 export default function verify() {
-  const withTypeConfiguredRuleNames = Object.keys(
-    withType as Record<PrefixedRuleName, unknown>,
-  ).filter(isTypeScriptRule) as PrefixedRuleName[];
-  const withoutTypeConfiguredRuleNames = Object.keys(
-    withoutType as Record<PrefixedRuleName, unknown>,
-  ).filter(isTypeScriptRule) as PrefixedRuleName[];
-  const definedRuleNames = Object.keys(definedRules).map((x) =>
-    addPrefix(x as UnprefixedRuleName),
-  );
+  const withTypeConfiguredRuleNames = Object.keys(withType)
+    .filter(isTypeScriptRule)
+    .filter(isPrefixedRuleName);
+  const withoutTypeConfiguredRuleNames = Object.keys(withoutType)
+    .filter(isTypeScriptRule)
+    .filter(isPrefixedRuleName);
+  const definedRuleNames = Object.keys(definedRules)
+    .filter(isUnprefixedRuleName)
+    .map((x) => addPrefix(x));
 
   const missingInWithType = definedRuleNames.filter((ruleName) => {
     const dropped = dropPrefix(ruleName);

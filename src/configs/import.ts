@@ -84,6 +84,7 @@ export default function configsImport(
         "import/no-relative-packages": "error",
         "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
         "import/no-empty-named-blocks": "error",
+        "import/no-rename-default": "off",
 
         ...options.overrides,
       },

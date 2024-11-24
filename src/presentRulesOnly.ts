@@ -3,6 +3,7 @@ import type { ESLint } from "eslint";
 import type { FlatConfigItem } from "./types";
 
 function coreRuleIsPresent(ruleName: string): boolean {
+  // eslint-disable-next-line @typescript-eslint/no-deprecated -- fixme
   return eslintUnsafe.builtinRules.has(ruleName);
 }
 
@@ -34,9 +35,8 @@ function processRules(
   rules: NonNullable<FlatConfigItem["rules"]>,
   plugins: NonNullable<FlatConfigItem["plugins"]>,
 ): FlatConfigItem["rules"] {
-  const castedPlugins = plugins as Record<string, ESLint.Plugin>;
   return Object.fromEntries(
-    Object.entries(rules as Record<string, unknown>).flatMap((kv) => {
+    Object.entries(rules).flatMap((kv) => {
       const [ruleNameInConfig] = kv;
       const { pluginName, ruleName } = parseRuleId(ruleNameInConfig);
 
@@ -50,7 +50,7 @@ function processRules(
       }
 
       // プラグインを参照しているルールは、pluginsの定義に対応するプラグインにルールが存在するかを確認する
-      const plugin = castedPlugins[pluginName];
+      const plugin = plugins[pluginName];
       if (!plugin) {
         throw new Error(`pluginName: "${pluginName}" is not provided`);
       }
@@ -67,13 +67,13 @@ function processRules(
 export default function presentRulesOnly(
   configs: FlatConfigItem[],
 ): FlatConfigItem[] {
-  const plugins = configs.reduce<Record<string, unknown>>(
+  const plugins = configs.reduce<Record<string, ESLint.Plugin>>(
     (acc, { plugins }) => {
       if (!plugins) return acc;
       return { ...acc, ...plugins };
     },
     {},
-  ) as Record<string, ESLint.Plugin>;
+  );
 
   return configs.map((config) => {
     const { rules, ...rest } = config;

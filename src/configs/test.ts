@@ -47,7 +47,7 @@ function getTestPlugin(options: OptionsTestLibrary) {
         rules: {
           ...pluginVitest.rules,
           ...Object.fromEntries(
-            jestToVitest.map((key) => [key, pluginJest.rules![key]]),
+            jestToVitest.map((key) => [key, pluginJest.rules[key]]),
           ),
         },
       };
@@ -130,6 +130,16 @@ export default function configsTest(
         "test/prefer-snapshot-hint": ["error", "multi"],
         "test/prefer-expect-assertions": "off",
 
+        // stylistic
+        "test/padding-around-after-all-blocks": "off",
+        "test/padding-around-after-each-blocks": "off",
+        "test/padding-around-all": "off",
+        "test/padding-around-before-all-blocks": "off",
+        "test/padding-around-before-each-blocks": "off",
+        "test/padding-around-describe-blocks": "off",
+        "test/padding-around-expect-groups": "off",
+        "test/padding-around-test-blocks": "off",
+
         // vitestからjestに移植
         "test/prefer-to-be-falsy": "error",
         "test/prefer-to-be-object": "error",
@@ -146,6 +156,7 @@ export default function configsTest(
               "test/no-restricted-vi-methods": "off",
               "test/require-local-test-context-for-concurrent-snapshots":
                 "error",
+              "test/prefer-vi-mocked": "error",
             }
           : {}),
 
@@ -161,16 +172,6 @@ export default function configsTest(
               "test/no-done-callback": "error",
               "test/prefer-importing-jest-globals": "error",
               "test/prefer-jest-mocked": "error",
-
-              // stylistic
-              "test/padding-around-after-all-blocks": "off",
-              "test/padding-around-after-each-blocks": "off",
-              "test/padding-around-all": "off",
-              "test/padding-around-before-all-blocks": "off",
-              "test/padding-around-before-each-blocks": "off",
-              "test/padding-around-describe-blocks": "off",
-              "test/padding-around-expect-groups": "off",
-              "test/padding-around-test-blocks": "off",
             }
           : {}),
 
@@ -231,6 +232,7 @@ export default function configsTest(
       name: "berlysia:test-and-typescript",
       files: GLOB_TESTS,
       plugins: {
+        // @ts-expect-error -- TS plugins plugin type is more specialized
         "@typescript-eslint": pluginTs,
       },
       languageOptions: {
@@ -241,6 +243,7 @@ export default function configsTest(
           ...(tsConfigPath
             ? { project: tsConfigPath, tsconfigRootDir: process.cwd() }
             : {}),
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- TS plugins parserOptions type is more specialized
           ...(parserOptions as ParserOptions),
         },
       },
