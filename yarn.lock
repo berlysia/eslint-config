@@ -418,7 +418,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:~8.18.0"
     "@typescript-eslint/utils": "npm:~8.18.0"
     "@vitest/eslint-plugin": "npm:~1.1.10"
-    bumpp: "npm:9.9.1"
+    bumpp: "npm:9.9.2"
     eslint: "npm:9.17.0"
     eslint-config-flat-gitignore: "npm:0.1.2"
     eslint-config-prettier: "npm:~9.1.0"
@@ -441,7 +441,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:~5.1.0"
     eslint-plugin-testing-library: "npm:~7.0.0"
     eslint-plugin-unicorn: "npm:~56.0.1"
-    globals: "npm:~15.13.0"
+    globals: "npm:~15.14.0"
     jest: "npm:29.7.0"
     jsonc-eslint-parser: "npm:~2.4.0"
     lint-staged: "npm:15.2.11"
@@ -1851,8 +1851,8 @@ __metadata:
   linkType: hard
 
 "@vitest/eslint-plugin@npm:~1.1.10":
-  version: 1.1.16
-  resolution: "@vitest/eslint-plugin@npm:1.1.16"
+  version: 1.1.20
+  resolution: "@vitest/eslint-plugin@npm:1.1.20"
   peerDependencies:
     "@typescript-eslint/utils": ">= 8.0"
     eslint: ">= 8.57.0"
@@ -1863,7 +1863,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/609c7ffd2c2a8661e2ad9847e21816bbcc7e95ad60bc5622f3dda23e217cefa83a46acff442352fca93e52f27efd9d5a66e21b7f5aa8a852f75e76308b4649d7
+  checksum: 10/3122eeebbf8cc54dba369eb3904f8b999879aff9dc4033145de59125196d693c0a6c208a890e9207fa71b6da6408b37d03a5e0f2b5474a5af0df630c4fd0cec4
   languageName: node
   linkType: hard
 
@@ -2413,9 +2413,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bumpp@npm:9.9.1":
-  version: 9.9.1
-  resolution: "bumpp@npm:9.9.1"
+"bumpp@npm:9.9.2":
+  version: 9.9.2
+  resolution: "bumpp@npm:9.9.2"
   dependencies:
     c12: "npm:^2.0.1"
     cac: "npm:^6.7.14"
@@ -2428,7 +2428,7 @@ __metadata:
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10/dbba6d743ce59a9822368835a3af55a2109a28126b9c81e06a9a4b9266e3f1faac8985a745cf8f1f7cb85a4eca835bd2e57fbcc7b23d20c2b296ae8311280475
+  checksum: 10/18107fbb61f76eb53a920a208acb6187b647fdb43ba05c87f328e607578d5f1b9ada38fe0894859f32d0e9d439a09e9820f0a89172e5822a64b4cb90d1ca4b79
   languageName: node
   linkType: hard
 
@@ -4575,10 +4575,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:~15.13.0":
-  version: 15.13.0
-  resolution: "globals@npm:15.13.0"
-  checksum: 10/ba84d0612d516bcc1dabdd9ce66667956e1a87401fb53be6c379f8f6a04f8e6ce415b584801ae2689a90e788e89bb38adfafc854a8a50ae8e322bb4dd35a2105
+"globals@npm:~15.14.0":
+  version: 15.14.0
+  resolution: "globals@npm:15.14.0"
+  checksum: 10/e35ffbdbc024d6381efca906f67211a7bbf935db2af8c14a65155785479e28b3e475950e5933bb6b296eed54b6dcd924e25b26dbc8579b1bde9d5d25916e1c5f
   languageName: node
   linkType: hard
 
