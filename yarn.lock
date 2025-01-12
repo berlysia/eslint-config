@@ -418,7 +418,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:~8.19.0"
     "@typescript-eslint/utils": "npm:~8.19.0"
     "@vitest/eslint-plugin": "npm:~1.1.10"
-    bumpp: "npm:9.9.2"
+    bumpp: "npm:9.10.0"
     eslint: "npm:9.17.0"
     eslint-config-flat-gitignore: "npm:0.1.2"
     eslint-config-prettier: "npm:~9.1.0"
@@ -451,7 +451,7 @@ __metadata:
     ts-morph: "npm:24.0.0"
     tsup: "npm:8.3.5"
     tsx: "npm:4.19.2"
-    typescript: "npm:5.7.2"
+    typescript: "npm:5.7.3"
   peerDependencies:
     eslint: "*"
   languageName: unknown
@@ -1875,8 +1875,8 @@ __metadata:
   linkType: hard
 
 "@vitest/eslint-plugin@npm:~1.1.10":
-  version: 1.1.24
-  resolution: "@vitest/eslint-plugin@npm:1.1.24"
+  version: 1.1.25
+  resolution: "@vitest/eslint-plugin@npm:1.1.25"
   peerDependencies:
     "@typescript-eslint/utils": ">= 8.0"
     eslint: ">= 8.57.0"
@@ -1887,7 +1887,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10/2406cdfef6967495f57941c22806ad5aa768ea48734913dbe1a48c567fcaa334e00a9996e6a84bd37d29c684e56d774b34af79bc006235b522a546cb6470c5ba
+  checksum: 10/4ffad605c900996756448b3ff2b4de02698fef8566d8adb9a620bd9e93fafa53c1a8772680c070b4e9296cdd35486a3bdc7ceeb12981ea73deca2b6303f27a27
   languageName: node
   linkType: hard
 
@@ -2437,22 +2437,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bumpp@npm:9.9.2":
-  version: 9.9.2
-  resolution: "bumpp@npm:9.9.2"
+"bumpp@npm:9.10.0":
+  version: 9.10.0
+  resolution: "bumpp@npm:9.10.0"
   dependencies:
     c12: "npm:^2.0.1"
     cac: "npm:^6.7.14"
     escalade: "npm:^3.2.0"
     js-yaml: "npm:^4.1.0"
     jsonc-parser: "npm:^3.3.1"
+    package-manager-detector: "npm:^0.2.8"
     prompts: "npm:^2.4.2"
     semver: "npm:^7.6.3"
-    tinyexec: "npm:^0.3.1"
+    tinyexec: "npm:^0.3.2"
     tinyglobby: "npm:^0.2.10"
   bin:
     bumpp: bin/bumpp.js
-  checksum: 10/18107fbb61f76eb53a920a208acb6187b647fdb43ba05c87f328e607578d5f1b9ada38fe0894859f32d0e9d439a09e9820f0a89172e5822a64b4cb90d1ca4b79
+  checksum: 10/fc1b34d8e703deeb1ef7103408cff1097022082940f52a21c753760e9b3737043bac83d539784d0d0ce75bc692a18c79a5273ae77ab71511bea478154df89194
   languageName: node
   linkType: hard
 
@@ -6720,6 +6721,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"package-manager-detector@npm:^0.2.8":
+  version: 0.2.8
+  resolution: "package-manager-detector@npm:0.2.8"
+  checksum: 10/deb7c5abeed0ac88c9014230355ab79695d2a600e6361d91f55fcb67cc359e7106b04b23d22dee18af1388daed7385c3260229602a33617d0247ad86d8ab69ec
+  languageName: node
+  linkType: hard
+
 "parent-module@npm:^1.0.0":
   version: 1.0.1
   resolution: "parent-module@npm:1.0.1"
@@ -7994,6 +8002,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyexec@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "tinyexec@npm:0.3.2"
+  checksum: 10/b9d5fed3166fb1acd1e7f9a89afcd97ccbe18b9c1af0278e429455f6976d69271ba2d21797e7c36d57d6b05025e525d2882d88c2ab435b60d1ddf2fea361de57
+  languageName: node
+  linkType: hard
+
 "tinyglobby@npm:^0.2.10, tinyglobby@npm:^0.2.9":
   version: 0.2.10
   resolution: "tinyglobby@npm:0.2.10"
@@ -8236,7 +8251,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.7.2, typescript@npm:^5":
+"typescript@npm:5.7.3":
+  version: 5.7.3
+  resolution: "typescript@npm:5.7.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/6a7e556de91db3d34dc51cd2600e8e91f4c312acd8e52792f243c7818dfadb27bae677175fad6947f9c81efb6c57eb6b2d0c736f196a6ee2f1f7d57b74fc92fa
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^5":
   version: 5.7.2
   resolution: "typescript@npm:5.7.2"
   bin:
@@ -8246,7 +8271,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>":
+  version: 5.7.3
+  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 10/dc58d777eb4c01973f7fbf1fd808aad49a0efdf545528dab9b07d94fdcb65b8751742804c3057e9619a4627f2d9cc85547fdd49d9f4326992ad0181b49e61d81
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5#optional!builtin<compat/typescript>":
   version: 5.7.2
   resolution: "typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=5786d5"
   bin:
