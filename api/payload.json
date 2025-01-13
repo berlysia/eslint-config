@@ -2129,7 +2129,7 @@
         "promise/prefer-await-to-then": "error",
         "promise/valid-params": "off",
         "promise/spec-only": "error",
-        "promise/prefer-catch": "error"
+        "promise/prefer-catch": "off"
       },
       "index": 17
     },
@@ -2220,8 +2220,6 @@
           }
         ],
         "@typescript-eslint/no-invalid-void-type": "error",
-        "no-loss-of-precision": "error",
-        "@typescript-eslint/no-loss-of-precision": "error",
         "@typescript-eslint/no-magic-numbers": "off",
         "@typescript-eslint/no-misused-new": "error",
         "@typescript-eslint/no-namespace": "error",
@@ -2244,13 +2242,11 @@
         "@typescript-eslint/no-use-before-define": "off",
         "no-useless-constructor": "off",
         "@typescript-eslint/no-useless-constructor": "error",
-        "@typescript-eslint/no-var-requires": "error",
         "@typescript-eslint/prefer-as-const": "error",
         "@typescript-eslint/prefer-for-of": "error",
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/prefer-literal-enum-member": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
-        "@typescript-eslint/prefer-ts-expect-error": "error",
         "@typescript-eslint/triple-slash-reference": [
           "error",
           {
@@ -13884,7 +13880,7 @@
     }
   ],
   "meta": {
-    "lastUpdate": 1736736928508,
+    "lastUpdate": 1736737000611,
     "basePath": "",
     "configPath": ""
   }
