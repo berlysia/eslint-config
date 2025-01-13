@@ -29,6 +29,7 @@ export default function configsPromise(
         "promise/prefer-await-to-then": "error",
         "promise/valid-params": "off", // in favor of TypeScript
         "promise/spec-only": "error",
+        "promise/prefer-catch": "off",
 
         ...options.overrides,
       },
