@@ -195,8 +195,6 @@ export const nonTypeAwareRules: Rules = {
       { capIsConstructor: false },
     ],
     "@typescript-eslint/no-invalid-void-type": "error",
-    "no-loss-of-precision": "error",
-    "@typescript-eslint/no-loss-of-precision": "error",
     "@typescript-eslint/no-magic-numbers": "off",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-namespace": "error",
@@ -219,13 +217,11 @@ export const nonTypeAwareRules: Rules = {
     "@typescript-eslint/no-use-before-define": "off", // 完全に理解しているので不要
     "no-useless-constructor": "off",
     "@typescript-eslint/no-useless-constructor": "error",
-    "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/prefer-as-const": "error",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-function-type": "error",
     "@typescript-eslint/prefer-literal-enum-member": "error",
     "@typescript-eslint/prefer-namespace-keyword": "error",
-    "@typescript-eslint/prefer-ts-expect-error": "error",
     "@typescript-eslint/triple-slash-reference": [
       "error",
       { path: "never", types: "never", lib: "never" },
