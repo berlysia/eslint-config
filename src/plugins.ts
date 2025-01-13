@@ -39,7 +39,6 @@ assertPlugin(pluginJestDomRaw, "eslint-plugin-jest-dom");
 export const pluginJestDom = pluginJestDomRaw;
 
 import pluginReactRaw from "eslint-plugin-react";
-// @ts-expect-error -- something wrong
 assertPlugin(pluginReactRaw, "eslint-plugin-react");
 export const pluginReact = pluginReactRaw;
 

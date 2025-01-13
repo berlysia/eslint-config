@@ -13,11 +13,15 @@ Organization approach is based on https://github.com/antfu/eslint-config ❤
 ## Install
 
 ```sh
-$ yarn add --dev eslint @berlysia/eslint-config
+npm install --save-dev eslint @berlysia/eslint-config
 ```
 
 ```sh
-$ npm install --save-dev eslint @berlysia/eslint-config
+yarn add --dev eslint @berlysia/eslint-config
+```
+
+```sh
+pnpm add --dev eslint @berlysia/eslint-config
 ```
 
 ## Config
