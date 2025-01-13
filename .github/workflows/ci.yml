@@ -18,13 +18,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
-      - run: yarn install --frozen-lockfile
+          cache: "pnpm"
+      - run: pnpm install
         env:
           CI: true
-      - run: yarn ci
+      - run: pnpm run ci
         env:
           CI: true

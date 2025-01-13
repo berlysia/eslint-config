@@ -10,28 +10,28 @@
     "stub": "tsup 'src/**' --format esm",
     "dev": "tsup 'src/**' --format esm,cjs --watch & eslint-flat-config-viewer",
     "clean": "node -e 'fs.rmSync(\"dist\", {recursive:true, force:true})'",
-    "lint": "yarn run clean && yarn run stub && yarn run lint:eslint && yarn run lint:prettier && yarn run lint:verify-plugins",
-    "nostub:lint": "yarn run lint:eslint && yarn run lint:prettier && yarn run lint:verify-plugins",
+    "lint": "$npm_execpath run clean && $npm_execpath run stub && $npm_execpath run lint:eslint && $npm_execpath run lint:prettier && $npm_execpath run lint:verify-plugins",
+    "nostub:lint": "$npm_execpath run lint:eslint && $npm_execpath run lint:prettier && $npm_execpath run lint:verify-plugins",
     "lint:eslint": "eslint './**/*.{js,ts}'",
     "lint:prettier": "prettier . --check",
     "lint:verify-plugins": "tsx ./scripts/verify/index.ts",
     "lint:type": "tsc",
-    "fix": "yarn run clean && yarn run stub && yarn run fix:eslint && yarn run fix:prettier && yarn run fix:verify-plugins",
-    "fix:eslint": "yarn run lint:eslint --fix",
+    "fix": "$npm_execpath run clean && $npm_execpath run stub && $npm_execpath run fix:eslint && $npm_execpath run fix:prettier && $npm_execpath run fix:verify-plugins",
+    "fix:eslint": "$npm_execpath run lint:eslint --fix",
     "fix:prettier": "prettier . --write",
     "fix:verify-plugins": "tsx ./scripts/verify/index.ts --fix",
     "format": "prettier '*.{json,md}'",
     "test:prettier": "eslint-config-prettier src/index.ts",
-    "test": "yarn run clean && yarn run stub && yarn run test:prettier",
-    "nostub:test": "yarn run test:prettier",
-    "projtest:tsproj": "yarn workspace tsproject lint",
-    "projtest:jsproj": "yarn workspace jsproject lint",
-    "projtest": "yarn run build && yarn run projtest:jsproj && yarn run projtest:tsproj",
-    "ci": "yarn run build && yarn run nostub:lint && yarn run nostub:test && yarn run projtest:jsproj && yarn run projtest:tsproj",
+    "test": "$npm_execpath run clean && $npm_execpath run stub && $npm_execpath run test:prettier",
+    "nostub:test": "$npm_execpath run test:prettier",
+    "projtest:tsproj": "$npm_execpath workspace tsproject lint",
+    "projtest:jsproj": "$npm_execpath workspace jsproject lint",
+    "projtest": "$npm_execpath run build && $npm_execpath run projtest:jsproj && $npm_execpath run projtest:tsproj",
+    "ci": "$npm_execpath run build && $npm_execpath run nostub:lint && $npm_execpath run nostub:test && $npm_execpath run projtest:jsproj && $npm_execpath run projtest:tsproj",
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
-    "release": "yarn run ci && bumpp",
-    "publish": "yarn npm publish --access public",
-    "publish:beta": "yarn npm publish --access public --tag beta"
+    "release": "$npm_execpath run ci && bumpp",
+    "publish": "$npm_execpath npm publish --access public",
+    "publish:beta": "$npm_execpath npm publish --access public --tag beta"
   },
   "workspaces": [
     "tests/jsproject",
@@ -132,7 +132,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "yarn@4.6.0",
+  "packageManager": "pnpm@10.0.0",
   "peerDependencies": {
     "eslint": "*"
   }
