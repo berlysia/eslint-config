@@ -93,6 +93,9 @@ importers:
       '@types/jest':
         specifier: 29.5.14
         version: 29.5.14
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.10.5
       bumpp:
         specifier: 9.10.0
         version: 9.10.0
@@ -135,6 +138,9 @@ importers:
 
   tests/jsproject:
     devDependencies:
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
       eslint:
         specifier: ^9
         version: 9.17.0(jiti@2.4.2)
@@ -144,6 +150,9 @@ importers:
 
   tests/tsproject:
     devDependencies:
+      '@jest/globals':
+        specifier: ^29.7.0
+        version: 29.7.0
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.14
