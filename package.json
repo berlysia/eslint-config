@@ -31,7 +31,10 @@
     "prepare": "git config --local core.hooksPath .githooks && echo 'githooks installed' || echo 'githooks install failed'",
     "release": "$npm_execpath run ci && bumpp",
     "publish": "$npm_execpath npm publish --access public",
-    "publish:beta": "$npm_execpath npm publish --access public --tag beta"
+    "publish:beta": "$npm_execpath npm publish --access public --tag beta",
+    "docs:build": "config-inspector build --base /eslint-config/",
+    "docs:deploy": "gh-pages --dist .eslint-config-inspector --nojekyll",
+    "docs": "$npm_execpath run docs:build && $npm_execpath run docs:deploy"
   },
   "workspaces": [
     "tests/jsproject",
@@ -107,6 +110,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.26.5",
+    "@eslint/config-inspector": "^0.7.1",
     "@types/eslint": "9.6.1",
     "@types/jest": "29.5.14",
     "@types/node": "^22.10.5",
@@ -115,6 +119,7 @@
     "eslint-define-config": "2.1.0",
     "eslint-find-rules": "4.2.0",
     "eslint-flat-config-viewer": "0.1.20",
+    "gh-pages": "^6.3.0",
     "jest": "29.7.0",
     "lint-staged": "15.3.0",
     "prettier": "3.4.2",

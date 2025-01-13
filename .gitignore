@@ -1,5 +1,6 @@
 dist
 mise.local.toml
+.eslint-config-inspector
 
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
