@@ -109,7 +109,7 @@
     "local-pkg": "~1.0.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "7.26.5",
+    "@babel/eslint-parser": "7.26.8",
     "@eslint/config-inspector": "0.7.1",
     "@types/eslint": "9.6.1",
     "@types/jest": "29.5.14",
