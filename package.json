@@ -104,9 +104,9 @@
     "eslint-plugin-react-hooks": "~5.1.0",
     "eslint-plugin-testing-library": "~7.1.1",
     "eslint-plugin-unicorn": "~56.0.1",
-    "globals": "~15.14.0",
+    "globals": "~15.15.0",
     "jsonc-eslint-parser": "~2.4.0",
-    "local-pkg": "~1.0.0"
+    "local-pkg": "~1.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.26.10",
@@ -121,13 +121,13 @@
     "eslint-flat-config-viewer": "0.1.20",
     "gh-pages": "6.3.0",
     "jest": "29.7.0",
-    "lint-staged": "15.4.3",
+    "lint-staged": "15.5.0",
     "prettier": "3.5.3",
     "terminal-link": "3.0.0",
-    "ts-morph": "25.0.0",
-    "tsup": "8.3.6",
-    "tsx": "4.19.2",
-    "typescript": "5.7.3"
+    "ts-morph": "25.0.1",
+    "tsup": "8.4.0",
+    "tsx": "4.19.3",
+    "typescript": "5.8.2"
   },
   "lint-staged": {
     "*.{js,ts}": [
@@ -138,7 +138,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.1.0",
+  "packageManager": "pnpm@10.7.0",
   "peerDependencies": {
     "eslint": "*"
   }
