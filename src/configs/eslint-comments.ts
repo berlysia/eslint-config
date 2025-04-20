@@ -24,7 +24,10 @@ export default function configsComments(
         "eslint-comments/no-unused-disable": "error",
         "eslint-comments/no-unused-enable": "error",
         "eslint-comments/no-use": "off",
-        "eslint-comments/require-description": "error",
+        "eslint-comments/require-description": [
+          "error",
+          { ignore: ["eslint-enable"] },
+        ],
 
         ...options.overrides,
       },
