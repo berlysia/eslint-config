@@ -54,6 +54,7 @@ export const typeAwareRules: Rules = {
       },
     ],
     "@typescript-eslint/no-base-to-string": "error",
+    "no-void": "off", // no-floating-promises で void を使うので無効化
     "@typescript-eslint/no-floating-promises": "error",
     "@typescript-eslint/no-for-in-array": "error",
     "@typescript-eslint/no-implied-eval": "error",
