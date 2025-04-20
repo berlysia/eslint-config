@@ -115,7 +115,7 @@
     "@types/jest": "29.5.14",
     "@types/node": "22.14.1",
     "bumpp": "9.11.1",
-    "eslint": "9.22.0",
+    "eslint": "9.25.0",
     "eslint-define-config": "2.1.0",
     "eslint-find-rules": "4.2.0",
     "eslint-flat-config-viewer": "0.1.20",
