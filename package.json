@@ -82,9 +82,9 @@
   "author": "berlysia",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "~8.35.0",
-    "@typescript-eslint/parser": "~8.35.0",
-    "@typescript-eslint/utils": "~8.35.0",
+    "@typescript-eslint/eslint-plugin": "~8.36.0",
+    "@typescript-eslint/parser": "~8.36.0",
+    "@typescript-eslint/utils": "~8.36.0",
     "@vitest/eslint-plugin": "~1.1.10",
     "eslint-config-flat-gitignore": "1.0.0",
     "eslint-config-prettier": "~9.1.0",
