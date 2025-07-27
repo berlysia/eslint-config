@@ -112,7 +112,7 @@
     "@babel/eslint-parser": "7.28.0",
     "@eslint/config-inspector": "0.7.1",
     "@types/eslint": "9.6.1",
-    "@types/jest": "29.5.14",
+    "@types/jest": "30.0.0",
     "@types/node": "22.16.5",
     "bumpp": "9.11.1",
     "eslint": "9.26.0",
