@@ -148,6 +148,8 @@ export const typeAwareRules: Rules = {
     "@typescript-eslint/no-deprecated": "error",
     "@typescript-eslint/no-unsafe-type-assertion": "error",
     "@typescript-eslint/related-getter-setter-pairs": "error",
+    "@typescript-eslint/no-misused-spread": "error",
+    "@typescript-eslint/no-unnecessary-type-conversion": "error",
   },
 };
 

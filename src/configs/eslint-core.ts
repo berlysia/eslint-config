@@ -245,6 +245,8 @@ export default function configsCore(
         "no-new-native-nonconstructor": "error",
         "no-object-constructor": "error",
         "no-useless-assignment": "error",
+        "no-unassigned-vars": "error",
+        "preserve-caught-error": "error",
 
         ...options.overrides,
       },

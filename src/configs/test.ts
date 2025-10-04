@@ -157,6 +157,19 @@ export default function configsTest(
               "test/require-local-test-context-for-concurrent-snapshots":
                 "error",
               "test/prefer-vi-mocked": "error",
+              "test/hoisted-apis-on-top": "error",
+              "test/consistent-vitest-vi": "error",
+              "test/prefer-describe-function-title": "off",
+              "test/prefer-strict-boolean-matchers": "error",
+              "test/require-mock-type-parameters": "error",
+              "test/no-importing-vitest-globals": "off",
+              "test/prefer-importing-vitest-globals": "error",
+              "test/prefer-called-once": "error",
+              "test/prefer-called-times": "error",
+              "test/prefer-expect-type-of": "error",
+              "test/warn-todo": "warn",
+              "test/prefer-import-in-mock": "error",
+              "test/prefer-called-exactly-once-with": "error",
             }
           : {}),
 
