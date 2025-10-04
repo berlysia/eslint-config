@@ -1,0 +1,715 @@
+# ESLint v7.2.0 新規ルール設定レビュー
+# 既存コードベースの特徴を考慮した推奨設定
+
+analysis_date: "2025-10-04"
+codebase_characteristics:
+  - "TypeScript優先（any型禁止）"
+  - "ES Modules使用"
+  - "トップレベルawait不使用"
+  - "null/undefinedは `== null` でチェック"
+  - "JSDocは最小限（TypeScript型定義優先）"
+  - "配列メソッド（reverse/sort）は必要に応じて使用"
+
+plugins:
+  eslint-plugin-unicorn:
+    version: "61.0.2"
+    existing_policy: "実用的なルールはerror、スタイリスティックすぎるものはoff"
+    rules:
+      - name: "unicorn/consistent-assert"
+        current: "off"
+        recommended: "off"
+        reason: "アサーションスタイルの統一を強制するが、このプロジェクトではTypeScriptの型アサーションとassert関数を使い分けており、柔軟性を保つべき"
+        fixable: false
+        impact: "low"
+
+      - name: "unicorn/consistent-date-clone"
+        current: "off"
+        recommended: "error"
+        reason: "日付クローンの一貫性は重要。new Date(date)とstructuredClone(date)の使い分けを統一すべき"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-accessor-recursion"
+        current: "off"
+        recommended: "error"
+        reason: "getter/setter内での同名プロパティアクセスは無限ループの原因。明確なバグパターン"
+        fixable: false
+        impact: "high"
+
+      - name: "unicorn/no-array-reverse"
+        current: "off"
+        recommended: "off"
+        reason: "Array#reverse()の使用を完全に禁止するのは制限が厳しすぎる。既存コードでも使用している可能性がある"
+        fixable: false
+        impact: "medium"
+
+      - name: "unicorn/no-array-sort"
+        current: "off"
+        recommended: "off"
+        reason: "Array#sort()の使用を完全に禁止するのは制限が厳しすぎる。既存コードでも使用している可能性がある"
+        fixable: false
+        impact: "medium"
+
+      - name: "unicorn/no-instanceof-builtins"
+        current: "off"
+        recommended: "error"
+        reason: "Array.isArray()などの専用メソッドの方が型安全。instanceof Arrayは誤りやすい"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-named-default"
+        current: "off"
+        recommended: "error"
+        reason: "import { default as foo }は冗長。import fooを使うべき"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-unnecessary-array-flat-depth"
+        current: "off"
+        recommended: "error"
+        reason: "flat(1)は冗長（デフォルトが1）。コードの明確性向上"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-unnecessary-array-splice-count"
+        current: "off"
+        recommended: "error"
+        reason: "splice(index, Infinity)の代わりにsplice(index)を推奨。より簡潔"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-unnecessary-slice-end"
+        current: "off"
+        recommended: "error"
+        reason: "slice(0, array.length)は冗長。slice(0)で十分"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/no-useless-error-capture-stack-trace"
+        current: "off"
+        recommended: "error"
+        reason: "Node.js固有のError.captureStackTrace()の不要な使用を検出。V8では自動的にスタックトレースが記録される"
+        fixable: false
+        impact: "low"
+
+      - name: "unicorn/prefer-bigint-literals"
+        current: "off"
+        recommended: "error"
+        reason: "BigIntリテラル(123n)の方が簡潔で意図が明確。自動修正可能で影響も小さい"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/prefer-class-fields"
+        current: "off"
+        recommended: "off"
+        reason: "既存コードは伝統的なコンストラクタスタイル。クラスフィールド構文への移行は破壊的変更"
+        fixable: true
+        impact: "high"
+
+      - name: "unicorn/prefer-classlist-toggle"
+        current: "off"
+        recommended: "error"
+        reason: "classList.toggle()の方が簡潔で読みやすい。DOM操作の改善"
+        fixable: true
+        impact: "low"
+
+      - name: "unicorn/prefer-import-meta-properties"
+        current: "off"
+        recommended: "error"
+        reason: "import.meta.envやimport.meta.urlの使用を推奨。ESM環境での適切なAPI使用を促進"
+        fixable: false
+        impact: "medium"
+        configuration_note: |
+          ESM環境でない場合（CommonJS等）は無効化：
+          {
+            files: ["**/*.cjs", "**/*.cts"],
+            rules: {
+              "unicorn/prefer-import-meta-properties": "off"
+            }
+          }
+
+      - name: "unicorn/prefer-single-call"
+        current: "off"
+        recommended: "warn"
+        reason: "メソッドチェーンを1回の呼び出しに統一することを推奨。可読性とのトレードオフがあるため警告レベル"
+        fixable: false
+        impact: "low"
+
+      - name: "unicorn/require-module-attributes"
+        current: "off"
+        recommended: "off"
+        reason: "import attributesはまだ実験的機能（JSON/CSS modules）。本番利用は時期尚早"
+        fixable: false
+        impact: "low"
+
+      - name: "unicorn/require-module-specifiers"
+        current: "off"
+        recommended: "error"
+        reason: "ESM環境では拡張子が必須。Node.jsでTypeScript直接実行する場合も.ts拡張子が必須となる。モジュール解決の明示性を向上"
+        fixable: false
+        impact: "medium"
+        configuration_note: |
+          ブラウザ向けビルド環境やCJSで管理する場合はオーバーライドで無効化：
+
+          // ブラウザ向けビルド環境（bundlerが拡張子を解決）
+          {
+            files: ["src/browser/**/*.ts", "src/components/**/*.tsx"],
+            rules: {
+              "unicorn/require-module-specifiers": "off"
+            }
+          }
+
+          // CommonJS環境
+          {
+            files: ["**/*.cjs", "**/*.cts"],
+            rules: {
+              "unicorn/require-module-specifiers": "off"
+            }
+          }
+
+          // Node.jsで直接実行しないビルド成果物
+          {
+            files: ["dist/**/*.js"],
+            rules: {
+              "unicorn/require-module-specifiers": "off"
+            }
+          }
+
+  eslint-plugin-jest:
+    version: "29.0.1"
+    existing_policy: "実用的なルールはerror"
+    note: "testLibrary: 'jest'の場合のみ適用"
+    rules:
+      - name: "test/prefer-ending-with-an-expect"
+        current: "off"
+        recommended: "off"
+        reason: "テストが必ずexpectで終わることを強制するが、setup/teardownやhelper関数では不要。false positiveが多い"
+        fixable: false
+        impact: "medium"
+        already_configured: true
+
+  eslint-plugin-jsdoc:
+    version: "60.8.0"
+    existing_policy: "ほとんどoff（TypeScript型定義優先）"
+    rules:
+      - name: "jsdoc/escape-inline-tags"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー。TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/prefer-import-tag"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/reject-any-type"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript側で@typescript-eslint/no-explicit-anyを使用。JSDocで重複チェック不要"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/reject-function-type"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript側で型チェック済み。JSDocで重複チェック不要"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-next-description"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-next-type"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-tags"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-template-description"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-throws-description"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-throws-type"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-yields-description"
+        current: "off"
+        recommended: "off"
+        reason: "JSDocをほとんど使用しないポリシー"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/require-yields-type"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "jsdoc/type-formatting"
+        current: "off"
+        recommended: "off"
+        reason: "TypeScript型定義を優先"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+  eslint-markdown:
+    version: "7.3.0"
+    existing_policy: "すべてoff（Markdownコード例の自由度を保つ）"
+    note: "eslint-plugin-markdown (5.1.0)から@eslint/markdown (7.3.0)に移行"
+    rules:
+      - name: "markdown/fenced-code-language"
+        current: "off"
+        recommended: "off"
+        reason: "コード例で言語指定なしのブロックを使いたい場合がある"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/heading-increment"
+        current: "off"
+        recommended: "off"
+        reason: "見出しレベルの飛ばしを許容（ドキュメント構造の柔軟性）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-bare-urls"
+        current: "off"
+        recommended: "off"
+        reason: "生URLも許容（簡潔性優先）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-duplicate-definitions"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-duplicate-headings"
+        current: "off"
+        recommended: "off"
+        reason: "同名の見出しを許容（セクション分けの柔軟性）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-empty-definitions"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-empty-images"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-empty-links"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-html"
+        current: "off"
+        recommended: "off"
+        reason: "HTMLタグの使用を許容（表現の柔軟性）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-invalid-label-refs"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-missing-atx-heading-space"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-missing-label-refs"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-missing-link-fragments"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-multiple-h1"
+        current: "off"
+        recommended: "off"
+        reason: "複数のH1を許容（ドキュメント構造の柔軟性）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-reference-like-urls"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-reversed-media-syntax"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-space-in-emphasis"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/no-unused-definitions"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/require-alt-text"
+        current: "off"
+        recommended: "off"
+        reason: "画像の代替テキストを強制しない（柔軟性優先）"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+      - name: "markdown/table-column-count"
+        current: "off"
+        recommended: "off"
+        reason: "Markdownドキュメントの自由度を保つ"
+        fixable: false
+        impact: "low"
+        already_configured: true
+
+  eslint-plugin-n:
+    version: "17.23.1"
+    existing_policy: "実用的なルールはerror"
+    rules:
+      - name: "node/no-top-level-await"
+        current: "off"
+        recommended: "error"
+        reason: "ライブラリコードではトップレベルawaitを禁止すべき（利用側の制約になる）。スクリプトファイルでは個別にoffオーバーライド推奨"
+        fixable: false
+        impact: "medium"
+        already_configured: true
+        configuration_note: |
+          スクリプトファイルでトップレベルawaitを許可する場合は、以下のようなオーバーライド設定を追加：
+          {
+            files: ["scripts/**/*.ts", "scripts/**/*.js"],
+            rules: {
+              "node/no-top-level-await": "off"
+            }
+          }
+
+  eslint-plugin-react-hooks:
+    version: "6.1.1"
+    existing_policy: "基本ルールのみerror、実験的ルールはすべてoff"
+    note: "React Compiler関連の実験的ルール24個"
+    rules:
+      - name: "react-hooks/hooks"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール。安定版ドキュメント未提供"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/capitalized-calls"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/static-components"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/use-memo"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/component-hook-factories"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/preserve-manual-memoization"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/incompatible-library"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/immutability"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/globals"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/refs"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/memoized-effect-dependencies"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/set-state-in-effect"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/no-deriving-state-in-effects"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/error-boundaries"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/purity"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/set-state-in-render"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/invariant"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/todo"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/syntax"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/unsupported-syntax"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/config"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/gating"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/rule-suppression"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/automatic-effect-dependencies"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/fire"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+      - name: "react-hooks/fbt"
+        current: "off"
+        recommended: "off"
+        reason: "React Compiler用の実験的ルール"
+        fixable: false
+        impact: "unknown"
+        already_configured: true
+
+  eslint-plugin-import-x:
+    version: "4.16.1"
+    existing_policy: "実用的なルールはerror、誤検知が多いものはoff"
+    rules:
+      - name: "import/prefer-namespace-import"
+        current: "off"
+        recommended: "off"
+        reason: "名前空間インポート（import * as foo）を強制するが、個別インポートの方が tree shaking に有利。プロジェクトの判断に委ねる"
+        fixable: false
+        impact: "medium"
+        already_configured: true
+        decision_required: true
+        decision_criteria: "名前空間インポートを標準化したいか？tree shakingとのトレードオフを考慮"
+
+summary:
+  total_rules: 78
+  immediate_enable_recommended: 15
+  keep_off_recommended: 62
+  requires_decision: 1
