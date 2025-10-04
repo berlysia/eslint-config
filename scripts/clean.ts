@@ -15,10 +15,7 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
 1. 操作した結果のファイルを書きだす
 */
 
-  const configsDir = path.resolve(
-    path.dirname(url.fileURLToPath(import.meta.url)),
-    "../src/configs",
-  );
+  const configsDir = path.resolve(import.meta.dirname, "../src/configs");
   const configFiles = fs.readdirSync(configsDir);
 
   for (const configFile of configFiles) {
