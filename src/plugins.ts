@@ -42,7 +42,6 @@ import pluginReactRaw from "eslint-plugin-react";
 assertPlugin(pluginReactRaw, "eslint-plugin-react");
 export const pluginReact = pluginReactRaw;
 
-// @ts-expect-error -- no type definition
 import pluginReactHooksRaw from "eslint-plugin-react-hooks";
 assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
 export const pluginReactHooks = pluginReactHooksRaw;
@@ -60,9 +59,8 @@ import pluginUnicornRaw from "eslint-plugin-unicorn";
 assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
 export const pluginUnicorn = pluginUnicornRaw;
 
-// @ts-expect-error -- no type definition
-import pluginMarkdownRaw from "eslint-plugin-markdown";
-assertPlugin(pluginMarkdownRaw, "eslint-plugin-markdown");
+import pluginMarkdownRaw from "@eslint/markdown";
+assertPlugin(pluginMarkdownRaw, "@eslint/markdown");
 export const pluginMarkdown = pluginMarkdownRaw;
 
 export { default as pluginJsdoc } from "eslint-plugin-jsdoc";
@@ -92,7 +90,6 @@ export * as parserTs from "@typescript-eslint/parser";
 
 export * as parserJsonc from "jsonc-eslint-parser";
 
-// @ts-expect-error -- no type definition
 export { default as configPrettier } from "eslint-config-prettier";
 
 export { default as configFlatGitIgnore } from "eslint-config-flat-gitignore";

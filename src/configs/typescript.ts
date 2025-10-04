@@ -1,4 +1,4 @@
-import type { ParserOptions } from "eslint-define-config";
+import type { ParserOptions } from "@typescript-eslint/parser";
 import { GLOB_DTS, GLOB_TS, GLOB_TSX } from "../globs";
 import { parserTs, pluginImport, pluginTs } from "../plugins";
 import type {

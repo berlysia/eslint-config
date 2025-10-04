@@ -1,8 +1,7 @@
 import type { ParserOptions } from "@typescript-eslint/parser";
-import type { Linter } from "@typescript-eslint/utils/ts-eslint";
-import type { FlatESLintConfig } from "eslint-define-config";
+import type { FlatConfig, Linter } from "@typescript-eslint/utils/ts-eslint";
 
-export type FlatConfigItem = FlatESLintConfig & {
+export type FlatConfigItem = FlatConfig.Config & {
   name?: string;
 };
 

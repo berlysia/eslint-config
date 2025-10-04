@@ -1,4 +1,4 @@
-import type { ParserOptions } from "eslint-define-config";
+import type { ParserOptions } from "@typescript-eslint/parser";
 import { GLOB_TESTS } from "../globs";
 import {
   parserTs,
@@ -185,6 +185,7 @@ export default function configsTest(
               "test/no-done-callback": "error",
               "test/prefer-importing-jest-globals": "error",
               "test/prefer-jest-mocked": "error",
+              "test/prefer-ending-with-an-expect": "off",
             }
           : {}),
 

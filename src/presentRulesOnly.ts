@@ -1,5 +1,5 @@
 import eslintUnsafe from "eslint/use-at-your-own-risk";
-import type { ESLint } from "eslint";
+import type { FlatConfig } from "@typescript-eslint/utils/ts-eslint";
 import type { FlatConfigItem } from "./types";
 
 function coreRuleIsPresent(ruleName: string): boolean {
@@ -67,7 +67,7 @@ function processRules(
 export default function presentRulesOnly(
   configs: FlatConfigItem[],
 ): FlatConfigItem[] {
-  const plugins = configs.reduce<Record<string, ESLint.Plugin>>(
+  const plugins = configs.reduce<Record<string, FlatConfig.Plugin>>(
     (acc, { plugins }) => {
       if (!plugins) return acc;
       return { ...acc, ...plugins };

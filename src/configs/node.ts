@@ -51,6 +51,7 @@ export default function configsNode(
         "node/process-exit-as-throw": "error",
         "node/prefer-node-protocol": "error",
         "node/hashbang": "error",
+        "node/no-top-level-await": "off",
 
         ...options.overrides,
       },

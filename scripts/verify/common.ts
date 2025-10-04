@@ -47,7 +47,10 @@ function verifier(
     }
     for (const ruleName of Object.keys(plugin.rules)) {
       const ruleNameForConfiguration = `${pluginName}/${ruleName}`;
-      const rule = plugin.rules[ruleName];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- FlatConfig.Plugin型のrulesプロパティからの取得
+      const rule = plugin.rules[ruleName] as
+        | { meta?: { deprecated?: boolean; docs?: { url?: string } } }
+        | undefined;
       const ruleIsConfigured = Boolean(rules[ruleNameForConfiguration]);
       const ruleIsDeprecated = Boolean(
         typeof rule === "object" && rule.meta?.deprecated,

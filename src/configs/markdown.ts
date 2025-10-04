@@ -14,10 +14,7 @@ export default function configsMarkdown(
     {
       name: "berlysia:markdown:setup",
       plugins: {
-        markdown: {
-          rules: {},
-          ...pluginMarkdown,
-        },
+        markdown: pluginMarkdown,
         node: pluginNode,
         "@typescript-eslint": pluginTs,
         unicorn: pluginUnicorn,
@@ -57,6 +54,27 @@ export default function configsMarkdown(
         "@typescript-eslint/no-var-requires": "off",
 
         "unicorn/prefer-module": "off",
+
+        "markdown/fenced-code-language": "off",
+        "markdown/heading-increment": "off",
+        "markdown/no-bare-urls": "off",
+        "markdown/no-duplicate-definitions": "off",
+        "markdown/no-invalid-label-refs": "off",
+        "markdown/no-missing-atx-heading-space": "off",
+        "markdown/no-missing-label-refs": "off",
+        "markdown/no-missing-link-fragments": "off",
+        "markdown/no-multiple-h1": "off",
+        "markdown/no-reference-like-urls": "off",
+        "markdown/no-reversed-media-syntax": "off",
+        "markdown/no-space-in-emphasis": "off",
+        "markdown/no-unused-definitions": "off",
+        "markdown/require-alt-text": "off",
+        "markdown/table-column-count": "off",
+        "markdown/no-duplicate-headings": "off",
+        "markdown/no-empty-definitions": "off",
+        "markdown/no-empty-images": "off",
+        "markdown/no-empty-links": "off",
+        "markdown/no-html": "off",
 
         ...options.overrides,
       },
