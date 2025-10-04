@@ -34,7 +34,8 @@
     "publish:beta": "$npm_execpath publish --access public --tag beta",
     "docs:build": "config-inspector build --base /eslint-config/",
     "docs:deploy": "gh-pages --dist .eslint-config-inspector --nojekyll",
-    "docs": "$npm_execpath run docs:build && $npm_execpath run docs:deploy"
+    "docs": "$npm_execpath run docs:build && $npm_execpath run docs:deploy",
+    "renovate:replace-package": "tsx scripts/renovate/replace-package.ts"
   },
   "workspaces": [
     "tests/jsproject",

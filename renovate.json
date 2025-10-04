@@ -6,7 +6,7 @@
       "matchUpdateTypes": ["replacement"],
       "postUpgradeTasks": {
         "commands": [
-          "./.renovate/replace-package-name.sh '{{{depName}}}' '{{{newName}}}'"
+          "pnpm run renovate:replace-package '{{{depName}}}' '{{{newName}}}'"
         ],
         "executionMode": "branch",
         "fileFilters": ["src/plugins.ts"]
