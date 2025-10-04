@@ -21,8 +21,11 @@ assertPlugin(pluginTsRaw, "@typescript-eslint/eslint-plugin");
 export const pluginTs = pluginTsRaw;
 
 // @ts-expect-error -- no type definition
-import pluginCommentsRaw from "eslint-plugin-eslint-comments";
-assertPlugin(pluginCommentsRaw, "eslint-plugin-eslint-comments");
+import pluginCommentsRaw from "@eslint-community/eslint-plugin-eslint-comments";
+assertPlugin(
+  pluginCommentsRaw,
+  "@eslint-community/eslint-plugin-eslint-comments",
+);
 export const pluginComments = pluginCommentsRaw;
 
 import * as pluginImportRaw from "eslint-plugin-import-x";
