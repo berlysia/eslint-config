@@ -1,5 +1,10 @@
 import { GLOB_JSX, GLOB_TSX } from "../globs";
-import { pluginJsxA11y, pluginReact, pluginReactHooks } from "../plugins";
+import {
+  pluginJsxA11y,
+  pluginReact,
+  pluginReactHooks,
+  pluginReactYouMightNotNeedAnEffect,
+} from "../plugins";
 import type { FlatConfigItem, OptionsOverride } from "../types";
 
 export default function configsReact(
@@ -13,6 +18,8 @@ export default function configsReact(
         react: pluginReact,
         "react-hooks": pluginReactHooks,
         "jsx-a11y": pluginJsxA11y,
+        "react-you-might-not-need-an-effect":
+          pluginReactYouMightNotNeedAnEffect,
       },
 
       languageOptions: {
@@ -233,6 +240,20 @@ export default function configsReact(
         "jsx-a11y/role-supports-aria-props": "error",
         "jsx-a11y/scope": "error",
         "jsx-a11y/tabindex-no-positive": "error",
+
+        "react-you-might-not-need-an-effect/no-derived-state": "warn",
+        "react-you-might-not-need-an-effect/no-chain-state-updates": "warn",
+        "react-you-might-not-need-an-effect/no-event-handler": "warn",
+        "react-you-might-not-need-an-effect/no-adjust-state-on-prop-change":
+          "warn",
+        "react-you-might-not-need-an-effect/no-reset-all-state-on-prop-change":
+          "warn",
+        "react-you-might-not-need-an-effect/no-pass-live-state-to-parent":
+          "warn",
+        "react-you-might-not-need-an-effect/no-pass-data-to-parent": "warn",
+        "react-you-might-not-need-an-effect/no-initialize-state": "warn",
+        "react-you-might-not-need-an-effect/no-manage-parent": "warn",
+        "react-you-might-not-need-an-effect/no-empty-effect": "warn",
 
         ...options.overrides,
       },

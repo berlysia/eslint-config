@@ -102,6 +102,7 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-react-hooks": "6.1.1",
+    "eslint-plugin-react-you-might-not-need-an-effect": "^0.5.5",
     "eslint-plugin-testing-library": "7.11.0",
     "eslint-plugin-unicorn": "61.0.2",
     "globals": "16.4.0",

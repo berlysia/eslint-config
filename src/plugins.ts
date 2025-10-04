@@ -46,6 +46,15 @@ import pluginReactHooksRaw from "eslint-plugin-react-hooks";
 assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
 export const pluginReactHooks = pluginReactHooksRaw;
 
+// @ts-expect-error -- no type definition
+import pluginReactYouMightNotNeedAnEffectRaw from "eslint-plugin-react-you-might-not-need-an-effect";
+assertPlugin(
+  pluginReactYouMightNotNeedAnEffectRaw,
+  "eslint-plugin-react-you-might-not-need-an-effect",
+);
+export const pluginReactYouMightNotNeedAnEffect =
+  pluginReactYouMightNotNeedAnEffectRaw;
+
 import pluginNodeRaw from "eslint-plugin-n";
 assertPlugin(pluginNodeRaw, "eslint-plugin-n");
 export const pluginNode = pluginNodeRaw;
