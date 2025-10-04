@@ -1,4 +1,16 @@
 {
   "extends": ["github>berlysia/renovate-config"],
-  "ignoreDeps": ["eslint-config-flat-gitignore"]
+  "ignoreDeps": ["eslint-config-flat-gitignore"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["replacement"],
+      "postUpgradeTasks": {
+        "commands": [
+          "./.renovate/replace-package-name.sh '{{{depName}}}' '{{{newName}}}'"
+        ],
+        "executionMode": "branch",
+        "fileFilters": ["src/plugins.ts"]
+      }
+    }
+  ]
 }
