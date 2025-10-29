@@ -39,6 +39,7 @@ jobs:
         id: detect
         env:
           GITHUB_BASE_REF: ${{ github.base_ref }}
+          RENOVATE_PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           REPLACEMENT=$(pnpm exec tsx scripts/renovate/detect-replacement.ts)
           if [ -n "$REPLACEMENT" ]; then
