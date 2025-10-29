@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [opened, synchronize]
     paths:
-      - 'package.json'
+      - "package.json"
 
 permissions:
   contents: write
@@ -21,7 +21,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0  # 全履歴を取得してbase branchと比較できるように
+          fetch-depth: 0 # 全履歴を取得してbase branchと比較できるように
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -29,8 +29,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
+          node-version: "lts/*"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -65,7 +65,5 @@ jobs:
           fi
 
           git add src/plugins.ts
-          git commit -m "chore: auto-update src/plugins.ts for package replacement
-
-Automated update by GitHub Actions"
+          git commit -m "chore: auto-update src/plugins.ts for package replacement" -m "Automated update by GitHub Actions"
           git push
