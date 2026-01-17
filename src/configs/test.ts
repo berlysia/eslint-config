@@ -1,4 +1,5 @@
 import type { ParserOptions } from "@typescript-eslint/parser";
+import type { ESLint } from "eslint";
 import { GLOB_TESTS } from "../globs";
 import {
   parserTs,
@@ -70,6 +71,7 @@ export default function configsTest(
     {
       name: "berlysia:test:setup",
       plugins: {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- ESLint 9.39の型定義との互換性問題を回避
         test: {
           ...pluginTest,
           rules: {
@@ -77,7 +79,7 @@ export default function configsTest(
             ...pluginNoOnlyTests.rules,
             ...pluginJestDom.rules,
           },
-        },
+        } as ESLint.Plugin,
         "testing-library": pluginTestingLibrary,
       },
     },
