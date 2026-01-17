@@ -3,7 +3,7 @@
 # Setup required:
 # 1. Install Claude Code GitHub App: https://github.com/apps/claude
 #    (or run: claude → /install-github-app)
-# 2. Add ANTHROPIC_API_KEY to repository secrets
+# 2. Add CLAUDE_CODE_OAUTH_TOKEN to repository secrets
 # 3. Enable "Read and write permissions" for GitHub Actions
 #    (Settings → Actions → General → Workflow permissions)
 
@@ -81,7 +81,7 @@ jobs:
         if: steps.pr-info.outputs.is_bot == 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             This is a dependency update PR from ${{ steps.pr-info.outputs.pr_author }} that failed CI.
 
