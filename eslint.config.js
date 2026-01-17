@@ -9,4 +9,13 @@ const configs = berlysia(
   { ignores: ["dist/**/*", "tests/**/*"] },
 );
 
-export default configs;
+export default [
+  ...configs,
+  {
+    files: ["src/cli/index.ts"],
+    rules: {
+      "node/hashbang": "off",
+      "unicorn/prefer-top-level-await": "off",
+    },
+  },
+];

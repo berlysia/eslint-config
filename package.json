@@ -5,6 +5,9 @@
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
+  "bin": {
+    "berlysia-eslint-oxlint": "./dist/cli/index.js"
+  },
   "scripts": {
     "build": "tsup 'src/**' --format esm,cjs --dts --clean --sourcemap",
     "stub": "tsup 'src/**' --format esm",

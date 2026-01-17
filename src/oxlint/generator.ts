@@ -2,7 +2,6 @@
  * oxlint設定の生成ロジック
  */
 
-import { isPackageExists } from "local-pkg";
 import configsComments from "../configs/eslint-comments";
 import configsCore from "../configs/eslint-core";
 import configsImport from "../configs/import";
@@ -13,6 +12,7 @@ import configsReact from "../configs/react";
 import configsTest from "../configs/test";
 import configsTypeScript from "../configs/typescript";
 import configsUnicorn from "../configs/unicorn";
+import { detectDependencies } from "./detect";
 import { isNativePlugin } from "./plugin-mappings";
 import { mapRules } from "./rule-mappings";
 import type {
@@ -43,14 +43,11 @@ function collectRulesFromConfigs(
  * oxlint設定を生成
  */
 export function generateOxlintConfig(options: OxlintOptions): OxlintConfig {
+  const detected = detectDependencies();
   const {
-    typescript: useTypeScript = isPackageExists("typescript"),
-    react: useReact = isPackageExists("react"),
-    testLibrary = isPackageExists("vitest")
-      ? "vitest"
-      : isPackageExists("jest")
-        ? "jest"
-        : false,
+    typescript: useTypeScript = detected.typescript,
+    react: useReact = detected.react,
+    testLibrary = detected.testLibrary,
   } = options;
 
   const optionTypeScript =
