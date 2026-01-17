@@ -1,0 +1,172 @@
+name: Auto-fix CI Failures
+
+on:
+  workflow_run:
+    workflows: ["Node CI"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+    # Only run on failed CI runs
+    if: >
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.event == 'pull_request'
+
+    steps:
+      - name: Get PR information
+        id: pr-info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pulls = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${github.event.workflow_run.head_branch}`
+            });
+
+            if (pulls.data.length === 0) {
+              core.setFailed('No open PR found for this branch');
+              return;
+            }
+
+            const pr = pulls.data[0];
+            const author = pr.user.login;
+
+            // Check if PR is from renovate or dependabot
+            const isBot = author === 'renovate[bot]' ||
+                         author === 'dependabot[bot]' ||
+                         author.includes('renovate') ||
+                         author.includes('dependabot');
+
+            core.setOutput('pr_number', pr.number);
+            core.setOutput('pr_author', author);
+            core.setOutput('is_bot', isBot);
+            core.setOutput('branch', github.event.workflow_run.head_branch);
+            core.setOutput('sha', github.event.workflow_run.head_sha);
+
+            console.log(`PR #${pr.number} by ${author}, is_bot: ${isBot}`);
+
+      - name: Check if auto-fix should run
+        if: steps.pr-info.outputs.is_bot == 'true'
+        run: |
+          echo "Auto-fix will run for PR #${{ steps.pr-info.outputs.pr_number }}"
+          echo "Branch: ${{ steps.pr-info.outputs.branch }}"
+
+      - name: Checkout PR branch
+        if: steps.pr-info.outputs.is_bot == 'true'
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ steps.pr-info.outputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        if: steps.pr-info.outputs.is_bot == 'true'
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        if: steps.pr-info.outputs.is_bot == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        if: steps.pr-info.outputs.is_bot == 'true'
+        run: pnpm install
+
+      - name: Install Claude Code CLI
+        if: steps.pr-info.outputs.is_bot == 'true'
+        run: |
+          npm install -g @anthropic-ai/claude-code
+
+      - name: Run auto-fix with Claude Code
+        if: steps.pr-info.outputs.is_bot == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          # First, try to run CI to capture the errors
+          set +e
+          pnpm run ci 2>&1 | tee ci-output.txt
+          CI_EXIT_CODE=$?
+          set -e
+
+          if [ $CI_EXIT_CODE -eq 0 ]; then
+            echo "CI passed, no fixes needed"
+            exit 0
+          fi
+
+          echo "CI failed with exit code $CI_EXIT_CODE"
+          echo "Attempting to fix with Claude Code..."
+
+          # Create a prompt for Claude Code
+          cat > fix-prompt.txt << 'EOF'
+          The CI has failed for this dependency update PR. Please:
+          1. Analyze the CI output and error messages
+          2. Fix any linting, type checking, or test failures
+          3. Run the fixes (pnpm run fix if applicable)
+          4. Verify the fixes work by running the CI command again
+
+          CI output:
+          EOF
+
+          cat ci-output.txt >> fix-prompt.txt
+
+          # Run Claude Code to fix the issues
+          claude-code "$(cat fix-prompt.txt)" --non-interactive || true
+
+          # Try running CI again to see if it's fixed
+          pnpm run ci
+
+      - name: Commit and push fixes
+        if: steps.pr-info.outputs.is_bot == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Check if there are any changes
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "fix: auto-fix CI failures with Claude Code
+
+          Automatically fixed by GitHub Actions using Claude Code CLI.
+
+          Related PR: #${{ steps.pr-info.outputs.pr_number }}"
+
+          git push
+
+      - name: Comment on PR
+        if: steps.pr-info.outputs.is_bot == 'true' && success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr-info.outputs.pr_number }},
+              body: '🤖 Auto-fixed CI failures using Claude Code CLI. Please review the changes.'
+            });
+
+      - name: Comment on PR if fix failed
+        if: steps.pr-info.outputs.is_bot == 'true' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr-info.outputs.pr_number }},
+              body: '❌ Failed to auto-fix CI failures. Manual intervention may be required.'
+            });
