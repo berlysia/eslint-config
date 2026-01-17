@@ -60,6 +60,16 @@
         "default": "./dist/index.cjs"
       }
     },
+    "./oxlint": {
+      "import": {
+        "types": "./dist/oxlint/index.d.ts",
+        "default": "./dist/oxlint/index.js"
+      },
+      "require": {
+        "types": "./dist/oxlint/index.d.cts",
+        "default": "./dist/oxlint/index.cjs"
+      }
+    },
     "./configs/*": {
       "import": {
         "types": "./dist/configs/*.d.ts",
