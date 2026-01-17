@@ -68,86 +68,31 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: Setup pnpm
+      - name: Run Claude Code auto-fix
         if: steps.pr-info.outputs.is_bot == 'true'
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        if: steps.pr-info.outputs.is_bot == 'true'
-        uses: actions/setup-node@v4
+        uses: anthropics/claude-code-action@v1
         with:
-          node-version: 'lts/*'
-          cache: 'pnpm'
+          prompt: |
+            This is a dependency update PR from ${{ steps.pr-info.outputs.pr_author }} that failed CI.
 
-      - name: Install dependencies
-        if: steps.pr-info.outputs.is_bot == 'true'
-        run: pnpm install
+            Please investigate and fix the CI failures:
 
-      - name: Install Claude Code CLI
-        if: steps.pr-info.outputs.is_bot == 'true'
-        run: |
-          npm install -g @anthropic-ai/claude-code
+            1. Run `pnpm install` to ensure dependencies are up to date
+            2. Run `pnpm run ci` to see the specific failures
+            3. Analyze the error messages and determine the root cause
+            4. Fix the issues (this might include):
+               - Running `pnpm run fix` for auto-fixable linting/formatting issues
+               - Updating code to work with new dependency versions
+               - Fixing type errors or test failures
+            5. Verify the fixes by running `pnpm run ci` again
+            6. Commit all changes with a descriptive message
 
-      - name: Run auto-fix with Claude Code
-        if: steps.pr-info.outputs.is_bot == 'true'
+            The goal is to make the CI pass while maintaining code quality and correctness.
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: |
-          # First, try to run CI to capture the errors
-          set +e
-          pnpm run ci 2>&1 | tee ci-output.txt
-          CI_EXIT_CODE=$?
-          set -e
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          if [ $CI_EXIT_CODE -eq 0 ]; then
-            echo "CI passed, no fixes needed"
-            exit 0
-          fi
-
-          echo "CI failed with exit code $CI_EXIT_CODE"
-          echo "Attempting to fix with Claude Code..."
-
-          # Create a prompt for Claude Code
-          cat > fix-prompt.txt << 'EOF'
-          The CI has failed for this dependency update PR. Please:
-          1. Analyze the CI output and error messages
-          2. Fix any linting, type checking, or test failures
-          3. Run the fixes (pnpm run fix if applicable)
-          4. Verify the fixes work by running the CI command again
-
-          CI output:
-          EOF
-
-          cat ci-output.txt >> fix-prompt.txt
-
-          # Run Claude Code to fix the issues
-          claude-code "$(cat fix-prompt.txt)" --non-interactive || true
-
-          # Try running CI again to see if it's fixed
-          pnpm run ci
-
-      - name: Commit and push fixes
-        if: steps.pr-info.outputs.is_bot == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-
-          # Check if there are any changes
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-
-          git add -A
-          git commit -m "fix: auto-fix CI failures with Claude Code
-
-          Automatically fixed by GitHub Actions using Claude Code CLI.
-
-          Related PR: #${{ steps.pr-info.outputs.pr_number }}"
-
-          git push
-
-      - name: Comment on PR
+      - name: Comment on PR success
         if: steps.pr-info.outputs.is_bot == 'true' && success()
         uses: actions/github-script@v7
         with:
@@ -156,10 +101,10 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: ${{ steps.pr-info.outputs.pr_number }},
-              body: '🤖 Auto-fixed CI failures using Claude Code CLI. Please review the changes.'
+              body: '🤖 Auto-fixed CI failures using Claude Code. Please review the changes.'
             });
 
-      - name: Comment on PR if fix failed
+      - name: Comment on PR failure
         if: steps.pr-info.outputs.is_bot == 'true' && failure()
         uses: actions/github-script@v7
         with:

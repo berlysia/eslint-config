@@ -6,15 +6,36 @@
 
 `.github/workflows/auto-fix-ci.yml` ワークフローは、以下の処理を自動的に実行します：
 
-1. CI（`Node CI`）が失敗したことを検知
-2. 失敗したPRがRenovateまたはDependabotによるものかを確認
-3. Claude Code CLIを使用してエラーを自動修正
-4. 修正をコミット・プッシュ
-5. PRにコメントを追加
+1. **CI失敗の検知**: `Node CI`ワークフローが失敗したことを検知
+2. **ボット判定**: PRの作成者がRenovateまたはDependabotであることを確認
+3. **自動修正**: Claude Code GitHub Appを使ってエラーを分析・修正
+4. **検証**: 修正後に再度CIを実行して確認
+5. **コミット**: 変更をコミット・プッシュ
+6. **通知**: PRに修正結果をコメント
 
 ## セットアップ手順
 
-### 1. Anthropic APIキーの設定
+### 1. Claude Code GitHub Appのインストール
+
+Claude Code GitHub Appをリポジトリにインストールする必要があります：
+
+**方法A: Claude Code CLIから自動インストール（推奨）**
+
+```bash
+claude
+/install-github-app
+```
+
+**方法B: 手動インストール**
+
+1. [Claude GitHub App](https://github.com/apps/claude) にアクセス
+2. "Install" または "Configure" をクリック
+3. インストール先のリポジトリを選択
+4. 必要な権限を確認して承認
+
+**注意**: リポジトリの管理者権限が必要です
+
+### 2. Anthropic APIキーの設定
 
 このワークフローを動作させるには、Anthropic APIキーが必要です。
 
@@ -27,7 +48,7 @@
    - Secret: 作成したAPIキーを貼り付け
    - "Add secret"をクリック
 
-### 2. ワークフロー権限の確認
+### 3. ワークフロー権限の確認
 
 リポジトリの設定で、GitHub Actionsに適切な権限が付与されていることを確認してください：
 
@@ -36,7 +57,7 @@
    - "Read and write permissions"が選択されている
    - "Allow GitHub Actions to create and approve pull requests"にチェックが入っている
 
-### 3. テスト
+### 4. テスト
 
 設定が完了したら、以下の方法でテストできます：
 
@@ -61,29 +82,44 @@
 
 ### 修正プロセス
 
-1. **エラー収集**: CI実行結果を取得
-2. **Claude Code実行**: 取得したエラー情報を基にClaude Code CLIで修正を試行
-3. **検証**: 修正後、再度CIを実行して確認
-4. **コミット**: 変更があればコミット・プッシュ
-5. **通知**: PRにコメントで結果を通知
+1. **PR情報取得**: 失敗したCIに関連するPR情報を取得
+2. **ブランチチェックアウト**: PRのブランチをチェックアウト
+3. **Claude Code実行**: `anthropics/claude-code-action@v1`を使用して自動修正
+   - 依存関係のインストール
+   - CIの実行とエラー分析
+   - 自動修正の適用
+   - 修正の検証
+   - 変更のコミット
+4. **通知**: PRにコメントで結果を通知
+
+## Claude Code GitHub Appの特徴
+
+Claude Code GitHub Appを使用する利点：
+
+- **シンプルな設定**: CLIのインストールが不要
+- **統合された環境**: GitHub Actions内でシームレスに動作
+- **自動コミット**: Claude Codeが直接変更をコミット・プッシュ
+- **詳細なログ**: 修正プロセスの詳細なログが確認可能
 
 ## トラブルシューティング
 
 ### ワークフローが実行されない
 
+- Claude Code GitHub Appが正しくインストールされているか確認
 - `ANTHROPIC_API_KEY`が正しく設定されているか確認
 - ワークフロー権限が適切に設定されているか確認
 - PRの作成者がRenovateまたはDependabotであるか確認
 
 ### 修正に失敗する
 
-- Claude Code CLIのバージョンが最新であるか確認
 - エラーメッセージを確認し、手動での修正が必要な場合もあります
 - APIキーのクォータが残っているか確認
+- Claude Code GitHub Appの権限が適切に設定されているか確認
 
 ### コミットがプッシュされない
 
 - GitHub Actionsの権限設定を確認
+- Claude Code GitHub Appの権限を確認
 - ブランチ保護ルールがbotによるプッシュを許可しているか確認
 
 ## カスタマイズ
@@ -112,26 +148,43 @@ const isBot = author === 'renovate[bot]' ||
              author.includes('dependabot');
 ```
 
-### 修正コマンドの変更
+### Claude Codeへのプロンプトカスタマイズ
 
-プロジェクトに合わせて修正コマンドをカスタマイズできます：
+プロジェクトに合わせてClaude Codeへの指示をカスタマイズできます：
 
-```bash
-# 例: 特定のfixコマンドを実行
-pnpm run fix
+```yaml
+- name: Run Claude Code auto-fix
+  uses: anthropics/claude-code-action@v1
+  with:
+    prompt: |
+      カスタマイズされた指示をここに記述
 
-# 例: 型チェックのみ
-pnpm run lint:type
+      1. プロジェクト固有のコマンド実行
+      2. 特定のチェックの実施
+      3. 修正後の検証
 ```
+
+## 手動でのClaude Code実行
+
+自動化に加えて、PRに直接コメントしてClaude Codeを実行することもできます：
+
+```
+@claude このPRのCI失敗を修正してください
+```
+
+これにより、Claude Codeがインタラクティブモードで起動し、修正を試みます。
 
 ## セキュリティに関する注意
 
 - APIキーは必ずGitHub Secretsとして保存してください
 - ワークフローは信頼できるボット（Renovate、Dependabot）からのPRのみを対象としてください
 - 自動コミットの内容は必ずレビューしてください
+- Claude Code GitHub Appに付与する権限を確認してください
 
 ## 参考リンク
 
-- [Claude Code CLI Documentation](https://github.com/anthropics/claude-code)
+- [Claude Code GitHub App](https://github.com/apps/claude)
+- [anthropics/claude-code-action](https://github.com/anthropics/claude-code-action)
+- [Claude Code Documentation](https://code.claude.com/docs)
 - [GitHub Actions Workflow Syntax](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 - [Anthropic API Documentation](https://docs.anthropic.com/)
