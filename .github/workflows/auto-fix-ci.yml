@@ -1,10 +1,9 @@
 # Automatically fixes CI failures in Renovate/Dependabot PRs using Claude Code
 #
 # Setup required:
-# 1. Install Claude Code GitHub App: https://github.com/apps/claude
-#    (or run: claude → /install-github-app)
-# 2. Add CLAUDE_CODE_OAUTH_TOKEN to repository secrets
-# 3. Enable "Read and write permissions" for GitHub Actions
+# 1. Run Claude Code CLI: claude → /install-github-app
+#    This installs the GitHub App and sets up CLAUDE_CODE_OAUTH_TOKEN automatically
+# 2. Enable "Read and write permissions" for GitHub Actions
 #    (Settings → Actions → General → Workflow permissions)
 
 name: Auto-fix CI Failures
