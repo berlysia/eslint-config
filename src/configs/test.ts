@@ -170,6 +170,12 @@ export default function configsTest(
               "test/warn-todo": "warn",
               "test/prefer-import-in-mock": "error",
               "test/prefer-called-exactly-once-with": "error",
+              "test/consistent-each-for": "error",
+              "test/no-unneeded-async-expect-function": "error",
+              "test/prefer-mock-return-shorthand": "error",
+              "test/prefer-to-have-been-called-times": "error",
+              "test/require-awaited-expect-poll": "error",
+              "test/require-test-timeout": "off",
             }
           : {}),
 
