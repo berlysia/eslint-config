@@ -1,0 +1,123 @@
+# Automatically fixes CI failures in Renovate/Dependabot PRs using Claude Code
+#
+# Setup required:
+# 1. Run Claude Code CLI: claude → /install-github-app
+#    This installs the GitHub App and sets up CLAUDE_CODE_OAUTH_TOKEN automatically
+# 2. Enable "Read and write permissions" for GitHub Actions
+#    (Settings → Actions → General → Workflow permissions)
+
+name: Auto-fix CI Failures
+
+on:
+  workflow_run:
+    workflows: ["Node CI"]
+    types:
+      - completed
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+    # Only run on failed CI runs
+    if: >
+      github.event.workflow_run.conclusion == 'failure' &&
+      github.event.workflow_run.event == 'pull_request'
+
+    steps:
+      - name: Get PR information
+        id: pr-info
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pulls = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${github.event.workflow_run.head_branch}`
+            });
+
+            if (pulls.data.length === 0) {
+              core.setFailed('No open PR found for this branch');
+              return;
+            }
+
+            const pr = pulls.data[0];
+            const author = pr.user.login;
+
+            // Check if PR is from renovate or dependabot
+            const isBot = author === 'renovate[bot]' ||
+                         author === 'dependabot[bot]' ||
+                         author.includes('renovate') ||
+                         author.includes('dependabot');
+
+            core.setOutput('pr_number', pr.number);
+            core.setOutput('pr_author', author);
+            core.setOutput('is_bot', isBot);
+            core.setOutput('branch', github.event.workflow_run.head_branch);
+            core.setOutput('sha', github.event.workflow_run.head_sha);
+
+            console.log(`PR #${pr.number} by ${author}, is_bot: ${isBot}`);
+
+      - name: Check if auto-fix should run
+        if: steps.pr-info.outputs.is_bot == 'true'
+        run: |
+          echo "Auto-fix will run for PR #${{ steps.pr-info.outputs.pr_number }}"
+          echo "Branch: ${{ steps.pr-info.outputs.branch }}"
+
+      - name: Checkout PR branch
+        if: steps.pr-info.outputs.is_bot == 'true'
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ steps.pr-info.outputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Run Claude Code auto-fix
+        if: steps.pr-info.outputs.is_bot == 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            This is a dependency update PR from ${{ steps.pr-info.outputs.pr_author }} that failed CI.
+
+            Please investigate and fix the CI failures:
+
+            1. Run `pnpm install` to ensure dependencies are up to date
+            2. Run `pnpm run ci` to see the specific failures
+            3. Analyze the error messages and determine the root cause
+            4. Fix the issues (this might include):
+               - Running `pnpm run fix` for auto-fixable linting/formatting issues
+               - Updating code to work with new dependency versions
+               - Fixing type errors or test failures
+            5. Verify the fixes by running `pnpm run ci` again
+            6. Commit all changes with a descriptive message
+
+            The goal is to make the CI pass while maintaining code quality and correctness.
+
+      - name: Comment on PR success
+        if: steps.pr-info.outputs.is_bot == 'true' && success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr-info.outputs.pr_number }},
+              body: '🤖 Auto-fixed CI failures using Claude Code. Please review the changes.'
+            });
+
+      - name: Comment on PR failure
+        if: steps.pr-info.outputs.is_bot == 'true' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.pr-info.outputs.pr_number }},
+              body: '❌ Failed to auto-fix CI failures. Manual intervention may be required.'
+            });
