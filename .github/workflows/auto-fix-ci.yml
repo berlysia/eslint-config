@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Get PR information
         id: pr-info
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const pulls = await github.rest.pulls.list({
@@ -70,7 +70,7 @@ jobs:
 
       - name: Checkout PR branch
         if: steps.pr-info.outputs.is_bot == 'true'
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
         with:
           ref: ${{ steps.pr-info.outputs.branch }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -78,7 +78,7 @@ jobs:
 
       - name: Run Claude Code auto-fix
         if: steps.pr-info.outputs.is_bot == 'true'
-        uses: anthropics/claude-code-action@v1
+        uses: anthropics/claude-code-action@f64219702d7454cf29fe32a74104be6ed43dc637 # v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
@@ -100,7 +100,7 @@ jobs:
 
       - name: Comment on PR success
         if: steps.pr-info.outputs.is_bot == 'true' && success()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             github.rest.issues.createComment({
@@ -112,7 +112,7 @@ jobs:
 
       - name: Comment on PR failure
         if: steps.pr-info.outputs.is_bot == 'true' && failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             github.rest.issues.createComment({
