@@ -151,7 +151,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.34.1",
+  "packageManager": "pnpm@10.34.3",
   "peerDependencies": {
     "eslint": "*"
   }
