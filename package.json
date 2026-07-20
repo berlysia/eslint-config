@@ -134,7 +134,7 @@
     "eslint-find-rules": "5.0.0",
     "gh-pages": "6.3.0",
     "jest": "30.4.2",
-    "lint-staged": "16.4.0",
+    "lint-staged": "17.0.8",
     "prettier": "3.6.2",
     "terminal-link": "5.0.0",
     "ts-morph": "27.0.2",
