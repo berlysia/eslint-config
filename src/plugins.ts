@@ -16,7 +16,7 @@ function assertPlugin(
 }
 
 import pluginTsRaw from "@typescript-eslint/eslint-plugin";
-// @ts-expect-error -- something wrong
+// @ts-expect-error -- its legacy configs allow `parser: null`, which @eslint/core 0.17 types reject
 assertPlugin(pluginTsRaw, "@typescript-eslint/eslint-plugin");
 export const pluginTs: Plugin = pluginTsRaw;
 
@@ -29,7 +29,7 @@ assertPlugin(
 export const pluginComments: Plugin = pluginCommentsRaw;
 
 import * as pluginImportRaw from "eslint-plugin-import-x";
-// @ts-expect-error -- something wrong
+// @ts-expect-error -- its rule context type still has methods that @eslint/core 0.17 types removed
 assertPlugin(pluginImportRaw, "eslint-plugin-import-x");
 export const pluginImport: Plugin = pluginImportRaw;
 
@@ -71,7 +71,6 @@ assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
 export const pluginUnicorn: Plugin = pluginUnicornRaw;
 
 import pluginMarkdownRaw from "@eslint/markdown";
-// @ts-expect-error -- markdown plugin has incompatible types with ESLint.Plugin
 assertPlugin(pluginMarkdownRaw, "@eslint/markdown");
 export const pluginMarkdown: Plugin = pluginMarkdownRaw;
 
@@ -92,7 +91,6 @@ assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
 export const pluginJsxA11y: Plugin = pluginJsxA11yRaw;
 
 import pluginJsoncRaw from "eslint-plugin-jsonc";
-// @ts-expect-error -- something wrong
 assertPlugin(pluginJsoncRaw, "eslint-plugin-jsonc");
 export const pluginJsonc: Plugin = pluginJsoncRaw;
 

@@ -101,6 +101,7 @@ export function rulesTest(
           "test/prefer-to-have-been-called-times": "error",
           "test/require-awaited-expect-poll": "error",
           "test/require-test-timeout": "off",
+          "test/unbound-method": "off", // @typescript-eslint/unbound-method covers vitest projects
         }
       : {}),
 
@@ -117,6 +118,15 @@ export function rulesTest(
           "test/prefer-importing-jest-globals": "error",
           "test/prefer-jest-mocked": "error",
           "test/prefer-ending-with-an-expect": "off",
+          "test/no-unneeded-async-expect-function": "error",
+          "test/prefer-mock-return-shorthand": "error",
+          "test/prefer-to-have-been-called-times": "error",
+          "test/prefer-to-have-been-called": "error",
+          "test/valid-mock-module-path": "error",
+          // type-aware; configure in `jest-and-typescript`
+          "test/no-error-equal": "off",
+          "test/no-unnecessary-assertion": "off",
+          "test/valid-expect-with-promise": "off",
         }
       : {}),
 
@@ -126,6 +136,7 @@ export function rulesTest(
     "test/prefer-enabled-disabled": "error",
     "test/prefer-focus": "error",
     "test/prefer-in-document": "error",
+    "test/prefer-pressed": "error",
     "test/prefer-required": "error",
     "test/prefer-to-have-attribute": "error",
     "test/prefer-to-have-class": "error",
@@ -170,5 +181,8 @@ export function rulesTestTypeScript(): Rules {
     "@typescript-eslint/unbound-method": "off",
     "test/unbound-method": "error",
     "test/no-untyped-mock-factory": "error",
+    "test/no-error-equal": "error",
+    "test/no-unnecessary-assertion": "error",
+    "test/valid-expect-with-promise": "error",
   };
 }

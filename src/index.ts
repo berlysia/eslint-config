@@ -28,9 +28,7 @@ type Rules = Record<string, Linter.RuleEntry>;
 
 type Options = {
   typescript?:
-    | boolean
-    | OptionsTypeScriptTsConfigPath
-    | OptionsTypeScriptParserOptions;
+    boolean | OptionsTypeScriptTsConfigPath | OptionsTypeScriptParserOptions;
   react?: boolean;
   gitignore?: boolean | FlatGitignoreOptions;
   overrides?: {
