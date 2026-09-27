@@ -8,6 +8,7 @@ export interface DetectedDependencies {
   typescript: boolean;
   react: boolean;
   testLibrary: "vitest" | "jest" | false;
+  typeAware: boolean;
 }
 
 /**
@@ -26,5 +27,7 @@ export function detectDependencies(): DetectedDependencies {
     typescript: useTypeScript,
     react: useReact,
     testLibrary,
+    // 型情報を使うlintはoxlint-tsgolintが入っているときだけ動く
+    typeAware: useTypeScript && isPackageExists("oxlint-tsgolint"),
   };
 }

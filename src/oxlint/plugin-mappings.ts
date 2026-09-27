@@ -23,34 +23,24 @@ export const NATIVE_PLUGINS: readonly OxlintNativePlugin[] = [
 ] as const;
 
 /**
- * ESLintプラグイン名からoxlintネイティブプラグイン名への変換
+ * このパッケージのflat configで使っているプラグイン名（ルールIDの接頭辞）から
+ * oxlintネイティブプラグイン名への変換。
+ * null はoxlintにネイティブ実装がないプラグイン。
+ * `test` はテストライブラリによって変わるため mapPluginName で扱う。
  */
-export const PLUGIN_NAME_MAP: Record<string, OxlintNativePlugin | null> = {
-  // ESLintコアルール（プラグイン指定不要）
-  eslint: "eslint",
-
-  // TypeScript
+const PLUGIN_NAME_MAP: Record<string, OxlintNativePlugin | null> = {
   "@typescript-eslint": "typescript",
-
-  // React関連
   react: "react",
-  "react-hooks": null, // react プラグインに含まれる
-
-  // その他のプラグイン
+  // oxlintではrules-of-hooks等がreactプラグインに含まれる
+  "react-hooks": "react",
+  "jsx-a11y": "jsx-a11y",
   unicorn: "unicorn",
   import: "import",
-  "import-x": "import", // import-xはimportとして扱う
-  jest: "jest",
-  vitest: "vitest",
-  "jsx-a11y": "jsx-a11y",
   jsdoc: "jsdoc",
   promise: "promise",
-  n: "node",
+  node: "node",
 
-  // JSプラグイン（ネイティブサポートなし）
-  "@eslint-community/eslint-comments": null,
-  "no-only-tests": null,
-  "jest-dom": null,
+  "eslint-comments": null,
   "testing-library": null,
   "react-you-might-not-need-an-effect": null,
   jsonc: null,
@@ -58,27 +48,18 @@ export const PLUGIN_NAME_MAP: Record<string, OxlintNativePlugin | null> = {
 };
 
 /**
- * JSプラグインとして使用する必要があるESLintプラグイン
- * oxlintでネイティブサポートされていないプラグイン
- */
-export const JS_PLUGINS = [
-  "@eslint-community/eslint-plugin-eslint-comments",
-  "eslint-plugin-no-only-tests",
-  "eslint-plugin-jest-dom",
-  "eslint-plugin-testing-library",
-  "eslint-plugin-react-you-might-not-need-an-effect",
-  "eslint-plugin-jsonc",
-  "@eslint/markdown",
-] as const;
-
-/**
  * ESLintプラグイン名をoxlintプラグイン名に変換
- * @param eslintPluginName ESLintプラグイン名
+ * @param eslintPluginName flat configでのプラグイン名
+ * @param testLibrary `test` プラグインの変換先
  * @returns oxlintプラグイン名（ネイティブサポートなしの場合はnull）
  */
 export function mapPluginName(
   eslintPluginName: string,
+  testLibrary: "jest" | "vitest" | false,
 ): OxlintNativePlugin | null {
+  if (eslintPluginName === "test") {
+    return testLibrary || null;
+  }
   return PLUGIN_NAME_MAP[eslintPluginName] ?? null;
 }
 

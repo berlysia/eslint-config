@@ -40,6 +40,9 @@ export type OxlintOverride = {
  */
 export type OxlintConfig = {
   $schema?: string;
+  options?: {
+    typeAware?: boolean;
+  };
   plugins?: OxlintNativePlugin[];
   jsPlugins?: string[];
   rules?: RulesRecord;
@@ -50,7 +53,16 @@ export type OxlintConfig = {
  * berlysiaOxlint関数のオプション
  */
 export type OxlintOptions = {
+  /**
+   * `tsConfigPath` は型情報を使うルールを有効にするためだけに使う。パス自体は
+   * 設定に書き出されず、oxlint-tsgolintが各ファイルに対応するtsconfigを探す。
+   */
   typescript?: boolean | { tsConfigPath?: string | string[] };
+  /**
+   * 型情報を使うルールを有効にする（oxlint-tsgolintが必要）。
+   * `typescript.tsConfigPath` の指定でも有効になる。
+   */
+  typeAware?: boolean;
   react?: boolean;
   testLibrary?: "jest" | "vitest" | false;
   // 将来的な拡張用

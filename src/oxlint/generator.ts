@@ -1,7 +1,11 @@
 /**
  * oxlint設定の生成ロジック
+ *
+ * ESLintのプラグイン本体は読み込まず、ルール定義（src/rules）だけから生成する。
+ * TypeScript 7のプロジェクトではtypescript-eslintが読み込み時点で失敗するため。
  */
 
+import { GLOB_TESTS_BRACE } from "../globs";
 import { rulesComments } from "../rules/eslint-comments";
 import { rulesCore } from "../rules/eslint-core";
 import { rulesImport } from "../rules/import";
@@ -39,6 +43,17 @@ function mergeRules(
   return allRules;
 }
 
+function collectPlugins(rules: RulesRecord): Set<OxlintNativePlugin> {
+  const plugins = new Set<OxlintNativePlugin>();
+  for (const ruleId of Object.keys(rules)) {
+    const [pluginName] = ruleId.split("/");
+    if (pluginName && isNativePlugin(pluginName)) {
+      plugins.add(pluginName);
+    }
+  }
+  return plugins;
+}
+
 /**
  * oxlint設定を生成
  */
@@ -52,6 +67,10 @@ export function generateOxlintConfig(options: OxlintOptions): OxlintConfig {
 
   const optionTypeScript =
     typeof useTypeScript === "boolean" ? {} : useTypeScript;
+  const useTypeAware =
+    useTypeScript !== false &&
+    (options.typeAware ??
+      (optionTypeScript.tsConfigPath !== undefined || detected.typeAware));
 
   // 各ルールモジュールからルールを収集
   const ruleRecords: Array<Record<string, unknown> | undefined> = [
@@ -69,59 +88,45 @@ export function generateOxlintConfig(options: OxlintOptions): OxlintConfig {
   }
 
   if (useTypeScript) {
-    const tsConfigPath = optionTypeScript.tsConfigPath
-      ? [optionTypeScript.tsConfigPath].flat()
-      : undefined;
     ruleRecords.push({
       ...nonTypeAwareRules.rules,
-      ...(tsConfigPath ? typeAwareRules.rules : {}),
+      ...(useTypeAware ? typeAwareRules.rules : {}),
       ...options.overrides?.typescript,
     });
   }
 
-  if (testLibrary) {
-    ruleRecords.push(
-      rulesTest({
-        ...optionTypeScript,
-        testLibrary,
-        isInEditor: false,
-        overrides: options.overrides?.test,
-      }),
-    );
+  const rules = mapRules(mergeRules(ruleRecords), testLibrary);
+  const plugins = collectPlugins(rules);
+  plugins.add("eslint");
 
-    // OxlintOptions.typescript has no `parserOptions` field (unlike the
-    // ESLint config factory), so only `tsConfigPath` can trigger this here.
-    const tsConfigPath = optionTypeScript.tsConfigPath
-      ? [optionTypeScript.tsConfigPath].flat()
-      : undefined;
-    if (tsConfigPath && testLibrary === "jest") {
-      ruleRecords.push(rulesTestTypeScript());
-    }
-  }
-
-  // ESLintルールを収集
-  const eslintRules = mergeRules(ruleRecords);
-
-  // oxlint形式に変換
-  const oxlintRules = mapRules(eslintRules);
-
-  // 使用するプラグインを特定
-  const plugins = new Set<OxlintNativePlugin>(["eslint"]);
-
-  // ルールIDからプラグインを抽出
-  for (const ruleId of Object.keys(oxlintRules)) {
-    const [pluginName] = ruleId.split("/");
-    if (pluginName && isNativePlugin(pluginName)) {
-      plugins.add(pluginName);
-    }
-  }
-
-  // 設定を生成
   const config: OxlintConfig = {
     $schema: "./node_modules/oxlint/configuration_schema.json",
+    ...(useTypeAware ? { options: { typeAware: true } } : {}),
     plugins: [...plugins].sort(),
-    rules: oxlintRules,
+    rules,
   };
+
+  // テスト用ルールはESLint設定と同じくテストファイルだけに適用する
+  if (testLibrary) {
+    const testRules = mapRules(
+      mergeRules([
+        rulesTest({
+          testLibrary,
+          isInEditor: false,
+          overrides: options.overrides?.test,
+        }),
+        useTypeAware && testLibrary === "jest" ? rulesTestTypeScript() : {},
+      ]),
+      testLibrary,
+    );
+    config.overrides = [
+      {
+        files: GLOB_TESTS_BRACE,
+        plugins: [...collectPlugins(testRules)].sort(),
+        rules: testRules,
+      },
+    ];
+  }
 
   return config;
 }
