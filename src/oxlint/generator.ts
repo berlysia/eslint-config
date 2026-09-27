@@ -2,16 +2,16 @@
  * oxlint設定の生成ロジック
  */
 
-import configsComments from "../configs/eslint-comments";
-import configsCore from "../configs/eslint-core";
-import configsImport from "../configs/import";
-import configsJsdoc from "../configs/jsdoc";
-import configsNode from "../configs/node";
-import configsPromise from "../configs/promise";
-import configsReact from "../configs/react";
-import configsTest from "../configs/test";
-import configsTypeScript from "../configs/typescript";
-import configsUnicorn from "../configs/unicorn";
+import { rulesComments } from "../rules/eslint-comments";
+import { rulesCore } from "../rules/eslint-core";
+import { rulesImport } from "../rules/import";
+import { rulesJsdoc } from "../rules/jsdoc";
+import { rulesNode } from "../rules/node";
+import { rulesPromise } from "../rules/promise";
+import { rulesReact } from "../rules/react";
+import { rulesTest, rulesTestTypeScript } from "../rules/test";
+import { nonTypeAwareRules, typeAwareRules } from "../rules/typescript";
+import { rulesUnicorn } from "../rules/unicorn";
 import { detectDependencies } from "./detect";
 import { isNativePlugin } from "./plugin-mappings";
 import { mapRules } from "./rule-mappings";
@@ -23,16 +23,16 @@ import type {
 } from "./types";
 
 /**
- * 各設定からルールを収集
+ * 複数のルールレコードをマージ
  */
-function collectRulesFromConfigs(
-  configs: Array<{ rules?: Record<string, unknown> }>,
+function mergeRules(
+  ruleRecords: Array<Record<string, unknown> | undefined>,
 ): RulesRecord {
   const allRules: RulesRecord = {};
 
-  for (const config of configs) {
-    if (config.rules) {
-      Object.assign(allRules, config.rules);
+  for (const rules of ruleRecords) {
+    if (rules) {
+      Object.assign(allRules, rules);
     }
   }
 
@@ -53,43 +53,54 @@ export function generateOxlintConfig(options: OxlintOptions): OxlintConfig {
   const optionTypeScript =
     typeof useTypeScript === "boolean" ? {} : useTypeScript;
 
-  // 各設定からルールを収集
-  const allConfigs = [
-    ...configsCore({ overrides: options.overrides?.core }),
-    ...configsComments({ overrides: options.overrides?.comments }),
-    ...configsImport({ overrides: options.overrides?.import }),
-    ...configsUnicorn({ overrides: options.overrides?.unicorn }),
-    ...configsNode({ overrides: options.overrides?.node }),
-    ...configsJsdoc({ overrides: options.overrides?.jsdoc }),
-    ...configsPromise({ overrides: options.overrides?.promise }),
+  // 各ルールモジュールからルールを収集
+  const ruleRecords: Array<Record<string, unknown> | undefined> = [
+    rulesCore({ overrides: options.overrides?.core }),
+    rulesComments({ overrides: options.overrides?.comments }),
+    rulesImport({ overrides: options.overrides?.import }),
+    rulesUnicorn({ overrides: options.overrides?.unicorn }),
+    rulesNode({ overrides: options.overrides?.node }),
+    rulesJsdoc({ overrides: options.overrides?.jsdoc }),
+    rulesPromise({ overrides: options.overrides?.promise }),
   ];
 
   if (useReact) {
-    allConfigs.push(...configsReact({ overrides: options.overrides?.react }));
+    ruleRecords.push(rulesReact({ overrides: options.overrides?.react }));
   }
 
   if (useTypeScript) {
-    allConfigs.push(
-      ...configsTypeScript({
-        ...optionTypeScript,
-        overrides: options.overrides?.typescript,
-      }),
-    );
+    const tsConfigPath = optionTypeScript.tsConfigPath
+      ? [optionTypeScript.tsConfigPath].flat()
+      : undefined;
+    ruleRecords.push({
+      ...nonTypeAwareRules.rules,
+      ...(tsConfigPath ? typeAwareRules.rules : {}),
+      ...options.overrides?.typescript,
+    });
   }
 
   if (testLibrary) {
-    allConfigs.push(
-      ...configsTest({
+    ruleRecords.push(
+      rulesTest({
         ...optionTypeScript,
         testLibrary,
         isInEditor: false,
         overrides: options.overrides?.test,
       }),
     );
+
+    // OxlintOptions.typescript has no `parserOptions` field (unlike the
+    // ESLint config factory), so only `tsConfigPath` can trigger this here.
+    const tsConfigPath = optionTypeScript.tsConfigPath
+      ? [optionTypeScript.tsConfigPath].flat()
+      : undefined;
+    if (tsConfigPath && testLibrary === "jest") {
+      ruleRecords.push(rulesTestTypeScript());
+    }
   }
 
   // ESLintルールを収集
-  const eslintRules = collectRulesFromConfigs(allConfigs);
+  const eslintRules = mergeRules(ruleRecords);
 
   // oxlint形式に変換
   const oxlintRules = mapRules(eslintRules);

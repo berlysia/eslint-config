@@ -5,7 +5,8 @@ import * as morph from "ts-morph";
 
 export function clean(removeTargetRules: Set<string>): void {
   /*
-src/configs配下のTypeScriptファイルに対して次の操作をする
+src/rules配下のTypeScriptファイルに対して次の操作をする
+（ルールのリテラル定義はsrc/configsからsrc/rulesへ移設済み）
 
 1. ファイルの中身を文字列として読む
 1. ts-morphを使ってASTに変換する
@@ -15,11 +16,11 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
 1. 操作した結果のファイルを書きだす
 */
 
-  const configsDir = path.resolve(import.meta.dirname, "../src/configs");
-  const configFiles = fs.readdirSync(configsDir);
+  const rulesDir = path.resolve(import.meta.dirname, "../src/rules");
+  const ruleFiles = fs.readdirSync(rulesDir);
 
-  for (const configFile of configFiles) {
-    const configFilePath = path.resolve(configsDir, configFile);
+  for (const ruleFile of ruleFiles) {
+    const configFilePath = path.resolve(rulesDir, ruleFile);
     const configSource = fs.readFileSync(configFilePath, "utf8");
 
     const project = new morph.Project();
@@ -34,10 +35,20 @@ src/configs配下のTypeScriptファイルに対して次の操作をする
       (objectLiteralExpression) => {
         const parent = objectLiteralExpression.getParent();
 
-        return (
+        // `export const typeAwareRules = { rules: { ... } }` 形式（typescript.ts）
+        if (
           parent.isKind(morph.SyntaxKind.PropertyAssignment) &&
           parent.getName() === "rules"
-        );
+        ) {
+          return true;
+        }
+
+        // `export function rulesXxx(...) { return { ... }; }` 形式（他の src/rules/*.ts）
+        if (parent.isKind(morph.SyntaxKind.ReturnStatement)) {
+          return true;
+        }
+
+        return false;
       },
     );
 
