@@ -37,7 +37,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               state: 'open',
-              head: `${context.repo.owner}:${github.event.workflow_run.head_branch}`
+              head: `${context.repo.owner}:${context.payload.workflow_run.head_branch}`
             });
 
             if (pulls.data.length === 0) {
@@ -48,17 +48,16 @@ jobs:
             const pr = pulls.data[0];
             const author = pr.user.login;
 
-            // Check if PR is from renovate or dependabot
+            // Only the dependency bots may trigger an autonomous fix; a substring match
+            // would also accept any user whose login contains "renovate".
             const isBot = author === 'renovate[bot]' ||
-                         author === 'dependabot[bot]' ||
-                         author.includes('renovate') ||
-                         author.includes('dependabot');
+                         author === 'dependabot[bot]';
 
             core.setOutput('pr_number', pr.number);
             core.setOutput('pr_author', author);
             core.setOutput('is_bot', isBot);
-            core.setOutput('branch', github.event.workflow_run.head_branch);
-            core.setOutput('sha', github.event.workflow_run.head_sha);
+            core.setOutput('branch', context.payload.workflow_run.head_branch);
+            core.setOutput('sha', context.payload.workflow_run.head_sha);
 
             console.log(`PR #${pr.number} by ${author}, is_bot: ${isBot}`);
 
