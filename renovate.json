@@ -1,4 +1,17 @@
 {
   "extends": ["github>berlysia/renovate-config"],
-  "ignoreDeps": ["eslint-config-flat-gitignore"]
+  "ignoreDeps": ["eslint-config-flat-gitignore"],
+  "packageRules": [
+    {
+      "description": "typescript-eslint needs the JavaScript API of typescript, which TypeScript 7 no longer ships. tests/oxproject stays on TypeScript 7 to cover the oxlint path.",
+      "matchPackageNames": ["typescript"],
+      "matchFileNames": ["package.json", "tests/tsproject/package.json"],
+      "allowedVersions": "<6.1"
+    },
+    {
+      "description": "src/oxlint/supported-rules.ts is generated from the root oxlint; keep the fixture on the same version.",
+      "matchPackageNames": ["oxlint", "oxlint-tsgolint"],
+      "groupName": "oxlint"
+    }
+  ]
 }
