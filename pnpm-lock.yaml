@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments':
-        specifier: 3.2.1
-        version: 3.2.1(eslint@9.39.5(jiti@2.7.0))
+        specifier: 4.8.1
+        version: 4.8.1(eslint@9.39.5(jiti@2.7.0))
       '@eslint/markdown':
         specifier: 7.5.1
         version: 7.5.1
@@ -683,11 +683,11 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@eslint-community/eslint-plugin-eslint-comments@3.2.1':
-    resolution: {integrity: sha512-/HZbjIGaVO2zLlWX3gRgiHmKRVvvqrC0zVu3eXnIj1ORxoyfGSj50l0PfDfqihyZAqrDYzSMdJesXzFjvAoiLQ==}
-    engines: {node: '>=6.5.0'}
+  '@eslint-community/eslint-plugin-eslint-comments@4.8.1':
+    resolution: {integrity: sha512-vafrdi15JHBFh1qWOAucyJwlEEuhdoMof28jOdKdgnwZ7bXwd6v4wzHYSmAVLwnx0yc7bqAtfJ0EZQV1WAzV/Q==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      eslint: '>=4.19.1'
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
 
   '@eslint-community/eslint-utils@4.10.1':
     resolution: {integrity: sha512-cuadcxVFE8sDK6iWJbs8Sn0av2Nrh2QSGQhVlBW9AaAHqHwjWsZHT8LJ4hFGPh7ASBV2deFdM7H/DPjulmh8rg==}
@@ -4883,11 +4883,11 @@ snapshots:
   '@esbuild/win32-x64@0.28.2':
     optional: true
 
-  '@eslint-community/eslint-plugin-eslint-comments@3.2.1(eslint@9.39.5(jiti@2.7.0))':
+  '@eslint-community/eslint-plugin-eslint-comments@4.8.1(eslint@9.39.5(jiti@2.7.0))':
     dependencies:
-      escape-string-regexp: 1.0.5
+      escape-string-regexp: 4.0.0
       eslint: 9.39.5(jiti@2.7.0)
-      ignore: 5.3.2
+      ignore: 7.0.8
 
   '@eslint-community/eslint-utils@4.10.1(eslint@9.39.5(jiti@2.7.0))':
     dependencies:
