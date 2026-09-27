@@ -54,6 +54,7 @@ export const typeAwareRules: Rules = {
     "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
     "@typescript-eslint/no-unnecessary-condition": "error",
     "@typescript-eslint/no-useless-default-assignment": "error",
+    "@typescript-eslint/no-generated-empty-object-type": "error",
     "@typescript-eslint/strict-void-return": "error",
     "@typescript-eslint/no-unnecessary-qualifier": "off",
     "@typescript-eslint/no-unnecessary-type-arguments": "off",
