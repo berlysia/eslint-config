@@ -53,7 +53,8 @@ export function rulesImport(options: OptionsOverride): Rules {
       },
     ],
     "import/unambiguous": "off",
-    "import/no-unused-modules": "warn",
+    // without missingExports/unusedExports it checks nothing, and on ESLint 10 it is a no-op that prints a warning
+    "import/no-unused-modules": "off",
     "import/no-import-module-exports": "error",
     "import/no-relative-packages": "error",
     "import/consistent-type-specifier-style": ["error", "prefer-top-level"],

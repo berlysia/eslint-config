@@ -70,6 +70,7 @@ assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
 export const pluginUnicorn: Plugin = pluginUnicornRaw;
 
 import pluginMarkdownRaw from "@eslint/markdown";
+// @ts-expect-error -- its rule context type still has methods that ESLint 10's types removed
 assertPlugin(pluginMarkdownRaw, "@eslint/markdown");
 export const pluginMarkdown: Plugin = pluginMarkdownRaw;
 
