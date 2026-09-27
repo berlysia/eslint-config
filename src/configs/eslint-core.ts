@@ -27,7 +27,8 @@ export default function configsCore(
         },
       },
       linterOptions: {
-        reportUnusedDisableDirectives: true,
+        // replaces the deprecated eslint-comments/no-unused-disable
+        reportUnusedDisableDirectives: "error",
       },
       rules: {
         "max-classes-per-file": ["error", 1],
