@@ -47,10 +47,11 @@ type Options = {
     markdown?: Rules;
     promise?: Rules;
   };
-} & OptionsTestLibrary;
+  testLibrary?: OptionsTestLibrary["testLibrary"] | false;
+};
 
 export default function berlysia(
-  options: Options,
+  options: Options = {},
   ...userConfigs: FlatConfigItem[]
 ) {
   const {
