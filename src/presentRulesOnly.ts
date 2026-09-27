@@ -61,7 +61,7 @@ function processRules(
       absenceSet.add(ruleNameInConfig);
       return [];
     }),
-  ) as FlatConfigItem["rules"];
+  );
 }
 
 export default function presentRulesOnly(

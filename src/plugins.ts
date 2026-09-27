@@ -73,7 +73,7 @@ export const pluginUnicorn: Plugin = pluginUnicornRaw;
 import pluginMarkdownRaw from "@eslint/markdown";
 // @ts-expect-error -- markdown plugin has incompatible types with ESLint.Plugin
 assertPlugin(pluginMarkdownRaw, "@eslint/markdown");
-export const pluginMarkdown: Plugin = pluginMarkdownRaw as Plugin;
+export const pluginMarkdown: Plugin = pluginMarkdownRaw;
 
 export { default as pluginJsdoc } from "eslint-plugin-jsdoc";
 
