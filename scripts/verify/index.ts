@@ -64,6 +64,7 @@ for (const result of results) {
   const messages: string[] = [];
   if (result.withType.missing.length > 0) {
     isInvalid = true;
+    flags.hasMissing = true;
     messages.push(
       `Rules to be configured in withType:\n${result.withType.missing.map(linkify).join("\n")}\n`,
     );
@@ -92,6 +93,7 @@ for (const result of results) {
 
   if (result.withoutType.missing.length > 0) {
     isInvalid = true;
+    flags.hasMissing = true;
     messages.push(
       `Rules to be configured in withoutType:\n${result.withoutType.missing
         .map(linkify)
