@@ -19,6 +19,16 @@ export const GLOB_TESTS = [
   `**/?(*.)+(spec|test|perf).${GLOB_SRC_EXT}`,
 ];
 
+// oxlintのoverridesはextglobを解釈しないため、brace展開だけで同じ範囲を表す
+const GLOB_SRC_EXT_BRACE =
+  "{js,jsx,ts,tsx,cjs,cjsx,cts,ctsx,mjs,mjsx,mts,mtsx}";
+
+export const GLOB_TESTS_BRACE = [
+  `**/__{test,spec,perf}s__/**/*.${GLOB_SRC_EXT_BRACE}`,
+  `**/{spec,test,perf}.${GLOB_SRC_EXT_BRACE}`,
+  `**/*.{spec,test,perf}.${GLOB_SRC_EXT_BRACE}`,
+];
+
 export const GLOB_STORIES = [
   `**/*.stories.${GLOB_SRC_EXT}`,
   "**/*.stories.mdx",

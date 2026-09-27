@@ -5,6 +5,7 @@
 export interface CliOptions {
   interactive: boolean;
   typescript?: boolean;
+  typeAware?: boolean;
   react?: boolean;
   testLibrary?: "vitest" | "jest" | "none";
   dryRun: boolean;

@@ -1,4 +1,5 @@
 dist
+tests/oxproject/.oxlintrc.json
 mise.local.toml
 .eslint-config-inspector
 .tmp

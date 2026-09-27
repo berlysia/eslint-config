@@ -27,6 +27,7 @@ void (async () => {
       ? await runInteractive(detected, options.output)
       : {
           typescript: options.typescript ?? detected.typescript,
+          typeAware: options.typeAware ?? detected.typeAware,
           react: options.react ?? detected.react,
           testLibrary:
             options.testLibrary === "none"
@@ -38,6 +39,7 @@ void (async () => {
     // Generate oxlint config
     const config = generateOxlintConfig({
       typescript: finalOptions.typescript,
+      typeAware: finalOptions.typeAware,
       react: finalOptions.react,
       testLibrary: finalOptions.testLibrary,
     });

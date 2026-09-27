@@ -7,6 +7,7 @@ import type { DetectedDependencies } from "../oxlint/detect";
 
 export interface InteractiveResult {
   typescript: boolean;
+  typeAware: boolean;
   react: boolean;
   testLibrary: "vitest" | "jest" | false;
   output: string;
@@ -27,6 +28,9 @@ export async function runInteractive(
   try {
     console.log("\nDetected dependencies:");
     console.log(`  - typescript: ${detected.typescript ? "Yes" : "No"}`);
+    console.log(
+      `  - oxlint-tsgolint (type-aware): ${detected.typeAware ? "Yes" : "No"}`,
+    );
     console.log(`  - react: ${detected.react ? "Yes" : "No"}`);
     console.log(`  - test library: ${detected.testLibrary || "none"}`);
     console.log("\nConfigure oxlint settings:");
@@ -36,6 +40,14 @@ export async function runInteractive(
       `  Include TypeScript rules? [${detected.typescript ? "Y/n" : "y/N"}]: `,
     );
     const useTypeScript = parseYesNo(typescriptAnswer, detected.typescript);
+
+    // Type-aware rules
+    const typeAwareAnswer = useTypeScript
+      ? await rl.question(
+          `  Include type-aware rules (requires oxlint-tsgolint)? [${detected.typeAware ? "Y/n" : "y/N"}]: `,
+        )
+      : "n";
+    const useTypeAware = parseYesNo(typeAwareAnswer, detected.typeAware);
 
     // React
     const reactAnswer = await rl.question(
@@ -61,6 +73,7 @@ export async function runInteractive(
 
     return {
       typescript: useTypeScript,
+      typeAware: useTypeScript && useTypeAware,
       react: useReact,
       testLibrary,
       output,

@@ -14,6 +14,8 @@ Options:
   -i, --interactive           Run in interactive mode
   --typescript                Enable TypeScript rules (auto-detected by default)
   --no-typescript             Disable TypeScript rules
+  --type-aware                Enable type-aware rules (auto-detected from oxlint-tsgolint)
+  --no-type-aware             Disable type-aware rules
   --react                     Enable React rules (auto-detected by default)
   --no-react                  Disable React rules
   --test-library <library>    Specify test library (vitest|jest|none)
@@ -25,6 +27,7 @@ Examples:
   $ berlysia-eslint-oxlint
   $ berlysia-eslint-oxlint --interactive
   $ berlysia-eslint-oxlint --typescript --react --test-library=vitest
+  $ berlysia-eslint-oxlint --type-aware
   $ berlysia-eslint-oxlint --no-typescript --no-react
   $ berlysia-eslint-oxlint --dry-run
   $ berlysia-eslint-oxlint -o custom-oxlint.json
@@ -40,6 +43,10 @@ export function parseCliArgs(argv: string[]): CliOptions {
         default: false,
       },
       typescript: {
+        type: "boolean",
+        default: undefined,
+      },
+      "type-aware": {
         type: "boolean",
         default: undefined,
       },
@@ -66,6 +73,8 @@ export function parseCliArgs(argv: string[]): CliOptions {
       },
     },
     allowPositionals: false,
+    // --no-typescript などの否定形フラグを受け付ける
+    allowNegative: true,
   });
 
   // test-library validation
@@ -89,6 +98,7 @@ export function parseCliArgs(argv: string[]): CliOptions {
   return {
     interactive: values.interactive || false,
     typescript: values.typescript,
+    typeAware: values["type-aware"],
     react: values.react,
     testLibrary,
     dryRun: values["dry-run"] || false,
@@ -106,6 +116,7 @@ export function showHelp(): void {
  */
 export function generateCommandFromOptions(options: {
   typescript: boolean;
+  typeAware: boolean;
   react: boolean;
   testLibrary: "vitest" | "jest" | false;
   output: string;
@@ -114,6 +125,10 @@ export function generateCommandFromOptions(options: {
 
   if (!options.typescript) {
     args.push("--no-typescript");
+  } else if (options.typeAware) {
+    args.push("--type-aware");
+  } else {
+    args.push("--no-type-aware");
   }
   if (options.react) {
     args.push("--react");

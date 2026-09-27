@@ -3,77 +3,96 @@
  */
 
 import { mapPluginName } from "./plugin-mappings";
+import { SUPPORTED_RULES } from "./supported-rules";
 import type { RuleEntry } from "./types";
+
+type TestLibrary = "jest" | "vitest" | false;
+
+/**
+ * ESLintとoxlintでオプションの形が違うルールの変換
+ */
+const OPTION_TRANSLATORS = new Map<string, (option: unknown) => unknown>([
+  [
+    // oxlintは同じ意味のフラグを反転した名前で持つ
+    "unicorn/prefer-export-from",
+    (option) => {
+      if (typeof option !== "object" || option === null) return option;
+      const { ignoreUsedVariables, ...rest } = option as {
+        ignoreUsedVariables?: boolean;
+      };
+      return ignoreUsedVariables === undefined
+        ? rest
+        : { ...rest, checkUsedVariables: !ignoreUsedVariables };
+    },
+  ],
+]);
 
 /**
  * ESLintルールIDをoxlintルールIDに変換
- * 例: "@typescript-eslint/no-unused-vars" -> "typescript/no-unused-vars"
- * @param eslintRuleId ESLintルールID
- * @returns oxlintルールID
+ * 例: "@typescript-eslint/no-unused-vars" -> "eslint/no-unused-vars"
+ * @returns oxlintルールID（oxlintが実装していないルールはnull）
  */
-export function mapRuleId(eslintRuleId: string): string | null {
-  // プラグインプレフィックスがない場合（ESLintコアルール）
+export function mapRuleId(
+  eslintRuleId: string,
+  testLibrary: TestLibrary,
+): string | null {
   if (!eslintRuleId.includes("/")) {
-    return `eslint/${eslintRuleId}`;
+    const id = `eslint/${eslintRuleId}`;
+    return SUPPORTED_RULES.has(id) ? id : null;
   }
 
-  // プラグインプレフィックスを分離
   const [pluginName, ...ruleNameParts] = eslintRuleId.split("/");
   const ruleName = ruleNameParts.join("/");
-
-  // プラグイン名が存在しない場合はnull
-  if (!pluginName) {
-    return null;
-  }
-
-  // プラグイン名を変換
-  const oxlintPluginName = mapPluginName(pluginName);
-
-  // ネイティブサポートされていない場合はnull
+  const oxlintPluginName = pluginName
+    ? mapPluginName(pluginName, testLibrary)
+    : null;
   if (!oxlintPluginName) {
     return null;
   }
 
-  return `${oxlintPluginName}/${ruleName}`;
-}
-
-/**
- * ESLintルールエントリをoxlintルールエントリに変換
- * @param eslintRuleId ESLintルールID
- * @param eslintRuleEntry ESLintルールエントリ
- * @returns oxlintルールエントリ（サポートされていない場合はnull）
- */
-export function mapRuleEntry(
-  eslintRuleId: string,
-  eslintRuleEntry: RuleEntry,
-): [string, RuleEntry] | null {
-  const oxlintRuleId = mapRuleId(eslintRuleId);
-
-  // サポートされていないルール
-  if (!oxlintRuleId) {
-    return null;
+  const id = `${oxlintPluginName}/${ruleName}`;
+  if (SUPPORTED_RULES.has(id)) {
+    return id;
   }
 
-  // ルールエントリをそのまま返す
-  // TODO: 必要に応じてルールオプションの変換を追加
-  return [oxlintRuleId, eslintRuleEntry];
+  // typescript-eslintの拡張ルール（no-unused-vars等）は、oxlintではTypeScriptを
+  // 理解するeslintプラグイン側の同名ルールが担う
+  if (oxlintPluginName === "typescript") {
+    const coreId = `eslint/${ruleName}`;
+    if (SUPPORTED_RULES.has(coreId)) {
+      return coreId;
+    }
+  }
+
+  return null;
+}
+
+function mapRuleEntry(oxlintRuleId: string, entry: RuleEntry): RuleEntry {
+  const translate = OPTION_TRANSLATORS.get(oxlintRuleId);
+  if (!translate || !Array.isArray(entry)) {
+    return entry;
+  }
+  const [severity, ...ruleOptions] = entry;
+  return [severity, ...ruleOptions.map((option) => translate(option))];
 }
 
 /**
  * ESLintルール設定オブジェクトをoxlintルール設定オブジェクトに変換
- * @param eslintRules ESLintルール設定
- * @returns oxlintルール設定（サポートされていないルールは除外）
+ *
+ * 拡張ルールとコアルールが同じoxlintルールに集約される場合は、後に現れた設定
+ * （TypeScript向け設定）が優先される。
+ * @returns oxlintルール設定（oxlintが実装していないルールは除外）
  */
 export function mapRules(
   eslintRules: Record<string, RuleEntry>,
+  testLibrary: TestLibrary,
 ): Record<string, RuleEntry> {
   const oxlintRules: Record<string, RuleEntry> = {};
 
   for (const [eslintRuleId, eslintRuleEntry] of Object.entries(eslintRules)) {
-    const mapped = mapRuleEntry(eslintRuleId, eslintRuleEntry);
-    if (mapped) {
-      const [oxlintRuleId, oxlintRuleEntry] = mapped;
-      oxlintRules[oxlintRuleId] = oxlintRuleEntry;
+    const oxlintRuleId = mapRuleId(eslintRuleId, testLibrary);
+    if (oxlintRuleId) {
+      oxlintRules[oxlintRuleId] = mapRuleEntry(oxlintRuleId, eslintRuleEntry);
     }
   }
 
