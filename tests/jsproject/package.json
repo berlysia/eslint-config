@@ -2,11 +2,13 @@
   "name": "jsproject",
   "private": true,
   "scripts": {
-    "lint": "eslint 'src/**/*.{js,jsx}' -c ./eslint.config.js"
+    "lint": "eslint 'src/**/*.{js,jsx,json,md}' -c ./eslint.config.js"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
+    "@testing-library/react": "16.3.3",
     "eslint": "^9.37.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "react": "^19.3.0"
   }
 }
