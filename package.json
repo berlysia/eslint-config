@@ -26,7 +26,7 @@
     "format": "prettier '*.{json,md}'",
     "test:prettier": "eslint-config-prettier src/index.ts",
     "test": "$npm_execpath run clean && $npm_execpath run stub && $npm_execpath run test:prettier",
-    "nostub:test": "$npm_execpath run test:prettier",
+    "nostub:test": "$npm_execpath run test:prettier && $npm_execpath run test:interop",
     "projtest:tsproj": "pnpm --filter tsproject run --recursive lint",
     "projtest:jsproj": "pnpm --filter jsproject run --recursive lint",
     "projtest": "$npm_execpath run build && $npm_execpath run projtest:jsproj && $npm_execpath run projtest:tsproj && $npm_execpath run projtest:oxproj",
@@ -41,7 +41,8 @@
     "renovate:replace-package": "tsx scripts/renovate/replace-package.ts",
     "lint:oxlint-rules": "tsx ./scripts/oxlint-rules.ts --check",
     "fix:oxlint-rules": "tsx ./scripts/oxlint-rules.ts",
-    "projtest:oxproj": "pnpm --filter oxproject run lint"
+    "projtest:oxproj": "pnpm --filter oxproject run lint",
+    "test:interop": "node ./scripts/check-interop.ts"
   },
   "workspaces": [
     "tests/jsproject",
