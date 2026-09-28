@@ -1,5 +1,6 @@
 /* eslint-disable import/first, import/newline-after-import -- 対応関係を示すために */
 
+import { fixupPluginRules } from "@eslint/compat";
 import type { ESLint, Linter } from "eslint";
 
 type Plugin = ESLint.Plugin;
@@ -60,7 +61,8 @@ export const pluginJestDom = pluginJestDomRaw;
 
 import pluginReactRaw from "eslint-plugin-react";
 assertPlugin(pluginReactRaw, "eslint-plugin-react");
-export const pluginReact = pluginReactRaw;
+// eslint-plugin-react calls context methods removed in ESLint 10
+export const pluginReact: Plugin = fixupPluginRules(pluginReactRaw);
 
 import pluginReactHooksRaw from "eslint-plugin-react-hooks";
 assertPlugin(pluginReactHooksRaw, "eslint-plugin-react-hooks");
@@ -108,7 +110,8 @@ export const pluginTestingLibrary = pluginTestingLibraryRaw;
 // @ts-expect-error -- no type definition
 import pluginJsxA11yRaw from "eslint-plugin-jsx-a11y";
 assertPlugin(pluginJsxA11yRaw, "eslint-plugin-jsx-a11y");
-export const pluginJsxA11y: Plugin = pluginJsxA11yRaw;
+// eslint-plugin-jsx-a11y calls context methods removed in ESLint 10
+export const pluginJsxA11y: Plugin = fixupPluginRules(pluginJsxA11yRaw);
 
 import pluginJsoncRaw from "eslint-plugin-jsonc";
 assertPlugin(pluginJsoncRaw, "eslint-plugin-jsonc");
