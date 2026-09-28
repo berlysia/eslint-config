@@ -104,8 +104,21 @@ export default function verify() {
     ["markdown", configsMarkdown({}), ["markdown"]],
     ["node", configsNode({}), ["node"]],
     ["promise", configsPromise({}), ["promise"]],
-    ["react", configsReact({}), ["react", "react-hooks"]],
-    ["jest", configsTest({ tsConfigPath: "x", testLibrary: "jest" }), ["test"]],
+    [
+      "react",
+      configsReact({}),
+      [
+        "react",
+        "react-hooks",
+        "jsx-a11y",
+        "react-you-might-not-need-an-effect",
+      ],
+    ],
+    [
+      "jest",
+      configsTest({ tsConfigPath: "x", testLibrary: "jest" }),
+      ["test", "testing-library"],
+    ],
     [
       "vitest",
       configsTest({ tsConfigPath: "x", testLibrary: "vitest" }),

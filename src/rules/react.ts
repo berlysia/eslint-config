@@ -198,7 +198,6 @@ export function rulesReact(options: OptionsOverride): Rules {
     "jsx-a11y/no-noninteractive-element-interactions": "error",
     "jsx-a11y/no-noninteractive-element-to-interactive-role": "error",
     "jsx-a11y/no-noninteractive-tabindex": "error",
-    "jsx-a11y/no-onchange": "off",
     "jsx-a11y/no-redundant-roles": "error",
     "jsx-a11y/no-static-element-interactions": "error",
     "jsx-a11y/prefer-tag-over-role": "off",
@@ -216,8 +215,7 @@ export function rulesReact(options: OptionsOverride): Rules {
     "react-you-might-not-need-an-effect/no-pass-live-state-to-parent": "warn",
     "react-you-might-not-need-an-effect/no-pass-data-to-parent": "warn",
     "react-you-might-not-need-an-effect/no-initialize-state": "warn",
-    "react-you-might-not-need-an-effect/no-manage-parent": "warn",
-    "react-you-might-not-need-an-effect/no-empty-effect": "warn",
+    "react-you-might-not-need-an-effect/no-external-store-subscription": "warn",
 
     ...options.overrides,
   };

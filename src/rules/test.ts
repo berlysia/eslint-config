@@ -170,6 +170,8 @@ export function rulesTest(
     "testing-library/prefer-query-matchers": "off",
     "testing-library/prefer-screen-queries": "error",
     "testing-library/prefer-user-event": "error",
+    "testing-library/prefer-user-event-setup": "error",
+    "testing-library/no-test-id-queries": "warn",
     "testing-library/render-result-naming-convention": "error",
 
     ...options.overrides,
