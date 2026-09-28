@@ -15,6 +15,24 @@ function assertPlugin(
   }
 }
 
+/**
+ * CJSビルドでは、ESモジュールのみのプラグインを require() すると名前空間オブジェクトが
+ * 返り、default import がプラグイン本体ではなく名前空間になる。
+ * @template T プラグインの型
+ */
+function interopDefault<T>(mod: T): T {
+  if (
+    typeof mod === "object" &&
+    mod !== null &&
+    "default" in mod &&
+    !("rules" in mod)
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- the namespace's default export is the plugin itself
+    return mod.default as T;
+  }
+  return mod;
+}
+
 import pluginTsRaw from "@typescript-eslint/eslint-plugin";
 // @ts-expect-error -- its legacy configs allow `parser: null`, which @eslint/core 0.17 types reject
 assertPlugin(pluginTsRaw, "@typescript-eslint/eslint-plugin");
@@ -66,13 +84,15 @@ assertPlugin(pluginPromiseRaw, "eslint-plugin-promise");
 export const pluginPromise: Plugin = pluginPromiseRaw;
 
 import pluginUnicornRaw from "eslint-plugin-unicorn";
-assertPlugin(pluginUnicornRaw, "eslint-plugin-unicorn");
-export const pluginUnicorn: Plugin = pluginUnicornRaw;
+const pluginUnicornDefault = interopDefault(pluginUnicornRaw);
+assertPlugin(pluginUnicornDefault, "eslint-plugin-unicorn");
+export const pluginUnicorn: Plugin = pluginUnicornDefault;
 
 import pluginMarkdownRaw from "@eslint/markdown";
+const pluginMarkdownDefault = interopDefault(pluginMarkdownRaw);
 // @ts-expect-error -- its rule context type still has methods that ESLint 10's types removed
-assertPlugin(pluginMarkdownRaw, "@eslint/markdown");
-export const pluginMarkdown: Plugin = pluginMarkdownRaw;
+assertPlugin(pluginMarkdownDefault, "@eslint/markdown");
+export const pluginMarkdown: Plugin = pluginMarkdownDefault;
 
 export { default as pluginJsdoc } from "eslint-plugin-jsdoc";
 
@@ -102,4 +122,5 @@ export * as parserJsonc from "jsonc-eslint-parser";
 
 export { default as configPrettier } from "eslint-config-prettier";
 
-export { default as configFlatGitIgnore } from "eslint-config-flat-gitignore";
+import configFlatGitIgnoreRaw from "eslint-config-flat-gitignore";
+export const configFlatGitIgnore = interopDefault(configFlatGitIgnoreRaw);
