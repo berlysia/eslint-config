@@ -140,13 +140,13 @@
     "eslint-find-rules": "5.0.0",
     "gh-pages": "6.3.0",
     "jest": "30.5.2",
-    "lint-staged": "17.5.1",
+    "lint-staged": "17.6.0",
     "oxlint": "1.85.0",
     "prettier": "3.9.10",
     "terminal-link": "5.0.0",
     "ts-morph": "28.0.0",
     "tsup": "8.5.1",
-    "tsx": "4.23.13",
+    "tsx": "4.23.15",
     "typescript": "5.9.3"
   },
   "lint-staged": {
@@ -158,7 +158,7 @@
       "prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@10.34.9",
   "peerDependencies": {
     "eslint": "*"
   }
