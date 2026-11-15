@@ -134,7 +134,7 @@
     "@eslint/config-inspector": "1.5.0",
     "@types/eslint": "9.6.1",
     "@types/jest": "30.0.0",
-    "@types/node": "24.13.3",
+    "@types/node": "24.19.2",
     "bumpp": "12.3.0",
     "eslint": "10.11.0",
     "eslint-find-rules": "5.0.0",
